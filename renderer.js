@@ -18,15 +18,17 @@
 			return r;
 		};
 
+		//-----------------------------------------------------------------;
+		//-----------------------------------------------------------------;
 		window.UTIL.String = {};
 		window.UTIL.String.pad = function(n, width){
 		  n = n + '';
 		  return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
 		}
 
-
+		//-----------------------------------------------------------------;
+		//-----------------------------------------------------------------;
 		window.UTIL.DateFormat = {};
-
 		window.UTIL.DateFormat.YYYYMMDD_HHMMSS = function(){
 			var date = new Date();
 			
@@ -62,7 +64,8 @@
 			return YY + "." + MM + "." + DD;
 		};
 
-		
+		//-----------------------------------------------------------------;
+		//-----------------------------------------------------------------;
 		window.YYMMDD_now = window.UTIL.DateFormat.YYMMDD();
 		window.YYYYMMDD = window.UTIL.DateFormat.YYYYMMDD();
 		var oneDayAgo_date = new Date();
@@ -184,7 +187,7 @@
 			}
 
 			//-------------------------------------------------------;
-			//게시물상세페이지링크 추출 및 저장하기;
+			//게시물상세페이지HTML 추출 및 저장하기;
 			//-------------------------------------------------------;
 			//var _tText00 = global.fs.readFileSync( "allStockCode.json" ).toString();
 			//window.allStockCode = JSON.parse( _tText00 );
@@ -220,7 +223,7 @@
 			}
 			
 			//-------------------------------------------------------;
-			//게시물상세페이지링크 추출 및 저장하기;
+			//상세페이지 HTML 데이터추출 및 파일 저장;
 			//-------------------------------------------------------;
 			//var _tText00 = global.fs.readFileSync( "allStockCode.json" ).toString();
 			//window.allStockCode = JSON.parse( _tText00 );
@@ -248,6 +251,7 @@
 						, info : {}
 						, detail : []
 					};
+					
 					var el00 = window.document.getElementsByTagName("table")[0].children[1].children;
 					
 					var i = 0,iLen = el00.length,io;
@@ -257,7 +261,6 @@
 						if( io[ 0 ].children.length > 0 ) io[ 0 ] = io[ 0 ].removeChild( io[ 0 ].childNodes[ 1 ] ); 
 						r.info[ io[ 0 ].innerText ] = io[1].innerText;
 					}
-					
 					
 					var el01 = window.document.getElementsByTagName("article")[0].children[0].children
 					var i = 0,iLen = el01.length,io;
@@ -274,7 +277,6 @@
 				try
 				{
 					fs.writeFileSync( "./detail/" + window.YYYYMMDD + ".json", JSON.stringify( a ,null,4 ), {flag:"w"} );	
-					
 				}
 				catch(er)
 				{
