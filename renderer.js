@@ -77,9 +77,11 @@
 		window._tmp = {}
 		window._tmp.cnt = 0;
 		window.linkList = [];
+		window.linkListKeys = [];
 		window.detailList = [];
 
-		window.pageBaseUrl = "https://eomisae.co.kr/index.php?mid=fs&page="
+		window.FNS = {};
+		window.pageBaseUrl = "https://eomisae.co.kr/index.php?mid=os&page="
 		webview.addEventListener('dom-ready', () => {
 		  
 			var currentURL = webview.getURL();
@@ -90,7 +92,7 @@
 			//-------------------------------------------------------;
 			//페이지MAX걊 구하기;
 			//-------------------------------------------------------;
-			window.getMaxPage = function( url ){
+			window.FNS.getMaxPage = function( url ){
 				url = url || webview.getURL();
 				webview.loadURL( url );
 				webview.executeJavaScript(`
@@ -98,14 +100,16 @@
 					Promise.resolve( _el )
 				`
 				).then(function(data){
-					window.maxPage = window.UTIL.URL.paramToObject( data ).page * 1
+					window.maxPage = window.UTIL.URL.paramToObject( data ).page * 1;
+					console.log( "window.maxPage : " + window.maxPage );
 				})
 			}
 			//-------------------------------------------------------;
 			//게시물HTML저장하기;
 			//-------------------------------------------------------;
-			window.downloadHtml = function( url ){
-
+			window.FNS.downloadHtml = function( url ){
+				
+				var dirPath = "./list/html/" + window.UTIL.DateFormat.YYYYMMDD() + "/"
 				url = url || window.pageBaseUrl + window.pageCnt
 				webview.loadURL( url );
 				webview.executeJavaScript(`
@@ -125,17 +129,15 @@
 					
 					if( Number( date.replace(/\./gi,"") ) < Number( window.YYMMDD_now.replace(/\./gi,"") ) )
 					{
-						debugger;
 						window.document.getElementById("_tmp").innerHTML = "";
 					}
 					else
 					{
-						
-						fs.writeFileSync( window.pageCnt + ".html", _data, {flag : "w"} )	
+						fs.mkdirSync( dirPath, { recursive: true } );
+						fs.writeFileSync( dirPath + window.pageCnt + ".html", _data, {flag : "w"} )	
 
-						debugger;
 						++window.pageCnt;
-						window.downloadHtml( window.pageBaseUrl + window.pageCnt )
+						window.FNS.downloadHtml( window.pageBaseUrl + window.pageCnt )
 					}
 					
 				})
@@ -145,96 +147,109 @@
 			//-------------------------------------------------------;
 			//게시물상세페이지링크 추출 및 저장하기;
 			//-------------------------------------------------------;
-			//var _tText00 = global.fs.readFileSync( "allStockCode.json" ).toString();
-			//window.allStockCode = JSON.parse( _tText00 );
-			//var list = global.fs.readdirSync("./all_stock_html/20210105/");
-			window.getDetailLinks = function( yyyymmdd ){
+			window.FNS.getDetailLinks = function( targetDirPath, resultDirPath ){
+				var targetDirPath = targetDirPath || "./list/html/" + window.UTIL.DateFormat.YYYYMMDD() + "/";
+				var resultDirPath = resultDirPath || "./list/json/" + window.UTIL.DateFormat.YYYYMMDD() + "/";
+				var list = global.fs.readdirSync( targetDirPath );
 				
-				window.document.getElementById("_tmp").innerHTML = "";
-				window.document.getElementById("_tmp").innerHTML = global.fs.readFileSync( "1.html" ).toString();
-
-				var el = window.document.getElementsByClassName("card_content");
-				
-				var r = [];
-				var i = 0, iLen = el.length, io;
-				for(;i<iLen;++i){
-					io = el[ i ];
-					var date = io.children[0].children[1].innerText;
-					var href = io.children[1].children[0].href
-
-					if( Number( date.replace(/\./gi,"") ) < Number( window.YYMMDD_now.replace(/\./gi,"") ) ) break;
-					
-					console.log( date + " - " + href );
-
-					var _to = {
-						id : window.UTIL.URL.paramToObject( href ).document_srl
-						, url : href
-						, img : io.parentElement.children[0].children[0].src
-					};
-					
-					r.push( _to );
-				}
-				try
+				var r = {};
+				var z = 0,zLen=list.length,zo;
+				for(;z<zLen;++z)
 				{
-					fs.writeFileSync( "1.json", JSON.stringify( r ,null,4 ), {flag:"w"} );	
+					zo = list[ z ];
 					window.document.getElementById("_tmp").innerHTML = "";
+					window.document.getElementById("_tmp").innerHTML = global.fs.readFileSync( targetDirPath + zo ).toString();
+	
+					var el = window.document.getElementsByClassName("card_content");	
+					
+					var i = 0, iLen = el.length, io;
+					for(;i<iLen;++i){
+						io = el[ i ];
+						var date = io.children[0].children[1].innerText;
+						var href = io.children[1].children[0].href
+	
+						if( Number( date.replace(/\./gi,"") ) < Number( window.YYMMDD_now.replace(/\./gi,"") ) ) break;
+						
+						console.log( date + " - " + href );
+						
+						console.log( io.parentElement.children[0].children[0].src )
+						if( io.parentElement.children[0].children[0].src ==  "http://eomisae.co.kr/images/123.png" )
+						{
+							debugger;
+							console.log( date + " - 아직열리지않음 - " + href );
+							continue;
+						}
+
+						r[ window.UTIL.URL.paramToObject( href ).document_srl ] = {
+							url : href
+							, img : io.parentElement.children[0].children[0].src
+						};
+					}
+					try
+					{
+						fs.mkdirSync( resultDirPath, { recursive: true } );
+						fs.writeFileSync( resultDirPath + window.UTIL.DateFormat.YYYYMMDD() + ".json", JSON.stringify( r ,null,4 ), {flag:"w"} );	
+						window.document.getElementById("_tmp").innerHTML = "";
+					}
+					catch(er)
+					{
+						console.log( er );
+					}
+					
 				}
-				catch(er)
-				{
-					console.log( er );
-				}
-			
 			}
 
 			//-------------------------------------------------------;
 			//게시물상세페이지HTML 추출 및 저장하기;
 			//-------------------------------------------------------;
-			//var _tText00 = global.fs.readFileSync( "allStockCode.json" ).toString();
-			//window.allStockCode = JSON.parse( _tText00 );
-			//var list = global.fs.readdirSync("./all_stock_html/20210105/");
-			window.downloadDetailHtml = function( yyyymmdd ){
-				
-				debugger;
+			window.FNS.downloadDetailHtml = function( targetFilePath, resultDirPath ){
 
+				var now = window.UTIL.DateFormat.YYYYMMDD();
+				var targetFilePath = targetFilePath || "./list/json/" + now + "/" + now + ".json";
+				var resultDirPath = resultDirPath || "./detail/html/" + now + "/";
+				
 				if( window.linkList.length == 0 )
 				{
-					window.linkList = JSON.parse( global.fs.readFileSync( "1.json" ).toString() );
+					window.linkList = JSON.parse( global.fs.readFileSync( targetFilePath ).toString() );
+					window.linkListKeys = Object.keys( window.linkList );
 					window._tmp.cnt = 0
 				}
 				
-				if( window.linkList.length == window._tmp.cnt ) return;
+				if( window.linkListKeys.length == window._tmp.cnt ) return;
 				
-				webview.loadURL( window.linkList[ window._tmp.cnt ].url );
+				var _t = window.linkList[ window.linkListKeys[ window._tmp.cnt ] ]
+
+				console.log( _t.url )
+				webview.loadURL( _t.url );
 				webview.executeJavaScript(`
-					var _el = window.document.getElementsByClassName("_bd")[0].innerHTML
+					var _el = window.document.getElementsByClassName("_wrapper")[0].innerHTML
 					Promise.resolve( _el )
 				`
 				).then(function(data){
 
-					var _data = data.replace(/\/\/img/gi, "https://img")
-					fs.writeFileSync( window.linkList[ window._tmp.cnt ].id + ".html", _data, {flag : "w"} )	
+					var _data = data.replace(/\/\/img/gi, "https://img");
+					fs.mkdirSync( resultDirPath, { recursive: true } );
+					fs.writeFileSync( resultDirPath + window.linkListKeys[ window._tmp.cnt ] + ".html", _data, {flag : "w"} )	
 
-					debugger;
 					++window._tmp.cnt;
-					window.downloadDetailHtml()
+					setTimeout(function(){ window.FNS.downloadDetailHtml(); },500)
 					
 				})
-			
 			}
 			
 			//-------------------------------------------------------;
 			//상세페이지 HTML 데이터추출 및 파일 저장;
 			//-------------------------------------------------------;
-			//var _tText00 = global.fs.readFileSync( "allStockCode.json" ).toString();
-			//window.allStockCode = JSON.parse( _tText00 );
-			//var list = global.fs.readdirSync("./all_stock_html/20210105/");
-			window.detailHtmlToObject = function( id ){
+			window.FNS.detailHtmlToObject = function( date ){
 				
-				debugger;
+				var now = date || window.UTIL.DateFormat.YYYYMMDD();
+				var targetDirPath = targetDirPath || "./detail/html/" + now + "/";
+				var resultDirPath = resultDirPath || "./detail/json/" + now + "/";
+				var listObj = JSON.parse( global.fs.readFileSync( "./list/json/" + now + "/" + now + ".json" ).toString() );
 
 				if( window.detailList.length == 0 )
 				{
-					window.detailList = global.fs.readdirSync( "./detail/html/" );
+					window.detailList = global.fs.readdirSync( targetDirPath );
 					window._tmp.cnt = 0
 				}
 				
@@ -244,16 +259,26 @@
 					zo = window.detailList[ z ];
 				
 					window.document.getElementById("_tmp").innerHTML = "";
-					window.document.getElementById("_tmp").innerHTML = global.fs.readFileSync( "./detail/html/" + zo ).toString();
-					
-					var r = {
-						id : zo.split(".")[0]
-						, info : {}
-						, detail : []
-					};
-					
+					window.document.getElementById("_tmp").innerHTML = global.fs.readFileSync( targetDirPath + zo ).toString();
+					//debugger;
 					var el00 = window.document.getElementsByTagName("table")[0].children[1].children;
+					var el_title = window.document.getElementsByTagName("h2")[0].innerText;
 					
+					try {
+					
+						var r = {
+							id : zo.split(".")[0]
+							, info : {}
+							, detail : []
+							, thmbnail : listObj[ zo.split(".")[0] ].img
+							, title : el_title
+							, date : now
+						};
+					} catch (error) {
+						debugger;
+					}
+					
+
 					var i = 0,iLen = el00.length,io;
 					for(;i<iLen;++i){
 						io = el00[ i ].children
@@ -266,7 +291,7 @@
 					var i = 0,iLen = el01.length,io;
 					for(;i<iLen;++i){
 						io = el01[ i ]
-						debugger;
+						//debugger;
 						r.detail.push( io.outerHTML );
 					}
 					
@@ -276,13 +301,118 @@
 				
 				try
 				{
-					fs.writeFileSync( "./detail/" + window.YYYYMMDD + ".json", JSON.stringify( a ,null,4 ), {flag:"w"} );	
+					//debugger;
+					fs.mkdirSync( resultDirPath, { recursive: true } );
+					fs.writeFileSync( resultDirPath + window.YYYYMMDD + ".json", JSON.stringify( a ,null,4 ), {flag:"w"} );	
 				}
 				catch(er)
 				{
 					console.log( er );
 				}
 			
+			};
+
+			//-------------------------------------------------------;
+			//게시물상세페이지HTML 추출 및 저장하기;
+			//-------------------------------------------------------;
+			/*
+			    {
+					"id": "53959378",
+					"info": {
+						"링크": "https://www.newbalance.com/pd/mens-made-in-us-993/MR993V1-10103-M.html",
+						"할인 코드": "https://www.newbalance.com/account-login?src=DBMAC10FS&ECID=db_nbus_Abandon_Cart_Touch1&RMID=db_nbus_Abandon_Cart_Touch1&RIID=108,347,785&utm_source=email&UTM_campaign=db_nbus_Abandon_Cart_Touch1",
+						"면세 범위": "미국은200딸라",
+						"배송 정보": "미국내배송 무료"
+					},
+					"detail": [
+						"<p><img alt=\"zxczxc.PNG\" src=\"https://img.eomisae.co.kr/files/attach/images/138/378/959/053/acfa49d393f7ffc2497a07c25bd19aad.PNG\" rel=\"xe_gallery\"></p>",
+						"<p>&nbsp;</p>",
+						"<p>9.5 사이즈부터 다시 재입고됐어요 ~ 10%할인 경유해서 구매하세요&nbsp;&nbsp;</p>",
+						"<p>&nbsp;</p>"
+					]
+				},
+			*/
+			window.FNS.resultJsonToHtml = function( targetFilePath ){
+				var now = window.UTIL.DateFormat.YYYYMMDD();
+				var targetFilePath = targetFilePath || "./detail/json/" + now + "/" + now + ".json";
+				var resultDirPath = resultDirPath || "../HttpServer_Default/html/";
+				
+				var _ta = JSON.parse( global.fs.readFileSync( targetFilePath ).toString() ).reverse();
+				
+				var r = `
+				<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+
+				<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+				<style>
+				body { padding:0px; }
+				table{
+					width : 100%;
+					background-color : #ccc
+				}		
+				tr{ margin : 1px; }
+				td{ 
+					border : 0px solid #ccc;
+					padding: 3px;
+					background-color : #fff;
+					font-size :11px;
+				}
+				</style>
+				<div class="ui grid">
+				<div class="sixteen wide column" style="padding:100px;">
+				<div class="ui eight doubling cards">
+				`;
+				var i = 0,iLen =_ta.length,io;
+				for(;i<iLen;++i){
+					io = _ta[ i ];
+					console.log( io.id );
+					var thmbnail = io.thmbnail;
+					var description = ""
+					var title = io.title;
+					var date = io.date;
+					var s,so;
+					for( s in io.info ){
+						so = io.info[ s ];
+						description += s + " : " + so + "<br>"
+					}
+					//r += "<td>내용</td><td>" + io.detail.join("\n").replace( /rel\=\"xe_gallery\"/gi, "width='200'" ) + "</td>"
+					
+					r += `
+					<div class="card">
+						<div class="image">
+						<img src="${thmbnail}">
+						</div>
+						<div class="content">
+						<div class="header">${title}</div>
+						<div class="meta">
+							<a>${date}</a>
+						</div>
+						<div class="description" style="font-size:11px;word-break: break-all;">
+							${description}
+						</div>
+						</div>
+						<!--div class="extra content">
+							<span class="right floated">
+								Right-someText
+							</span>
+							<!span>
+								<i class="user icon"></i>
+								Left-someText
+							</span>
+						</div-->
+					</div>
+					`
+					
+				}
+
+				r += `
+				</div>
+				</div>
+				</div>
+				`
+
+				fs.mkdirSync( resultDirPath, { recursive: true } );
+				fs.writeFileSync( resultDirPath + now + ".html", r, {flag : "w"} )	
 			}
 		})
 
