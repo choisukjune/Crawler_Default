@@ -14,22 +14,22 @@ var createWindow = function() {
 		}
 	})
 	win.maximize();
-	win.loadFile('index.html');
+	//win.loadFile('index.html');
 	win.loadURL('file://' + __dirname + '/index.html');
 	//win.loadURL('https://naver.com');
-	
+
 	// Once did-navigate seems to function fine
 	win.webContents.once('did-navigate', function(){
 //		setTimeout(function(){
 //		var execSync = require('child_process').execSync;
 //		execSync('mouse_pos_test.ahk',);
-//		console.log("된당");	
+//		console.log("된당");
 //		}, 3000)
-	//Do Anything;		
+	//Do Anything;
 	});
 
 	win.webContents.openDevTools();
-	
+
 }
 
 app.whenReady().then(createWindow)
@@ -42,7 +42,7 @@ app.on('window-all-closed', function(){
 
 app.on('activate', function(){
 	if (BrowserWindow.getAllWindows().length === 0) {
-		
+
 		createWindow();
 	}
 })
