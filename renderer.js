@@ -407,6 +407,7 @@ debugger;
 				{
 					window.linkList = JSON.parse( global.fs.readFileSync( targetFilePath ).toString() );
 					window.linkListKeys = Object.keys( window.linkList );
+					fs.mkdirSync( resultDirPath, { recursive: true } );
 					var _ta = global.fs.readdirSync( resultDirPath );
 					var i = 0,iLen = _ta.length,io;
 					for(;i<iLen;++i){
