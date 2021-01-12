@@ -346,6 +346,7 @@
 			//-------------------------------------------------------;
 			window.FNS.detailHtmlToObject = function( targetDate, cbFunction ){
 				console.log( "[S] - window.FNS.detailHtmlToObject" )
+				
 				targetDate = targetDate || window.UTIL.DateFormat.YYYYMMDD();
 				var targetDirPath = targetDirPath || "./detail/html/" + targetDate + "/";
 				var resultDirPath = resultDirPath || "./detail/json/" + targetDate + "/";
@@ -377,6 +378,7 @@
 					{
 						var r = {
 							id : id
+							, source : "eomisae"
 							, info : {}
 							, detail : []
 							, thmbnail : listObj[ zo.split(".")[0] ].img
@@ -407,9 +409,14 @@
 				try
 				{
 					fs.mkdirSync( resultDirPath, { recursive: true } );
+					var _txt = fs.readFileSync( resultDirPath + targetDate + ".json" ).toString();
+					var _to = JSON.parse( _txt );
+					
 					fs.writeFileSync( resultDirPath + targetDate + ".json", JSON.stringify( a ,null,4 ), {flag:"w"} );
 					console.log( "[E] - window.FNS.detailHtmlToObject" )
-					cbFunction( targetDate );
+					window.detailList = [];
+					window._tmp.cnt = 0
+					if( cbFunction ) cbFunction( targetDate );
 				}
 				catch(er)
 				{
@@ -447,27 +454,6 @@
 				var _ta = JSON.parse( global.fs.readFileSync( targetFilePath ).toString() ).reverse();
 
 				var r = `
-				<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-				<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
-
-				<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
-				<style>
-				body { padding:0px; }
-				table{
-					width : 100%;
-					background-color : #ccc
-				}
-				tr{ margin : 1px; }
-				td{
-					border : 0px solid #ccc;
-					padding: 3px;
-					background-color : #fff;
-					font-size :11px;
-				}
-				</style>
-				<div class="ui grid">
-				<div class="sixteen wide column" style="padding:100px;">
-				<div class="ui eight doubling cards">
 				`;
 				var i = 0,iLen =_ta.length,io;
 				for(;i<iLen;++i){
@@ -520,9 +506,6 @@
 				}
 
 				r += `
-				</div>
-				</div>
-				</div>
 				`
 
 				fs.mkdirSync( resultDirPath, { recursive: true } );
