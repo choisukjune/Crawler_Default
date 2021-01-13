@@ -1,0 +1,68 @@
+{
+    "20210113_gocd_00": {
+        "id": "20210113_gocd_00",
+        "source": "gocd",
+        "info": {
+            "링크": "https://store.musinsa.com/app/goods/1730340"
+        },
+        "detail": [],
+        "thmbnail": "https://image.msscdn.net/images/goods_img/20201224/1730340/1730340_1_500.jpg",
+        "title": "무신사 클락스 왈라비 16만원대",
+        "date": "20210113"
+    },
+    "20210113_gocd_01": {
+        "id": "20210113_gocd_01",
+        "source": "gocd",
+        "info": {
+            "링크": "https://m.frizm.co.kr/product/list.html?cate_no=30&page=1"
+        },
+        "detail": [],
+        "thmbnail": "https://m.frizm.co.kr/web/product/big/202010/a6886cffef84d58b95c007bd58e8c9e1.jpg",
+        "title": "프리즘웍스 X 펜필드 세일",
+        "date": "20210113"
+    },
+    "20210113_gocd_02": {
+        "id": "20210113_gocd_02",
+        "source": "gocd",
+        "info": {
+            "링크": "http://randomwalk.co.kr/front/php/category.php?cate_no=45"
+        },
+        "detail": [],
+        "thmbnail": "http://randomwalk.co.kr/web/upload/category/shop1_45_top_101272.jpg",
+        "title": "랜덤워크 나이젤카본 세일",
+        "date": "20210113"
+    },
+    "20210113_gocd_03": {
+        "id": "20210113_gocd_03",
+        "source": "gocd",
+        "info": {
+            "링크": "http://randomwalk.co.kr/front/php/category.php?cate_no=45"
+        },
+        "detail": [],
+        "thmbnail": "http://randomwalk.co.kr/web/upload/category/shop1_45_top_101272.jpg",
+        "title": "랜덤워크 나이젤카본 세일",
+        "date": "20210113"
+    },
+    "20210113_gocd_04": {
+        "id": "20210113_gocd_04",
+        "source": "gocd",
+        "info": {
+            "링크": "http://randomwalk.co.kr/front/php/category.php?cate_no=45"
+        },
+        "detail": [],
+        "thmbnail": "http://randomwalk.co.kr/web/upload/category/shop1_45_top_101272.jpg",
+        "title": "랜덤워크 나이젤카본 세일",
+        "date": "20210113"
+    },
+    "20210113_gocd_05": {
+        "id": "20210113_gocd_05",
+        "source": "gocd",
+        "info": {
+            "링크": "http://randomwalk.co.kr/front/php/category.php?cate_no=45"
+        },
+        "detail": [],
+        "thmbnail": "http://randomwalk.co.kr/web/upload/category/shop1_45_top_101272.jpg",
+        "title": "랜덤워크 나이젤카본 세일",
+        "date": "20210113"
+    }
+}
