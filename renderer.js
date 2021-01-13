@@ -280,7 +280,7 @@
 				if( window.linkListKeys.length == window._tmp.cnt )
 				{
 					console.log( "[E] - window.FNS.downloadDetailHtml - " + window._tmp.cnt )
-					cbFunction( targetDate );
+					if( cbFunction ) cbFunction( targetDate );
 					return;
 				}
 				var _t = window.linkList[ window.linkListKeys[ window._tmp.cnt ] ]
@@ -337,7 +337,8 @@
 					console.log( window._tmp.cnt + " / " + window.linkListKeys.length + " - " + _t.url + " - 파일이존재함" )
 					console.log( "[E] - window.FNS.downloadDetailHtml - " + window._tmp.cnt )
 					++window._tmp.cnt;
-					setTimeout(function(){ window.FNS.downloadDetailHtml( targetDate, cbFunction ); },1000)
+					//setTimeout(function(){ window.FNS.downloadDetailHtml( targetDate, cbFunction ); },1000)
+					window.FNS.downloadDetailHtml( targetDate, cbFunction );
 				}
 				 //*/
 			}
@@ -357,7 +358,7 @@
 					window.detailList = global.fs.readdirSync( targetDirPath );
 					window._tmp.cnt = 0
 				}
-				var a = []
+				var a = {}
 				var z = 0,zLen = window.detailList.length,zo;
 				for(;z<zLen;++z){
 					zo = window.detailList[ z ];
@@ -401,7 +402,7 @@
 							r.detail.push( io.outerHTML );
 						}
 
-						a.push( r );
+						a[ r.id ] = r;
 						window.document.getElementById("_tmp").innerHTML = "";
 					}
 				}
@@ -451,22 +452,22 @@
 				var targetFilePath = targetFilePath || "./detail/json/" + targetDate + "/" + targetDate + ".json";
 				var resultDirPath = resultDirPath || "../HttpServer_Default/html/";
 
-				var _ta = JSON.parse( global.fs.readFileSync( targetFilePath ).toString() ).reverse();
+				var _to = JSON.parse( global.fs.readFileSync( targetFilePath ).toString() );
 
 				var r = `
 				`;
-				var i = 0,iLen =_ta.length,io;
-				for(;i<iLen;++i){
-					io = _ta[ i ];
-					console.log( io.id );
-					var thmbnail = io.thmbnail;
+				var z,zo;
+				for( z in _to ){
+					zo = _to[ z ];
+					console.log( zo.id );
+					var thmbnail = zo.thmbnail;
 					var description = ""
-					var title = io.title;
-					var date = io.date;
+					var title = zo.title;
+					var date = zo.date;
 					var href = "#";
 					var s,so;
-					for( s in io.info ){
-						so = io.info[ s ];
+					for( s in zo.info ){
+						so = zo.info[ s ];
 						if( s == "링크" ) href = so;
 						else
 						{
