@@ -92,7 +92,7 @@
 			, resultJsonToHtml : 0
 		}
 
-		window.pageBaseUrl = "https://eomisae.co.kr/index.php?mid=os&page="
+		window.pageBaseUrl = "http://espionage.co.kr/shop/shopbrand.html?type=X&xcode=061&sort=&page="
 		webview.addEventListener('did-finish-load', () => {
 
 			// var currentURL = webview.getURL();
@@ -127,26 +127,30 @@
 				url = url || webview.getURL();
 				webview.loadURL( url );
 				webview.executeJavaScript(`
-					var _el = window.document.getElementsByClassName("frst_last")[1].href
-					Promise.resolve( _el )
+					var _el = window.document.getElementsByClassName("item-page")[0]
+					var url = _el.lastElementChild.href;
+					Promise.resolve( url )
 				`
 				).then(function(data){
 					window.maxPage = window.UTIL.URL.paramToObject( data ).page * 1;
+					window.siteNm = "espionage"
+					window.siteUrl = "http://espionage.co.kr"
 					console.log( "window.maxPage : " + window.maxPage );
 				})
 			}
 			//-------------------------------------------------------;
 			//게시물HTML저장하기;
 			//-------------------------------------------------------;
-			window.FNS.downloadHtml = function( url, targetDate, cbFunction ){
+			window.FNS.downloadHtml = function( url, cbFunction ){
 				
+				if( window.maxPage < window.pageCnt ) return;
+
 				console.log( "[S] - window.FNS.downloadHtml - " +  window.pageCnt );
-				targetDate = targetDate || window.UTIL.DateFormat.YYYYMMDD();
-				var dirPath = "./list/html/" + targetDate + "/"
+				var dirPath = "./list/html/"
 				url = url || window.pageBaseUrl + window.pageCnt
 				webview.loadURL( url );
 				webview.executeJavaScript(`
-					var _el = window.document.getElementsByClassName("card_wrap")[0].innerHTML
+					var _el = window.document.getElementsByClassName("item-list")[0].innerHTML
 					Promise.resolve( _el )
 				`
 				).then(function(data){
@@ -159,34 +163,14 @@
 					//window.document.getElementsByClassName("card_content")[0].children[0].children[1].innerText
 					//window.document.getElementsByClassName("card_content")[0].children[1].children[0]
 
-					var date = window.document.getElementsByClassName("card_content")[0].children[0].children[1].innerText;
-
-					if( Number( date.replace(/\./gi,"") ) < Number( targetDate.substr(2,6) ) )
-					{
-						window.document.getElementById("_tmp").innerHTML = "";
-						console.log( "[E] - window.FNS.downloadHtml - 큼" +  window.pageCnt );
-						cbFunction( targetDate );
-					}
-					else if( Number( date.replace(/\./gi,"") ) > Number(  targetDate.substr(2,6) ) )
-					{
-						console.log( "[E] - window.FNS.downloadHtml - 작음" +  window.pageCnt )
-						
-						++window.pageCnt;
-						
-						window.FNS.downloadHtml( window.pageBaseUrl + window.pageCnt, targetDate, cbFunction );
-						window.document.getElementById("_tmp").innerHTML = "";
-					}
-					else
-					{
-						fs.mkdirSync( dirPath, { recursive: true } );
-						fs.writeFileSync( dirPath + window.pageCnt + ".html", _data, {flag : "w"} )
-						console.log( "[E] - window.FNS.downloadHtml - " +  window.pageCnt )
-						
-						++window.pageCnt;
-						
-						window.FNS.downloadHtml( window.pageBaseUrl + window.pageCnt, targetDate, cbFunction );
-						window.document.getElementById("_tmp").innerHTML = "";
-					}
+					fs.mkdirSync( dirPath, { recursive: true } );
+					fs.writeFileSync( dirPath + window.pageCnt + ".html", _data, {flag : "w"} )
+					console.log( "[E] - window.FNS.downloadHtml - " +  window.pageCnt )
+					
+					++window.pageCnt;
+					
+					window.FNS.downloadHtml( window.pageBaseUrl + window.pageCnt, cbFunction );
+					window.document.getElementById("_tmp").innerHTML = "";
 
 				})
 			}
@@ -195,13 +179,12 @@
 			//-------------------------------------------------------;
 			//게시물상세페이지링크 추출 및 저장하기;
 			//-------------------------------------------------------;
-			window.FNS.getDetailLinks = function( targetDate, cbFunction ){
+			window.FNS.getDetailLinks = function( cbFunction ){
 				
 				console.log( "[S] - window.FNS.getDetailLinks" )
 
-				targetDate = targetDate || window.UTIL.DateFormat.YYYYMMDD();
-				var targetDirPath = targetDirPath || "./list/html/" + targetDate + "/";
-				var resultDirPath = resultDirPath || "./list/json/" + targetDate + "/";
+				var targetDirPath = targetDirPath || "./list/html/";
+				var resultDirPath = resultDirPath || "./list/json/";
 				var list = global.fs.readdirSync( targetDirPath );
 
 				var r = {};
@@ -212,30 +195,48 @@
 					window.document.getElementById("_tmp").innerHTML = "";
 					window.document.getElementById("_tmp").innerHTML = global.fs.readFileSync( targetDirPath + zo ).toString();
 
-					var el = window.document.getElementsByClassName("card_content");
-
+					//var el = window.document.getElementsByClassName("item");
+					var el = window.document.getElementsByTagName("td")
 					var i = 0, iLen = el.length, io;
 					for(;i<iLen;++i){
 						io = el[ i ];
-						var date = io.children[0].children[1].innerText;
-						var href = io.children[1].children[0].href
 
-						if( Number( date.replace(/\./gi,"") ) < Number( targetDate.substr(2,6) ) ) break;
-						if( Number( date.replace(/\./gi,"") ) > Number( targetDate.substr(2,6) ) ) continue;
+						var href = io.children[1].href
 
-						console.log( date + " - " + href );
-
-						//console.log( io.parentElement.children[0].children[0].src )
-						if( io.parentElement.children[0].children[0].src ==  "http://eomisae.co.kr/images/123.png" )
-						{
-							console.log( date + " - 아직열리지않음 - " + href );
-							continue;
+						var info = io.children[0].children[0].children[1].children
+						debugger;
+						r[ window.UTIL.URL.paramToObject( href ).branduid ] = {};
+						r[ window.UTIL.URL.paramToObject( href ).branduid ].websiteNm = window.siteNm;
+						r[ window.UTIL.URL.paramToObject( href ).branduid ].url = window.siteUrl + href.replace( "file:///D:", "" )
+						r[ window.UTIL.URL.paramToObject( href ).branduid ].img = window.siteUrl + io.children[0].children[0].children[0].children[0].children[0].children[0].src.replace( "file:///D:", "" )
+						r[ window.UTIL.URL.paramToObject( href ).branduid ].brand = ""
+						r[ window.UTIL.URL.paramToObject( href ).branduid ].nm = [];
+						r[ window.UTIL.URL.paramToObject( href ).branduid ].salePrice = ""
+						r[ window.UTIL.URL.paramToObject( href ).branduid ].msrp = ""
+						
+						var k = 0,kLen = info.length,ko;
+						for(;k<kLen;++k){
+							ko = info[ k ];
+							if( ko.className == "prd-icon" ) continue;
+							if( ko.className == "prd-name" ||  ko.className == "prd-name2" )
+							{
+								r[ window.UTIL.URL.paramToObject( href ).branduid ].nm.push( ko.innerText );
+							}
+							else if( ko.className == "prd-brand" )
+							{
+								r[ window.UTIL.URL.paramToObject( href ).branduid ].brand = ko.innerText
+							}
+							else if( ko.className == "prd-price" )
+							{
+								if( ko.innerText == "SOLD OUT" ) r[ window.UTIL.URL.paramToObject( href ).branduid ].salePrice = null
+								else r[ window.UTIL.URL.paramToObject( href ).branduid ].salePrice = ko.innerText
+							}
+							else if( ko.className == "prd-consumer" )
+							{
+								r[ window.UTIL.URL.paramToObject( href ).branduid ].msrp = ko.innerText
+							}
 						}
-
-						r[ window.UTIL.URL.paramToObject( href ).document_srl ] = {
-							url : href
-							, img : io.parentElement.children[0].children[0].src
-						};
+						
 					}
 				}
 
@@ -243,213 +244,37 @@
 				try
 				{
 					fs.mkdirSync( resultDirPath, { recursive: true } );
-					fs.writeFileSync( resultDirPath + targetDate + ".json", JSON.stringify( r ,null,4 ), {flag:"w"} );
+					fs.writeFileSync( resultDirPath + window.siteNm + ".json", JSON.stringify( r ,null,4 ), {flag:"w"} );
 					window.document.getElementById("_tmp").innerHTML = "";
 					console.log( "[E] - window.FNS.getDetailLinks" )
-					cbFunction( targetDate );
+					if( cbFunction ) cbFunction();
 				}
 				catch(er)
 				{
 					console.log( er );
 				}
 			}
-			//-------------------------------------------------------;
-			//게시물상세페이지HTML 추출 및 저장하기;
-			//-------------------------------------------------------;
-			window.FNS.downloadDetailHtml = function( targetDate, cbFunction ){
-				console.log( "[S] - window.FNS.downloadDetailHtml - " + window._tmp.cnt )
-				targetDate = targetDate || window.UTIL.DateFormat.YYYYMMDD();
-				console.log( targetDate )
-				var targetFilePath = targetFilePath || "./list/json/" + targetDate + "/" + targetDate + ".json";
-				var resultDirPath = resultDirPath || "./detail/html/" + targetDate + "/";
-
-				if( window.linkList.length == 0 )
-				{
-					window.linkList = JSON.parse( global.fs.readFileSync( targetFilePath ).toString() );
-					window.linkListKeys = Object.keys( window.linkList );
-					fs.mkdirSync( resultDirPath, { recursive: true } );
-					var _ta = global.fs.readdirSync( resultDirPath );
-					var i = 0,iLen = _ta.length,io;
-					for(;i<iLen;++i){
-						io = _ta[ i ].split(".")[0];
-						window.resultFileList[ io ] = {}
-					}
-					window._tmp.cnt = 0
-				}
-
-				if( window.linkListKeys.length == window._tmp.cnt )
-				{
-					console.log( "[E] - window.FNS.downloadDetailHtml - " + window._tmp.cnt )
-					if( cbFunction ) cbFunction( targetDate );
-					return;
-				}
-				var _t = window.linkList[ window.linkListKeys[ window._tmp.cnt ] ]
-
-				/*/
-				var xhr = new XMLHttpRequest();
-				xhr.onreadystatechange = function() { // 요청에 대한 콜백
-				  if (xhr.readyState === xhr.DONE) { // 요청이 완료되면
-				    if (xhr.status === 200 || xhr.status === 201) {
-
-							var data = xhr.responseText;
-					   		var _data = data.replace(/\/\/img/gi, "https://img");
-
-							fs.mkdirSync( resultDirPath, { recursive: true } );
-  					 		fs.writeFileSync( resultDirPath + window.linkListKeys[ window._tmp.cnt ] + ".html", _data, {flag : "w"} )
-
-							console.log( "파일생성완료!" )
-
-  							++window._tmp.cnt;
-
-  							setTimeout(function(){ window.FNS.downloadDetailHtml(); },1000)
-
-
-
-				    } else {
-				      console.error(xhr.responseText);
-				    }
-				  }
-				};
-				xhr.open('GET', _t.url ); // 메소드와 주소 설정
-				xhr.send(); // 요청 전송
-				// xhr.abort(); // 전송된 요청 취소
-
-				/*/
-				if( !window.resultFileList[  window.linkListKeys[ window._tmp.cnt ] ] ){
-					debugger;
-					webview.loadURL( _t.url );
-					webview.executeJavaScript(`
-						var _el = window.document.getElementsByClassName("_wrapper")[0].innerHTML
-					 	Promise.resolve( _el )
-					 `).then(function(data){
-
-				 		var _data = data.replace(/\/\/img/gi, "https://img");
-				 		fs.mkdirSync( resultDirPath, { recursive: true } );
-				 		fs.writeFileSync( resultDirPath + window.linkListKeys[ window._tmp.cnt ] + ".html", _data, {flag : "w"} )
-						console.log( window._tmp.cnt + " / " + window.linkListKeys.length + " - " + _t.url + " - 파일생성완료!" )
-						console.log( "[E] - window.FNS.downloadDetailHtml - " + window._tmp.cnt )
-						++window._tmp.cnt;
-						setTimeout(function(){ window.FNS.downloadDetailHtml( targetDate, cbFunction ); },1000)
-					})
-			 	}
-				else
-				{
-					console.log( window._tmp.cnt + " / " + window.linkListKeys.length + " - " + _t.url + " - 파일이존재함" )
-					console.log( "[E] - window.FNS.downloadDetailHtml - " + window._tmp.cnt )
-					++window._tmp.cnt;
-					//setTimeout(function(){ window.FNS.downloadDetailHtml( targetDate, cbFunction ); },1000)
-					window.FNS.downloadDetailHtml( targetDate, cbFunction );
-				}
-				 //*/
-			}
-			//-------------------------------------------------------;
-			//상세페이지 HTML 데이터추출 및 파일 저장;
-			//-------------------------------------------------------;
-			window.FNS.detailHtmlToObject = function( targetDate, cbFunction ){
-				console.log( "[S] - window.FNS.detailHtmlToObject" )
-				
-				targetDate = targetDate || window.UTIL.DateFormat.YYYYMMDD();
-				var targetDirPath = targetDirPath || "./detail/html/" + targetDate + "/";
-				var resultDirPath = resultDirPath || "./detail/json/" + targetDate + "/";
-				var listObj = JSON.parse( global.fs.readFileSync( "./list/json/" + targetDate + "/" + targetDate + ".json" ).toString() );
-
-				if( window.detailList.length == 0 )
-				{
-					window.detailList = global.fs.readdirSync( targetDirPath );
-					window._tmp.cnt = 0
-				}
-				var a = {}
-				var z = 0,zLen = window.detailList.length,zo;
-				for(;z<zLen;++z){
-					zo = window.detailList[ z ];
-
-					window.document.getElementById("_tmp").innerHTML = "";
-					window.document.getElementById("_tmp").innerHTML = global.fs.readFileSync( targetDirPath + zo ).toString();
-
-					var el00 = window.document.getElementsByTagName("table")[0].children[1].children;
-					var el_title = window.document.getElementsByTagName("h2")[0].innerText;
-					var id = zo.split(".")[0];
-					if( !listObj[ id ])
-					{
-						console.log( id )
-						//TODO
-						//예외처리 추가해야함;
-					}
-					else
-					{
-						var r = {
-							id : id
-							, source : "eomisae"
-							, info : {}
-							, detail : []
-							, thmbnail : listObj[ zo.split(".")[0] ].img
-							, title : el_title
-							, date : targetDate
-						};
-
-						var i = 0,iLen = el00.length,io;
-						for(;i<iLen;++i){
-							io = el00[ i ].children
-							if( io.length == 0 ) continue;
-							if( io[ 0 ].children.length > 0 ) io[ 0 ] = io[ 0 ].removeChild( io[ 0 ].childNodes[ 1 ] );
-							r.info[ io[ 0 ].innerText ] = io[1].innerText;
-						}
-
-						var el01 = window.document.getElementsByTagName("article")[0].children[0].children
-						var i = 0,iLen = el01.length,io;
-						for(;i<iLen;++i){
-							io = el01[ i ]
-							r.detail.push( io.outerHTML );
-						}
-
-						a[ r.id ] = r;
-						window.document.getElementById("_tmp").innerHTML = "";
-					}
-				}
-
-				try
-				{
-					fs.mkdirSync( resultDirPath, { recursive: true } );
-					var _txt = fs.readFileSync( resultDirPath + targetDate + ".json" ).toString();
-					var _to = JSON.parse( _txt );
-					
-					fs.writeFileSync( resultDirPath + targetDate + ".json", JSON.stringify( a ,null,4 ), {flag:"w"} );
-					console.log( "[E] - window.FNS.detailHtmlToObject" )
-					window.detailList = [];
-					window._tmp.cnt = 0
-					if( cbFunction ) cbFunction( targetDate );
-				}
-				catch(er)
-				{
-					console.log( er );
-				}
-
-			};
 
 			//-------------------------------------------------------;
 			//게시물상세페이지HTML 추출 및 저장하기;
 			//-------------------------------------------------------;
 			/*
-			    {
-					"id": "53959378",
-					"info": {
-						"링크": "https://www.newbalance.com/pd/mens-made-in-us-993/MR993V1-10103-M.html",
-						"할인 코드": "https://www.newbalance.com/account-login?src=DBMAC10FS&ECID=db_nbus_Abandon_Cart_Touch1&RMID=db_nbus_Abandon_Cart_Touch1&RIID=108,347,785&utm_source=email&UTM_campaign=db_nbus_Abandon_Cart_Touch1",
-						"면세 범위": "미국은200딸라",
-						"배송 정보": "미국내배송 무료"
-					},
-					"detail": [
-						"<p><img alt=\"zxczxc.PNG\" src=\"https://img.eomisae.co.kr/files/attach/images/138/378/959/053/acfa49d393f7ffc2497a07c25bd19aad.PNG\" rel=\"xe_gallery\"></p>",
-						"<p>&nbsp;</p>",
-						"<p>9.5 사이즈부터 다시 재입고됐어요 ~ 10%할인 경유해서 구매하세요&nbsp;&nbsp;</p>",
-						"<p>&nbsp;</p>"
-					]
-				},
+			 {
+				"websiteNm": "espionage",
+				"url": "http://espionage.co.kr/shop/shopdetail.html?branduid=76078&xcode=061&mcode=001&scode=001&type=X&sort=manual&cur_code=061&GfDT=bm9%2BW1g%3D",
+				"img": "http://espionage.co.kr/shopimages/zooyork77/0610010000252.jpg?1357903799",
+				"brand": "",
+				"nm": [
+					"Colby Heavy Down Parka Dark G"
+				],
+				"salePrice": null,
+				"msrp": "329,000원"
+			},
 			*/
-			window.FNS.resultJsonToHtml = function( targetDate ){
+			window.FNS.resultJsonToHtml = function(){
 				console.log( "[S] - window.FNS.resultJsonToHtml" )
-					targetDate = targetDate || window.UTIL.DateFormat.YYYYMMDD();
-				var targetFilePath = targetFilePath || "./detail/json/" + targetDate + "/" + targetDate + ".json";
+				
+				var targetFilePath = targetFilePath || "./list/json/" + window.siteNm + ".json";
 				var resultDirPath = resultDirPath || "../HttpServer_Default/html/";
 
 				var _to = JSON.parse( global.fs.readFileSync( targetFilePath ).toString() );
@@ -459,21 +284,15 @@
 				var z,zo;
 				for( z in _to ){
 					zo = _to[ z ];
-					console.log( zo.id );
-					var thmbnail = zo.thmbnail;
-					var description = ""
-					var title = zo.title;
-					var date = zo.date;
-					var href = "#";
-					var s,so;
-					for( s in zo.info ){
-						so = zo.info[ s ];
-						if( s == "링크" ) href = so;
-						else
-						{
-							description += s + " : " + so + "<br>"
-						}
-					}
+
+					var thmbnail = zo.img;
+					var title = zo.nm.join( " - " );
+					var href = zo.url;
+					var websiteNm = zo.websiteNm
+					var brand = zo.brand
+					var salePrice = zo.salePrice
+					var msrp = zo.msrp
+
 					//r += "<td>내용</td><td>" + io.detail.join("\n").replace( /rel\=\"xe_gallery\"/gi, "width='200'" ) + "</td>"
 					//${description}
 					r += `
@@ -484,11 +303,13 @@
 						<div class="content">
 						<div class="header">${title}</div>
 						<div class="meta">
-							<a>${date}</a>
+							<a>${websiteNm}</a>
 						</div>
 
 						<div class="description" style="font-size:11px;word-break: break-all;">
-							
+							${brand}<br>
+							${salePrice}<br>
+							${msrp}<br>
 						</div>
 						</div>
 						<div class="extra content">
@@ -510,7 +331,7 @@
 				`
 
 				fs.mkdirSync( resultDirPath, { recursive: true } );
-				fs.writeFileSync( resultDirPath + targetDate + ".html", r, {flag : "w"} )
+				fs.writeFileSync( resultDirPath + window.siteNm + ".html", r, {flag : "w"} )
 				console.log( "[E] - window.FNS.resultJsonToHtml" )
 			}
 			//-------------------------------------------------------;

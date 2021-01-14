@@ -31,38 +31,5 @@
         "thmbnail": "http://randomwalk.co.kr/web/upload/category/shop1_45_top_101272.jpg",
         "title": "랜덤워크 나이젤카본 세일",
         "date": "20210113"
-    },
-    "20210113_gocd_03": {
-        "id": "20210113_gocd_03",
-        "source": "gocd",
-        "info": {
-            "링크": "http://randomwalk.co.kr/front/php/category.php?cate_no=45"
-        },
-        "detail": [],
-        "thmbnail": "http://randomwalk.co.kr/web/upload/category/shop1_45_top_101272.jpg",
-        "title": "랜덤워크 나이젤카본 세일",
-        "date": "20210113"
-    },
-    "20210113_gocd_04": {
-        "id": "20210113_gocd_04",
-        "source": "gocd",
-        "info": {
-            "링크": "http://randomwalk.co.kr/front/php/category.php?cate_no=45"
-        },
-        "detail": [],
-        "thmbnail": "http://randomwalk.co.kr/web/upload/category/shop1_45_top_101272.jpg",
-        "title": "랜덤워크 나이젤카본 세일",
-        "date": "20210113"
-    },
-    "20210113_gocd_05": {
-        "id": "20210113_gocd_05",
-        "source": "gocd",
-        "info": {
-            "링크": "http://randomwalk.co.kr/front/php/category.php?cate_no=45"
-        },
-        "detail": [],
-        "thmbnail": "http://randomwalk.co.kr/web/upload/category/shop1_45_top_101272.jpg",
-        "title": "랜덤워크 나이젤카본 세일",
-        "date": "20210113"
     }
 }
