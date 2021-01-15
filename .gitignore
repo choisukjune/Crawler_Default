@@ -1,0 +1,11 @@
+# directory
+DataBase/0/
+stock_data/
+stock_html/
+node_modules/
+Log/
+
+# files
+
+*.result
+_cmd.exe
