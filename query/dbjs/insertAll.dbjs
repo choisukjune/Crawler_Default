@@ -14,7 +14,7 @@ cols.forEach(function(col){
     db0.getCollection( col ).find({}).toArray().forEach(function(doc){
         doc._id = NumberInt( idx );
 
-        var arr = doc.nm.split( " " )
+        var arr = doc.nm.replace( doc.brand, "" ).split( " " )
     
         var i = 0,iLen = arr.length,io;
         for(;i<iLen;++i){

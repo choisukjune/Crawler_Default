@@ -173,7 +173,7 @@
 							  var i = currentPos;
 							  x = setInterval(function(){
 								 window.scrollTo(0, i);
-								 i += 10;
+								 i += 50;
 								 if(i>=pos){
 								  clearInterval(x);
 								 }
@@ -200,7 +200,7 @@
 							 }, time);
 							  }
 						}
-						scrollToSmoothly( document.body.scrollHeight, 3 )
+						scrollToSmoothly( document.body.scrollHeight, 1 )
 					`
 					).then(function(){
 						setTimeout(function(){
@@ -232,7 +232,7 @@
 							//window.document.getElementById("_tmp").innerHTML = "";
 
 						})
-						},10000)
+						},5000)
 
 					})
 					});

@@ -11580,7 +11580,7 @@ for( s in _o ){
         so._id = NumberInt( s );
     }
     
-    if( so.brand != "" && so.info.indexOf( so.brand ) != -1 )
+    if( so.brand != "" && so.info.indexOf( so.brand ) == -1 )
     {
         so.info.push( so.brand )
     }
