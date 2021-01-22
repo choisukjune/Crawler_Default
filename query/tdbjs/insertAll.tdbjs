@@ -1,0 +1,21 @@
+var db_nm = "data";
+
+var db0 = db.getSiblingDB( db_nm );
+var cols = db0.getCollectionNames();
+var col__all = db0.getCollection( "all" );
+
+col__all.remove({});
+
+idx = 0;
+cols.forEach(function(col){
+    
+    if( col == "all" ) return;
+    
+    db0.getCollection( col ).find({}).toArray().forEach(function(doc){
+        doc._id = NumberInt( idx );
+        col__all.insert( doc );
+        ++idx;
+    })
+})
+
+printjson( 1 )

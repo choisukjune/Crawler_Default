@@ -1,0 +1,35 @@
+var db_nm = "data";
+var col_nm = "<!=BRAND_NM=!>";
+
+var db0 = db.getSiblingDB( db_nm );
+var col0 = db0.getCollection( col_nm );
+
+//collection data all remove;
+col0.remove({});
+
+var _o = <!=DATA=!>
+
+var s,so;
+var idx = 0;
+for( s in _o ){
+    so = _o[ s ];
+    
+    if( typeof( s ) == "string" )
+    {
+        so._id = NumberInt( idx );
+    }
+    else
+    {
+        so._id = NumberInt( s );
+    }
+    
+    if( so.brand != "" && so.info.indexOf( so.brand ) != -1 )
+    {
+        so.info.push( so.brand )
+    }
+    so.info.push( so.websiteNm )
+    col0.insert( so );
+    ++idx;
+}
+
+printjson( 1 )
