@@ -198,7 +198,7 @@
 				console.log( "[S] - window.FNS.getDetailLinks" )
 
 				var targetDirPath = "./html/";
-				var resultDirPath = "./json/";
+				var resultDirPath = "./result/";
 				var list = global.fs.readdirSync( targetDirPath );
 				console.log( list )
 				var r = {};

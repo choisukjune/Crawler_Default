@@ -238,16 +238,69 @@
 					});
 			}
 
+			window.FNS.downloadJson = function( cbFunction ){
+				
+				if( window.maxPage < window.pageCnt )
+				{
+					cbFunction();
+					return
+				}
+
+				console.log( "[S] - window.FNS.downloadJspn - " +  window.pageCnt );
+				var dirPath = "./json/"
+				var xhr_page = window.pageCnt - 1;
+				webview.executeJavaScript(`
+				new Promise((resolve, reject) => {
+					var xhr = new XMLHttpRequest();
+					var param = encodeURI('userToken=anonymous-2f0e9c24-2d43-4500-af43-73b483222a0a&analyticsTags=["browse","web","v2",kr","KR","sale"]&page=${xhr_page}&facetFilters=[["categories:Sale"],["websites_available_at:12"]]&filters=&facets=["websites_available_at"]&hitsPerPage=120&ruleContexts=["browse","web","v2","kr","KR","sale"]&clickAnalytics=false')
+					var data = {
+						"requests":[
+							{
+								"indexName":"catalog_products_en_stock",
+								"params":param
+							}
+						]
+					};
+					xhr.onload = function() {
+					  if (xhr.status === 200 || xhr.status === 201) {
+						//console.log(JSON.parse(  ));
+						resolve( xhr.responseText )
+					  } else {
+						console.error(xhr.responseText);
+					  }
+					};
+					xhr.open('POST', 'https://ko4w2gbink-dsn.algolia.net/1/indexes/*/queries?x-algolia-agent=Algolia%20for%20JavaScript%20(3.35.1)%3B%20Browser&x-algolia-application-id=KO4W2GBINK&x-algolia-api-key=dfa5df098f8d677dd2105ece472a44f8');
+							 // https://ko4w2gbink-dsn.algolia.net/1/indexes/*/queries?x-algolia-agent=Algolia%20for%20JavaScript%20(3.35.1)%3B%20Browser&x-algolia-application-id=KO4W2GBINK&x-algolia-api-key=dfa5df098f8d677dd2105ece472a44f8
+					xhr.setRequestHeader('Content-Type', 'application/json'); // 컨텐츠타입을 json으로
+					xhr.send(JSON.stringify( data )); // 데이터를 stringify해서 보냄
+				});
+				`
+				).then(function(data){
+
+					var _data = data;
+
+					fs.mkdirSync( dirPath, { recursive: true } );
+					fs.writeFileSync( dirPath + window.pageCnt + ".json", _data, {flag : "w"} )
+					console.log( "[E] - window.FNS.downloadJspn - " +  window.pageCnt )
+					
+					++window.pageCnt;
+
+					window.FNS.downloadJson( cbFunction );
+
+				})
+				
+			}
+
 
 			//-------------------------------------------------------;
 			//게시물상세페이지링크 추출 및 저장하기;
 			//-------------------------------------------------------;
-			window.FNS.getDetailLinks = function( cbFunction ){
+			window.FNS.getDetailLinksByHTML = function( cbFunction ){
 				
 				console.log( "[S] - window.FNS.getDetailLinks" )
 
 				var targetDirPath = "./html/";
-				var resultDirPath = "./json/";
+				var resultDirPath = "./result/";
 				var list = global.fs.readdirSync( targetDirPath );
 				var brandObj = JSON.parse( global.fs.readFileSync( "brand.json" ).toString());
 				var brandArr = Object.keys( brandObj );
@@ -255,13 +308,19 @@
 
 				var getBrandNm = function(nm){
 					var r = "";
-					var i = 0,iLen = brandArr.length,io;
+					//debugger;
+					
+					var arr =  nm.split(" ");
+					
+					var _tNm = []
+					var i = 0,iLen = arr.length,io
 					for(;i<iLen;++i){
-						io = brandArr[ i ];
-						if( nm.indexOf( io ) != -1  ) 
+						io = arr[i]
+						_tNm.push( io );
+						//console.log( brandArr.indexOf( _tNm.join( " " ) ) )
+						if( brandArr.indexOf( _tNm.join( " " ) ) != -1)
 						{
-							r = io;
-							break;
+							r = brandArr[ brandArr.indexOf( _tNm.join( " " ) ) ];	
 						}
 					}
 					return r;
@@ -316,6 +375,15 @@
 						r[ id ].isSoldOut = 0;
 						r[ id ].info = [ io.children[0].children[2].innerText ];
 						
+						//if( r[ id ].nm.indexOf( " x " != -1 ) ){
+						//	var _tNm = r[ id ].nm.split( " " )
+						//	
+						//	var collabor = _tNm[0] + " " + _tNm[1] + " " + _tNm[2];
+					//		r[ id ].info.push( collabor );
+							
+							
+					//	}
+
 						if( r[ id ].msrp > -1 && r[ id ].salePrice > -1 )
 						{
 							var salePrice = r[ id ].salePrice;
@@ -340,7 +408,80 @@
 					console.log( er );
 				}
 			}
+			//-------------------------------------------------------;
+			//게시물상세페이지링크 추출 및 저장하기;
+			//-------------------------------------------------------;
+			window.FNS.getDetailLinksByJSON = function( cbFunction ){
+				
+				console.log( "[S] - window.FNS.getDetailLinks" )
 
+				var targetDirPath = "./json/";
+				var resultDirPath = "./result/";
+				var list = global.fs.readdirSync( targetDirPath );
+debugger;
+				var r = {};
+				var z = 0,zLen=list.length,zo;
+				for(;z<zLen;++z)
+				{
+					zo = list[ z ];
+					var _to = JSON.parse( global.fs.readFileSync( targetDirPath + zo ).toString() );
+debugger;			
+					var dataArr = _to.results[0].hits;
+					var i = 0, iLen = dataArr.length, io;
+					for(;i<iLen;++i){
+						debugger;
+						io = dataArr[ i ];
+
+						var href = io.url_key;
+						var id = io.objectID
+						
+						
+						r[ id ] = {};
+						r[ id ].websiteNm = window.siteNm;
+						r[ id ].url = window.siteUrl + "/kr/" + href
+						
+						//https://media.endclothing.com/media/f_auto,q_auto:eco,w_800,h_800/prodmedia/media/catalog/product/2/1/21-10-2019_visvim_deckhandjacket_olive_0119205013026-olv_jd_1x.jpg
+						var imgUrlBase = "https://media.endclothing.com/media/f_auto,q_auto:eco,w_800,h_800/prodmedia/media/catalog/product";
+						r[ id ].img = imgUrlBase + io.small_image;
+						
+						
+						r[ id ].brand = io.brand;
+						r[ id ].nm = io.name;
+						r[ id ].salePrice = io.final_price_12;	
+						r[ id ].msrp = io.full_price_12;
+						
+						
+						r[ id ].saleRatio = -1;
+						r[ id ].isSoldOut = 0;
+						r[ id ].info = [];
+						
+						r[ id ].info.push( io.brand )
+						r[ id ].info.push( io.actual_colour )
+						r[ id ].info.push( io.department )
+						if( r[ id ].msrp > -1 && r[ id ].salePrice > -1 )
+						{
+							var salePrice = r[ id ].salePrice;
+							var msrp = r[ id ].msrp;
+							r[ id ].saleRatio = (1 -( salePrice / msrp )).toFixed(2);
+						}
+						
+					}
+				}
+
+				
+				try
+				{
+					fs.mkdirSync( resultDirPath, { recursive: true } );
+					fs.writeFileSync( resultDirPath + window.siteNm + ".json", JSON.stringify( r ,null,4 ), {flag:"w"} );
+					window.document.getElementById("_tmp").innerHTML = "";
+					console.log( "[E] - window.FNS.getDetailLinks" )
+					if( cbFunction ) cbFunction();
+				}
+				catch(er)
+				{
+					console.log( er );
+				}
+			}
 			//-------------------------------------------------------;
 			//게시물상세페이지HTML 추출 및 저장하기;
 			//-------------------------------------------------------;
@@ -430,13 +571,13 @@
 				
 				window.FNS.init()
 				console.log( "--------------- window.FNS.getMaxPage ---------------" );
-				window.FNS.getMaxPage( function(){
+				//window.FNS.getMaxPage( function(){
 					console.log( "--------------- window.FNS.getMaxPage ---------------" );
 					console.log( "--------------- window.FNS.downloadHtml ---------------" );
-					window.FNS.downloadHtml(function(){
+					//window.FNS.downloadJson(function(){
 						console.log( "--------------- window.FNS.downloadHtml ---------------" );
 						console.log( "--------------- window.FNS.getDetailLinks ---------------" );
-						 window.FNS.getDetailLinks( function(){
+						window.FNS.getDetailLinksByJSON( function(){
 						// 	console.log( "--------------- window.FNS.getDetailLinks ---------------" );
 						// 	console.log( "--------------- window.FNS.resultJsonToHtml ---------------" );
 						// 	window.FNS.resultJsonToHtml()
@@ -446,9 +587,9 @@
 						// 	let w = remote.getCurrentWindow()
 						// 	w.close()
 
-						 })
-					});
-				} )
+						})
+					//});
+				//} )
 
 			
 			}

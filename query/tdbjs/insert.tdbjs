@@ -23,6 +23,15 @@ for( s in _o ){
         so._id = NumberInt( s );
     }
     
+    var arr = so.nm.replace( so.brand, "" ).split( " " )
+    
+	var i = 0,iLen = arr.length,io;
+	for(;i<iLen;++i){
+	    io = arr[ i ];
+	    if( io.length > 1 && io != io.brand ) so.info.push( io )
+	}
+
+    
     if( so.brand != "" && so.info.indexOf( so.brand ) == -1 )
     {
         so.info.push( so.brand )

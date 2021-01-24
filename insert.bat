@@ -1,2 +1,2 @@
-start node .\exec_db.js
+node .\exec_db.js
 cmd/k

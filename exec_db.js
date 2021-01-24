@@ -19,7 +19,7 @@ global.CONST.MongoDB.OPTIONS = {
 var ROOT_PATH = process.cwd();
 
 var CP_COMMAND = {};
-	CP_COMMAND.MONGO = "..\\Binary\\mongodb\\4.2.8\\bin\\mongo";
+	CP_COMMAND.MONGO = "..\\Binary\\mongodb\\mongodb-win32-x86_64-windows-4.4.3\\bin\\mongo";
 
 var DBJS_DIRECTORY_PATH = ROOT_PATH + "\\query\\dbjs\\";
 
@@ -82,7 +82,7 @@ var deleteLines = function( str, n ){
 //-------------------------;
 var makeDbJsInsert = function( nm ){
     console.log( nm )
-    var FILE_PATH = process.cwd() + "/sites/" + nm + "/json/" + nm + ".json";
+    var FILE_PATH = process.cwd() + "/sites/" + nm + "/result/" + nm + ".json";
     var TDBJS_PATH = process.cwd() + "/query/tdbjs/insert.tdbjs";
     var DBJS_PATH = process.cwd() + "/query/dbjs/";
     var _q = fs.readFileSync( TDBJS_PATH ).toString();
