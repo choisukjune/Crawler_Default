@@ -347,7 +347,10 @@
 						r[ id ] = {};
 						r[ id ].websiteNm = window.siteNm;
 						r[ id ].url = window.siteUrl + href.replace( "file:///D:", "" )
-						
+						r[ id ].currency = {
+							mark : "₩"
+							, code : "KRW"
+						}
 						
 						try {
 							r[ id ].img = io.children[0].children[0].children[0].src.replace( "file:///D:", "" )	
@@ -418,14 +421,14 @@
 				var targetDirPath = "./json/";
 				var resultDirPath = "./result/";
 				var list = global.fs.readdirSync( targetDirPath );
-debugger;
+
 				var r = {};
 				var z = 0,zLen=list.length,zo;
 				for(;z<zLen;++z)
 				{
 					zo = list[ z ];
 					var _to = JSON.parse( global.fs.readFileSync( targetDirPath + zo ).toString() );
-debugger;			
+
 					var dataArr = _to.results[0].hits;
 					var i = 0, iLen = dataArr.length, io;
 					for(;i<iLen;++i){
@@ -454,7 +457,10 @@ debugger;
 						r[ id ].saleRatio = -1;
 						r[ id ].isSoldOut = 0;
 						r[ id ].info = [];
-						
+						r[ id ].currency = {
+							mark : "₩"
+							, code : "KRW"
+						}
 						r[ id ].info.push( io.brand )
 						r[ id ].info.push( io.actual_colour )
 						r[ id ].info.push( io.department )
@@ -501,7 +507,7 @@ debugger;
 			window.FNS.resultJsonToHtml = function(){
 				console.log( "[S] - window.FNS.resultJsonToHtml" )
 				
-				var targetFilePath = targetFilePath || "./json/" + window.siteNm + ".json";
+				var targetFilePath = targetFilePath || "./result/" + window.siteNm + ".json";
 				var resultDirPath = resultDirPath || "../../../HttpServer_Default/html/";;
 
 				var _to = JSON.parse( global.fs.readFileSync( targetFilePath ).toString() );
@@ -574,24 +580,22 @@ debugger;
 				//window.FNS.getMaxPage( function(){
 					console.log( "--------------- window.FNS.getMaxPage ---------------" );
 					console.log( "--------------- window.FNS.downloadHtml ---------------" );
-					//window.FNS.downloadJson(function(){
+					//window.FNS.downloadHtml(function(){
 						console.log( "--------------- window.FNS.downloadHtml ---------------" );
 						console.log( "--------------- window.FNS.getDetailLinks ---------------" );
 						window.FNS.getDetailLinksByJSON( function(){
-						// 	console.log( "--------------- window.FNS.getDetailLinks ---------------" );
-						// 	console.log( "--------------- window.FNS.resultJsonToHtml ---------------" );
-						// 	window.FNS.resultJsonToHtml()
-						// 	console.log( "--------------- window.FNS.resultJsonToHtml ---------------" );
+							console.log( "--------------- window.FNS.getDetailLinks ---------------" );
+							console.log( "--------------- window.FNS.resultJsonToHtml ---------------" );
+							window.FNS.resultJsonToHtml()
+							console.log( "--------------- window.FNS.resultJsonToHtml ---------------" );
 
-						// 	const remote = require('electron').remote
-						// 	let w = remote.getCurrentWindow()
-						// 	w.close()
-
+							const remote = require('electron').remote
+							let w = remote.getCurrentWindow()
+							w.close()
+							
 						})
 					//});
-				//} )
-
-			
+				//})
 			}
 
 			if( !window.FNS.isLogicStart )

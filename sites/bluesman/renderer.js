@@ -218,44 +218,49 @@
 						if( io.children[1].children[2].children[1].innerTextt == "품절" ) continue;
 
 						var href = io.children[1].children[1].children[0].href;
+						var id = window.UTIL.URL.paramToObject( href ).product_no;
+						r[ id ] = {};
+						r[ id ].websiteNm = window.siteNm;
+						r[ id ].url = window.siteUrl + href.replace( "file:///D:", "" )
+						r[ id ].img = io.children[0].children[0].children[0].src.replace( "file", "http" )
+						
+						r[ id ].nm = "";
+						r[ id ].brand = ""
+						r[ id ].salePrice = -1;
+						r[ id ].msrp = -1;
+						r[ id ].saleRatio = -1;
+						r[ id ].isSoldOut = 0;
+						r[ id ].info = [];
 
-						r[ window.UTIL.URL.paramToObject( href ).product_no ] = {};
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].websiteNm = window.siteNm;
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].url = window.siteUrl + href.replace( "file:///D:", "" )
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].img = io.children[0].children[0].children[0].src.replace( "file", "http" )
-						
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].nm = "";
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].brand = ""
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].salePrice = -1;
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].msrp = -1;
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].saleRatio = -1;
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].isSoldOut = 0;
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].info = [];
+						r[ id ].currency = {
+							mark : "₩"
+							, code : "KRW"
+						}
 
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].brand = io.children[1].children[0].children[0].innerText.replace("[","").replace("]","");
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].nm = io.children[1].children[1].innerText;
+						r[ id ].brand = io.children[1].children[0].children[0].innerText.replace("[","").replace("]","");
+						r[ id ].nm = io.children[1].children[1].innerText;
 						
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].isSoldOut = 0;
+						r[ id ].isSoldOut = 0;
 						
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].salePrice = Number( io.children[1].children[2].children[1].innerText.replace( "KRW ","" ).replace( /\,/gi,"" ) );
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].msrp = Number( io.children[1].children[2].children[0].innerText.replace( "KRW ","" ).replace( /\,/gi,"" ) );
-						if( r[ window.UTIL.URL.paramToObject( href ).product_no ].msrp == 0 )
+						r[ id ].salePrice = Number( io.children[1].children[2].children[1].innerText.replace( "KRW ","" ).replace( /\,/gi,"" ) );
+						r[ id ].msrp = Number( io.children[1].children[2].children[0].innerText.replace( "KRW ","" ).replace( /\,/gi,"" ) );
+						if( r[ id ].msrp == 0 )
 						{
-							r[ window.UTIL.URL.paramToObject( href ).product_no ].msrp = r[ window.UTIL.URL.paramToObject( href ).product_no ].salePrice;
+							r[ id ].msrp = r[ id ].salePrice;
 						}
 
 		
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].info = [];
+						r[ id ].info = [];
 
-						if( r[ window.UTIL.URL.paramToObject( href ).product_no ].msrp > -1 && r[ window.UTIL.URL.paramToObject( href ).product_no ].salePrice > -1 )
+						if( r[ id ].msrp > -1 && r[ id ].salePrice > -1 )
 						{
-							var salePrice = r[ window.UTIL.URL.paramToObject( href ).product_no ].salePrice;
-							var msrp = r[ window.UTIL.URL.paramToObject( href ).product_no ].msrp;
-							r[ window.UTIL.URL.paramToObject( href ).product_no ].saleRatio = (1 -( salePrice / msrp )).toFixed(2);
+							var salePrice = r[ id ].salePrice;
+							var msrp = r[ id ].msrp;
+							r[ id ].saleRatio = (1 -( salePrice / msrp )).toFixed(2);
 						}
-						else if( r[ window.UTIL.URL.paramToObject( href ).product_no ].msrp == r[ window.UTIL.URL.paramToObject( href ).product_no ].salePrice )
+						else if( r[ id ].msrp == r[ id ].salePrice )
 						{
-							r[ window.UTIL.URL.paramToObject( href ).product_no ].saleRatio = 0;
+							r[ id ].saleRatio = 0;
 						}
 
 						// try
@@ -305,7 +310,7 @@
 			window.FNS.resultJsonToHtml = function(){
 				console.log( "[S] - window.FNS.resultJsonToHtml" )
 				
-				var targetFilePath = targetFilePath || "./json/" + window.siteNm + ".json";
+				var targetFilePath = targetFilePath || "./result/" + window.siteNm + ".json";
 				var resultDirPath = resultDirPath || "../../../HttpServer_Default/html/";
 
 				var _to = JSON.parse( global.fs.readFileSync( targetFilePath ).toString() );

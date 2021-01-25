@@ -209,63 +209,66 @@
 						var href = io.children[1].href
 
 						var info = io.children[0].children[0].children[1].children
-
-						r[ window.UTIL.URL.paramToObject( href ).branduid ] = {};
-						r[ window.UTIL.URL.paramToObject( href ).branduid ].websiteNm = window.siteNm;
-						r[ window.UTIL.URL.paramToObject( href ).branduid ].url = window.siteUrl + href.replace( "file:///D:", "" )
+						var id = window.UTIL.URL.paramToObject( href ).branduid;
+						r[ id ] = {};
+						r[ id ].websiteNm = window.siteNm;
+						r[ id ].url = window.siteUrl + href.replace( "file:///D:", "" )
 						if( io.children[0].children[0].children[0].children[0].children[0].children[0].attributes[ "rollover_onimg" ] )
 						{
-							r[ window.UTIL.URL.paramToObject( href ).branduid ].img = window.siteUrl + io.children[0].children[0].children[0].children[0].children[0].children[0].attributes[ "rollover_onimg" ].value.replace( "file:///D:", "" )
+							r[ id ].img = window.siteUrl + io.children[0].children[0].children[0].children[0].children[0].children[0].attributes[ "rollover_onimg" ].value.replace( "file:///D:", "" )
 						}
 						else
 						{
-							r[ window.UTIL.URL.paramToObject( href ).branduid ].img = window.siteUrl + io.children[0].children[0].children[0].children[0].children[0].children[0].src.replace( "file:///D:", "" )
+							r[ id ].img = window.siteUrl + io.children[0].children[0].children[0].children[0].children[0].children[0].src.replace( "file:///D:", "" )
 						}
 						
 						
-						r[ window.UTIL.URL.paramToObject( href ).branduid ].brand = "";
-						r[ window.UTIL.URL.paramToObject( href ).branduid ].nm = "";
-						r[ window.UTIL.URL.paramToObject( href ).branduid ].salePrice = -1;
-						r[ window.UTIL.URL.paramToObject( href ).branduid ].msrp = -1;
-						r[ window.UTIL.URL.paramToObject( href ).branduid ].saleRatio = -1;
-						r[ window.UTIL.URL.paramToObject( href ).branduid ].isSoldOut = 0;
-						r[ window.UTIL.URL.paramToObject( href ).branduid ].info = [];
-
+						r[ id ].brand = "";
+						r[ id ].nm = "";
+						r[ id ].salePrice = -1;
+						r[ id ].msrp = -1;
+						r[ id ].saleRatio = -1;
+						r[ id ].isSoldOut = 0;
+						r[ id ].info = [];
+						r[ id ].currency = {
+							mark : "₩"
+							, code : "KRW"
+						}
 						var k = 0,kLen = info.length,ko;
 						for(;k<kLen;++k){
 							ko = info[ k ];
 							if( ko.className == "prd-icon" ) continue;
 							if( ko.className == "prd-name")
 							{
-								r[ window.UTIL.URL.paramToObject( href ).branduid ].nm = ko.innerText;
+								r[ id ].nm = ko.innerText;
 							}
 							if( ko.className == "prd-name2" )
 							{
-								r[ window.UTIL.URL.paramToObject( href ).branduid ].info.push( ko.innerText );
+								r[ id ].info.push( ko.innerText );
 							}
 							else if( ko.className == "prd-brand" )
 							{
-								r[ window.UTIL.URL.paramToObject( href ).branduid ].brand = ko.innerText
+								r[ id ].brand = ko.innerText
 							}
 							else if( ko.className == "prd-price" )
 							{
-								if( ko.innerText != "SOLD OUT" ) r[ window.UTIL.URL.paramToObject( href ).branduid ].salePrice = Number( ko.innerText.replace( "원","" ).replace( /\,/gi,"" ) )
-								else r[ window.UTIL.URL.paramToObject( href ).branduid ].isSoldOut = 1;
+								if( ko.innerText != "SOLD OUT" ) r[ id ].salePrice = Number( ko.innerText.replace( "원","" ).replace( /\,/gi,"" ) )
+								else r[ id ].isSoldOut = 1;
 							}
 							else if( ko.className == "prd-consumer" )
 							{
-								r[ window.UTIL.URL.paramToObject( href ).branduid ].msrp = Number( ko.innerText.replace( "원","" ).replace( /\,/gi,"" ) )
-								if( r[ window.UTIL.URL.paramToObject( href ).branduid ].salePrice == -1 )
+								r[ id ].msrp = Number( ko.innerText.replace( "원","" ).replace( /\,/gi,"" ) )
+								if( r[ id ].salePrice == -1 )
 								{
-									r[ window.UTIL.URL.paramToObject( href ).branduid ].salePrice = r[ window.UTIL.URL.paramToObject( href ).branduid ].msrp;
+									r[ id ].salePrice = r[ id ].msrp;
 								}
 							}
 
-							if( r[ window.UTIL.URL.paramToObject( href ).branduid ].msrp > -1 && r[ window.UTIL.URL.paramToObject( href ).branduid ].salePrice > -1 )
+							if( r[ id ].msrp > -1 && r[ id ].salePrice > -1 )
 							{
-								var salePrice = r[ window.UTIL.URL.paramToObject( href ).branduid ].salePrice;
-								var msrp = r[ window.UTIL.URL.paramToObject( href ).branduid ].msrp;
-								r[ window.UTIL.URL.paramToObject( href ).branduid ].saleRatio = (1 -( salePrice / msrp )).toFixed(2);
+								var salePrice = r[ id ].salePrice;
+								var msrp = r[ id ].msrp;
+								r[ id ].saleRatio = (1 -( salePrice / msrp )).toFixed(2);
 							}
 						}
 						
@@ -306,7 +309,7 @@
 			window.FNS.resultJsonToHtml = function(){
 				console.log( "[S] - window.FNS.resultJsonToHtml" )
 				
-				var targetFilePath = targetFilePath || "./json/" + window.siteNm + ".json";
+				var targetFilePath = targetFilePath || "./result/" + window.siteNm + ".json";
 				var resultDirPath = resultDirPath || "../../../HttpServer_Default/html/";;
 
 				var _to = JSON.parse( global.fs.readFileSync( targetFilePath ).toString() );
@@ -376,10 +379,10 @@
 				
 				window.FNS.init()
 				console.log( "--------------- window.FNS.getMaxPage ---------------" );
-				window.FNS.getMaxPage( function(){
+				//window.FNS.getMaxPage( function(){
 					console.log( "--------------- window.FNS.getMaxPage ---------------" );
 					console.log( "--------------- window.FNS.downloadHtml ---------------" );
-					window.FNS.downloadHtml(function(){
+					//window.FNS.downloadHtml(function(){
 						console.log( "--------------- window.FNS.downloadHtml ---------------" );
 						console.log( "--------------- window.FNS.getDetailLinks ---------------" );
 						window.FNS.getDetailLinks( function(){
@@ -391,12 +394,10 @@
 							const remote = require('electron').remote
 							let w = remote.getCurrentWindow()
 							w.close()
-
+							
 						})
-					});
-				} )
-
-			
+					//});
+				//})
 			}
 
 			if( !window.FNS.isLogicStart )

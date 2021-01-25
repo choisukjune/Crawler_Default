@@ -9,7 +9,11 @@
         "msrp": 329000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "722315": {
         "websiteNm": "espionage",
@@ -21,7 +25,11 @@
         "msrp": 149000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "728965": {
         "websiteNm": "espionage",
@@ -33,7 +41,11 @@
         "msrp": 129000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "730241": {
         "websiteNm": "espionage",
@@ -45,7 +57,11 @@
         "msrp": 39000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "733612": {
         "websiteNm": "espionage",
@@ -57,7 +73,11 @@
         "msrp": 39000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "733613": {
         "websiteNm": "espionage",
@@ -69,7 +89,11 @@
         "msrp": 39000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "735766": {
         "websiteNm": "espionage",
@@ -81,7 +105,11 @@
         "msrp": 79000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "736242": {
         "websiteNm": "espionage",
@@ -93,7 +121,11 @@
         "msrp": 16000,
         "saleRatio": "0.25",
         "isSoldOut": 0,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "737407": {
         "websiteNm": "espionage",
@@ -105,7 +137,11 @@
         "msrp": 42000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "739744": {
         "websiteNm": "espionage",
@@ -117,7 +153,11 @@
         "msrp": 39000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "739751": {
         "websiteNm": "espionage",
@@ -129,7 +169,11 @@
         "msrp": 34000,
         "saleRatio": "0.74",
         "isSoldOut": 0,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "739752": {
         "websiteNm": "espionage",
@@ -141,7 +185,11 @@
         "msrp": 34000,
         "saleRatio": "0.74",
         "isSoldOut": 0,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "747530": {
         "websiteNm": "espionage",
@@ -153,7 +201,11 @@
         "msrp": 39000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "747589": {
         "websiteNm": "espionage",
@@ -167,7 +219,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "748753": {
         "websiteNm": "espionage",
@@ -179,7 +235,11 @@
         "msrp": 329000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "751131": {
         "websiteNm": "espionage",
@@ -193,7 +253,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "752188": {
         "websiteNm": "espionage",
@@ -207,7 +271,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "752411": {
         "websiteNm": "espionage",
@@ -219,7 +287,11 @@
         "msrp": 42000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "752412": {
         "websiteNm": "espionage",
@@ -233,7 +305,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "752425": {
         "websiteNm": "espionage",
@@ -247,7 +323,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "752503": {
         "websiteNm": "espionage",
@@ -261,7 +341,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "753267": {
         "websiteNm": "espionage",
@@ -273,7 +357,11 @@
         "msrp": 39000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "754048": {
         "websiteNm": "espionage",
@@ -285,7 +373,11 @@
         "msrp": 92000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "754049": {
         "websiteNm": "espionage",
@@ -297,7 +389,11 @@
         "msrp": 92000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "754052": {
         "websiteNm": "espionage",
@@ -311,7 +407,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "754057": {
         "websiteNm": "espionage",
@@ -323,7 +423,11 @@
         "msrp": 109000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "754380": {
         "websiteNm": "espionage",
@@ -335,7 +439,11 @@
         "msrp": 96000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "754391": {
         "websiteNm": "espionage",
@@ -349,7 +457,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "754393": {
         "websiteNm": "espionage",
@@ -361,7 +473,11 @@
         "msrp": 89000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "754512": {
         "websiteNm": "espionage",
@@ -373,7 +489,11 @@
         "msrp": 139000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "754519": {
         "websiteNm": "espionage",
@@ -385,7 +505,11 @@
         "msrp": 52000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "754520": {
         "websiteNm": "espionage",
@@ -397,7 +521,11 @@
         "msrp": 52000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "754842": {
         "websiteNm": "espionage",
@@ -409,7 +537,11 @@
         "msrp": 129000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "754846": {
         "websiteNm": "espionage",
@@ -423,7 +555,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "755138": {
         "websiteNm": "espionage",
@@ -435,7 +571,11 @@
         "msrp": 66000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "755435": {
         "websiteNm": "espionage",
@@ -449,7 +589,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "755495": {
         "websiteNm": "espionage",
@@ -463,7 +607,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "755886": {
         "websiteNm": "espionage",
@@ -475,7 +623,11 @@
         "msrp": 69000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "755887": {
         "websiteNm": "espionage",
@@ -487,7 +639,11 @@
         "msrp": 69000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "756200": {
         "websiteNm": "espionage",
@@ -501,7 +657,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "756201": {
         "websiteNm": "espionage",
@@ -515,7 +675,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "756284": {
         "websiteNm": "espionage",
@@ -527,7 +691,11 @@
         "msrp": 279000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "756285": {
         "websiteNm": "espionage",
@@ -541,7 +709,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "757743": {
         "websiteNm": "espionage",
@@ -553,7 +725,11 @@
         "msrp": 99000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "757746": {
         "websiteNm": "espionage",
@@ -565,7 +741,11 @@
         "msrp": 126000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "757749": {
         "websiteNm": "espionage",
@@ -579,7 +759,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "757750": {
         "websiteNm": "espionage",
@@ -593,7 +777,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "757752": {
         "websiteNm": "espionage",
@@ -605,7 +793,11 @@
         "msrp": 149000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "757755": {
         "websiteNm": "espionage",
@@ -617,7 +809,11 @@
         "msrp": 184000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "757758": {
         "websiteNm": "espionage",
@@ -631,7 +827,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "757759": {
         "websiteNm": "espionage",
@@ -645,7 +845,11 @@
         "isSoldOut": 1,
         "info": [
             "2019년 3월 8일 예약 배송"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "757762": {
         "websiteNm": "espionage",
@@ -659,7 +863,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "757764": {
         "websiteNm": "espionage",
@@ -671,7 +879,11 @@
         "msrp": 92000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "757844": {
         "websiteNm": "espionage",
@@ -683,7 +895,11 @@
         "msrp": 159000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "757849": {
         "websiteNm": "espionage",
@@ -695,7 +911,11 @@
         "msrp": 96000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "757850": {
         "websiteNm": "espionage",
@@ -707,7 +927,11 @@
         "msrp": 106000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "757853": {
         "websiteNm": "espionage",
@@ -719,7 +943,11 @@
         "msrp": 116000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "758012": {
         "websiteNm": "espionage",
@@ -731,7 +959,11 @@
         "msrp": 114000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "758013": {
         "websiteNm": "espionage",
@@ -745,7 +977,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "758015": {
         "websiteNm": "espionage",
@@ -757,7 +993,11 @@
         "msrp": 109000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "758508": {
         "websiteNm": "espionage",
@@ -771,7 +1011,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "758510": {
         "websiteNm": "espionage",
@@ -785,7 +1029,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "758703": {
         "websiteNm": "espionage",
@@ -797,7 +1045,11 @@
         "msrp": 49000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "759484": {
         "websiteNm": "espionage",
@@ -811,7 +1063,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "759485": {
         "websiteNm": "espionage",
@@ -825,7 +1081,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "759486": {
         "websiteNm": "espionage",
@@ -839,7 +1099,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "759523": {
         "websiteNm": "espionage",
@@ -853,7 +1117,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "759661": {
         "websiteNm": "espionage",
@@ -867,7 +1135,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "759889": {
         "websiteNm": "espionage",
@@ -879,7 +1151,11 @@
         "msrp": 54000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "759890": {
         "websiteNm": "espionage",
@@ -891,7 +1167,11 @@
         "msrp": 54000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "759925": {
         "websiteNm": "espionage",
@@ -903,7 +1183,11 @@
         "msrp": 26000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "759930": {
         "websiteNm": "espionage",
@@ -915,7 +1199,11 @@
         "msrp": 26000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "759933": {
         "websiteNm": "espionage",
@@ -927,7 +1215,11 @@
         "msrp": 39000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "760008": {
         "websiteNm": "espionage",
@@ -941,7 +1233,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "760086": {
         "websiteNm": "espionage",
@@ -953,7 +1249,11 @@
         "msrp": 84000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "760091": {
         "websiteNm": "espionage",
@@ -967,7 +1267,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "760092": {
         "websiteNm": "espionage",
@@ -981,7 +1285,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "760093": {
         "websiteNm": "espionage",
@@ -995,7 +1303,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "760094": {
         "websiteNm": "espionage",
@@ -1009,7 +1321,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "760226": {
         "websiteNm": "espionage",
@@ -1023,7 +1339,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "760227": {
         "websiteNm": "espionage",
@@ -1037,7 +1357,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "760234": {
         "websiteNm": "espionage",
@@ -1051,7 +1375,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "760274": {
         "websiteNm": "espionage",
@@ -1063,7 +1391,11 @@
         "msrp": 39000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "760275": {
         "websiteNm": "espionage",
@@ -1075,7 +1407,11 @@
         "msrp": 42000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "760300": {
         "websiteNm": "espionage",
@@ -1087,7 +1423,11 @@
         "msrp": -1,
         "saleRatio": -1,
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "760327": {
         "websiteNm": "espionage",
@@ -1099,7 +1439,11 @@
         "msrp": 26000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "760328": {
         "websiteNm": "espionage",
@@ -1111,7 +1455,11 @@
         "msrp": 26000,
         "saleRatio": "0.62",
         "isSoldOut": 0,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "760354": {
         "websiteNm": "espionage",
@@ -1123,7 +1471,11 @@
         "msrp": 46000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "760357": {
         "websiteNm": "espionage",
@@ -1137,7 +1489,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "760475": {
         "websiteNm": "espionage",
@@ -1149,7 +1505,11 @@
         "msrp": 46000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "760565": {
         "websiteNm": "espionage",
@@ -1161,7 +1521,11 @@
         "msrp": 42000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "760566": {
         "websiteNm": "espionage",
@@ -1175,7 +1539,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "760567": {
         "websiteNm": "espionage",
@@ -1189,7 +1557,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "760568": {
         "websiteNm": "espionage",
@@ -1201,7 +1573,11 @@
         "msrp": 26000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "761942": {
         "websiteNm": "espionage",
@@ -1215,7 +1591,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "761943": {
         "websiteNm": "espionage",
@@ -1229,7 +1609,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "761944": {
         "websiteNm": "espionage",
@@ -1243,7 +1627,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762231": {
         "websiteNm": "espionage",
@@ -1255,7 +1643,11 @@
         "msrp": 196000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762232": {
         "websiteNm": "espionage",
@@ -1267,7 +1659,11 @@
         "msrp": 196000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762233": {
         "websiteNm": "espionage",
@@ -1281,7 +1677,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762237": {
         "websiteNm": "espionage",
@@ -1295,7 +1695,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762240": {
         "websiteNm": "espionage",
@@ -1309,7 +1713,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762417": {
         "websiteNm": "espionage",
@@ -1321,7 +1729,11 @@
         "msrp": 76000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762418": {
         "websiteNm": "espionage",
@@ -1333,7 +1745,11 @@
         "msrp": 76000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762419": {
         "websiteNm": "espionage",
@@ -1345,7 +1761,11 @@
         "msrp": 76000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762423": {
         "websiteNm": "espionage",
@@ -1357,7 +1777,11 @@
         "msrp": 76000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762424": {
         "websiteNm": "espionage",
@@ -1369,7 +1793,11 @@
         "msrp": 76000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762425": {
         "websiteNm": "espionage",
@@ -1383,7 +1811,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762429": {
         "websiteNm": "espionage",
@@ -1397,7 +1829,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762432": {
         "websiteNm": "espionage",
@@ -1409,7 +1845,11 @@
         "msrp": 86000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762434": {
         "websiteNm": "espionage",
@@ -1421,7 +1861,11 @@
         "msrp": 86000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762436": {
         "websiteNm": "espionage",
@@ -1435,7 +1879,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762437": {
         "websiteNm": "espionage",
@@ -1449,7 +1897,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762473": {
         "websiteNm": "espionage",
@@ -1463,7 +1915,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762474": {
         "websiteNm": "espionage",
@@ -1477,7 +1933,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762731": {
         "websiteNm": "espionage",
@@ -1489,7 +1949,11 @@
         "msrp": 64000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762732": {
         "websiteNm": "espionage",
@@ -1501,7 +1965,11 @@
         "msrp": 64000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762848": {
         "websiteNm": "espionage",
@@ -1515,7 +1983,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762850": {
         "websiteNm": "espionage",
@@ -1529,7 +2001,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762884": {
         "websiteNm": "espionage",
@@ -1541,7 +2017,11 @@
         "msrp": 99000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762885": {
         "websiteNm": "espionage",
@@ -1553,7 +2033,11 @@
         "msrp": 99000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762888": {
         "websiteNm": "espionage",
@@ -1565,7 +2049,11 @@
         "msrp": 86000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762889": {
         "websiteNm": "espionage",
@@ -1579,7 +2067,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "762890": {
         "websiteNm": "espionage",
@@ -1593,7 +2085,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "763295": {
         "websiteNm": "espionage",
@@ -1607,7 +2103,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "763317": {
         "websiteNm": "espionage",
@@ -1621,7 +2121,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "763318": {
         "websiteNm": "espionage",
@@ -1635,7 +2139,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "763319": {
         "websiteNm": "espionage",
@@ -1649,7 +2157,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "763390": {
         "websiteNm": "espionage",
@@ -1663,7 +2175,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "763391": {
         "websiteNm": "espionage",
@@ -1677,7 +2193,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "763398": {
         "websiteNm": "espionage",
@@ -1691,7 +2211,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "763628": {
         "websiteNm": "espionage",
@@ -1703,7 +2227,11 @@
         "msrp": -1,
         "saleRatio": -1,
         "isSoldOut": 0,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "763629": {
         "websiteNm": "espionage",
@@ -1715,7 +2243,11 @@
         "msrp": -1,
         "saleRatio": -1,
         "isSoldOut": 0,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "763681": {
         "websiteNm": "espionage",
@@ -1729,7 +2261,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "763682": {
         "websiteNm": "espionage",
@@ -1743,7 +2279,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "763711": {
         "websiteNm": "espionage",
@@ -1757,7 +2297,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "764252": {
         "websiteNm": "espionage",
@@ -1769,7 +2313,11 @@
         "msrp": -1,
         "saleRatio": -1,
         "isSoldOut": 0,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "764253": {
         "websiteNm": "espionage",
@@ -1781,7 +2329,11 @@
         "msrp": -1,
         "saleRatio": -1,
         "isSoldOut": 0,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "3531033": {
         "websiteNm": "espionage",
@@ -1795,7 +2347,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "3531034": {
         "websiteNm": "espionage",
@@ -1809,7 +2365,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001246": {
         "websiteNm": "espionage",
@@ -1823,7 +2383,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001247": {
         "websiteNm": "espionage",
@@ -1837,7 +2401,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001249": {
         "websiteNm": "espionage",
@@ -1851,7 +2419,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001256": {
         "websiteNm": "espionage",
@@ -1863,7 +2435,11 @@
         "msrp": 196000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001257": {
         "websiteNm": "espionage",
@@ -1877,7 +2453,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001258": {
         "websiteNm": "espionage",
@@ -1891,7 +2471,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001266": {
         "websiteNm": "espionage",
@@ -1905,7 +2489,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001270": {
         "websiteNm": "espionage",
@@ -1919,7 +2507,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001271": {
         "websiteNm": "espionage",
@@ -1933,7 +2525,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001278": {
         "websiteNm": "espionage",
@@ -1947,7 +2543,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001279": {
         "websiteNm": "espionage",
@@ -1961,7 +2561,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001280": {
         "websiteNm": "espionage",
@@ -1973,7 +2577,11 @@
         "msrp": 84000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001281": {
         "websiteNm": "espionage",
@@ -1987,7 +2595,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001288": {
         "websiteNm": "espionage",
@@ -1999,7 +2611,11 @@
         "msrp": 166000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001289": {
         "websiteNm": "espionage",
@@ -2011,7 +2627,11 @@
         "msrp": 166000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001290": {
         "websiteNm": "espionage",
@@ -2025,7 +2645,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001291": {
         "websiteNm": "espionage",
@@ -2039,7 +2663,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001292": {
         "websiteNm": "espionage",
@@ -2053,7 +2681,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001318": {
         "websiteNm": "espionage",
@@ -2065,7 +2697,11 @@
         "msrp": 9000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001332": {
         "websiteNm": "espionage",
@@ -2077,7 +2713,11 @@
         "msrp": 99000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001334": {
         "websiteNm": "espionage",
@@ -2089,7 +2729,11 @@
         "msrp": 79000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001335": {
         "websiteNm": "espionage",
@@ -2101,7 +2745,11 @@
         "msrp": 79000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001356": {
         "websiteNm": "espionage",
@@ -2115,7 +2763,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001357": {
         "websiteNm": "espionage",
@@ -2129,7 +2781,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001358": {
         "websiteNm": "espionage",
@@ -2143,7 +2799,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001360": {
         "websiteNm": "espionage",
@@ -2157,7 +2817,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001361": {
         "websiteNm": "espionage",
@@ -2171,7 +2835,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001377": {
         "websiteNm": "espionage",
@@ -2183,7 +2851,11 @@
         "msrp": 89000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001379": {
         "websiteNm": "espionage",
@@ -2195,7 +2867,11 @@
         "msrp": 79000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001380": {
         "websiteNm": "espionage",
@@ -2207,7 +2883,11 @@
         "msrp": 79000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001381": {
         "websiteNm": "espionage",
@@ -2219,7 +2899,11 @@
         "msrp": 72000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001401": {
         "websiteNm": "espionage",
@@ -2231,7 +2915,11 @@
         "msrp": 106000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001402": {
         "websiteNm": "espionage",
@@ -2245,7 +2933,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001403": {
         "websiteNm": "espionage",
@@ -2257,7 +2949,11 @@
         "msrp": 96000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001710": {
         "websiteNm": "espionage",
@@ -2269,7 +2965,11 @@
         "msrp": 49000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001711": {
         "websiteNm": "espionage",
@@ -2281,7 +2981,11 @@
         "msrp": 49000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001712": {
         "websiteNm": "espionage",
@@ -2293,7 +2997,11 @@
         "msrp": 49000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001719": {
         "websiteNm": "espionage",
@@ -2305,7 +3013,11 @@
         "msrp": 46000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001720": {
         "websiteNm": "espionage",
@@ -2319,7 +3031,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001721": {
         "websiteNm": "espionage",
@@ -2333,7 +3049,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001722": {
         "websiteNm": "espionage",
@@ -2347,7 +3067,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001723": {
         "websiteNm": "espionage",
@@ -2361,7 +3085,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001724": {
         "websiteNm": "espionage",
@@ -2373,7 +3101,11 @@
         "msrp": 42000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001725": {
         "websiteNm": "espionage",
@@ -2385,7 +3117,11 @@
         "msrp": 42000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001726": {
         "websiteNm": "espionage",
@@ -2397,7 +3133,11 @@
         "msrp": 42000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001727": {
         "websiteNm": "espionage",
@@ -2409,7 +3149,11 @@
         "msrp": 42000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001751": {
         "websiteNm": "espionage",
@@ -2423,7 +3167,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001754": {
         "websiteNm": "espionage",
@@ -2437,7 +3185,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001845": {
         "websiteNm": "espionage",
@@ -2451,7 +3203,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001846": {
         "websiteNm": "espionage",
@@ -2465,7 +3221,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001847": {
         "websiteNm": "espionage",
@@ -2479,7 +3239,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001848": {
         "websiteNm": "espionage",
@@ -2493,7 +3257,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001849": {
         "websiteNm": "espionage",
@@ -2507,7 +3275,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001850": {
         "websiteNm": "espionage",
@@ -2521,7 +3293,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000001851": {
         "websiteNm": "espionage",
@@ -2533,7 +3309,11 @@
         "msrp": 39000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002091": {
         "websiteNm": "espionage",
@@ -2545,7 +3325,11 @@
         "msrp": 29000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002096": {
         "websiteNm": "espionage",
@@ -2557,7 +3341,11 @@
         "msrp": 26000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002097": {
         "websiteNm": "espionage",
@@ -2569,7 +3357,11 @@
         "msrp": 26000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002117": {
         "websiteNm": "espionage",
@@ -2583,7 +3375,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002118": {
         "websiteNm": "espionage",
@@ -2597,7 +3393,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002119": {
         "websiteNm": "espionage",
@@ -2611,7 +3411,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002120": {
         "websiteNm": "espionage",
@@ -2625,7 +3429,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002121": {
         "websiteNm": "espionage",
@@ -2639,7 +3447,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002124": {
         "websiteNm": "espionage",
@@ -2653,7 +3465,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002140": {
         "websiteNm": "espionage",
@@ -2667,7 +3483,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002141": {
         "websiteNm": "espionage",
@@ -2681,7 +3501,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002145": {
         "websiteNm": "espionage",
@@ -2695,7 +3519,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002146": {
         "websiteNm": "espionage",
@@ -2709,7 +3537,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002147": {
         "websiteNm": "espionage",
@@ -2721,7 +3553,11 @@
         "msrp": 39000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002148": {
         "websiteNm": "espionage",
@@ -2735,7 +3571,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002150": {
         "websiteNm": "espionage",
@@ -2747,7 +3587,11 @@
         "msrp": 39000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002151": {
         "websiteNm": "espionage",
@@ -2761,7 +3605,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002152": {
         "websiteNm": "espionage",
@@ -2773,7 +3621,11 @@
         "msrp": 39000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002153": {
         "websiteNm": "espionage",
@@ -2785,7 +3637,11 @@
         "msrp": 39000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002158": {
         "websiteNm": "espionage",
@@ -2799,7 +3655,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002159": {
         "websiteNm": "espionage",
@@ -2813,7 +3673,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002177": {
         "websiteNm": "espionage",
@@ -2827,7 +3691,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002178": {
         "websiteNm": "espionage",
@@ -2841,7 +3709,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002179": {
         "websiteNm": "espionage",
@@ -2855,7 +3727,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002180": {
         "websiteNm": "espionage",
@@ -2869,7 +3745,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002181": {
         "websiteNm": "espionage",
@@ -2881,7 +3761,11 @@
         "msrp": 44000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002182": {
         "websiteNm": "espionage",
@@ -2893,7 +3777,11 @@
         "msrp": 42000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002183": {
         "websiteNm": "espionage",
@@ -2907,7 +3795,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002184": {
         "websiteNm": "espionage",
@@ -2919,7 +3811,11 @@
         "msrp": 44000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002186": {
         "websiteNm": "espionage",
@@ -2931,7 +3827,11 @@
         "msrp": 42000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002187": {
         "websiteNm": "espionage",
@@ -2945,7 +3845,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002188": {
         "websiteNm": "espionage",
@@ -2959,7 +3863,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002189": {
         "websiteNm": "espionage",
@@ -2971,7 +3879,11 @@
         "msrp": 52000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002190": {
         "websiteNm": "espionage",
@@ -2983,7 +3895,11 @@
         "msrp": 52000,
         "saleRatio": "0.00",
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002191": {
         "websiteNm": "espionage",
@@ -2997,7 +3913,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002400": {
         "websiteNm": "espionage",
@@ -3011,7 +3931,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002435": {
         "websiteNm": "espionage",
@@ -3025,7 +3949,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002579": {
         "websiteNm": "espionage",
@@ -3039,7 +3967,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002580": {
         "websiteNm": "espionage",
@@ -3053,7 +3985,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002582": {
         "websiteNm": "espionage",
@@ -3067,7 +4003,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002583": {
         "websiteNm": "espionage",
@@ -3081,7 +4021,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002584": {
         "websiteNm": "espionage",
@@ -3095,7 +4039,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002585": {
         "websiteNm": "espionage",
@@ -3109,7 +4057,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002586": {
         "websiteNm": "espionage",
@@ -3123,7 +4075,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002603": {
         "websiteNm": "espionage",
@@ -3137,7 +4093,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002613": {
         "websiteNm": "espionage",
@@ -3151,7 +4111,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002631": {
         "websiteNm": "espionage",
@@ -3165,7 +4129,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002632": {
         "websiteNm": "espionage",
@@ -3179,7 +4147,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002666": {
         "websiteNm": "espionage",
@@ -3193,7 +4165,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002684": {
         "websiteNm": "espionage",
@@ -3207,7 +4183,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002685": {
         "websiteNm": "espionage",
@@ -3221,7 +4201,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002687": {
         "websiteNm": "espionage",
@@ -3235,7 +4219,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002694": {
         "websiteNm": "espionage",
@@ -3247,7 +4235,11 @@
         "msrp": -1,
         "saleRatio": -1,
         "isSoldOut": 1,
-        "info": []
+        "info": [],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002709": {
         "websiteNm": "espionage",
@@ -3261,7 +4253,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002710": {
         "websiteNm": "espionage",
@@ -3275,7 +4271,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002711": {
         "websiteNm": "espionage",
@@ -3289,7 +4289,11 @@
         "isSoldOut": 0,
         "info": [
             "SEASON OFF"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002712": {
         "websiteNm": "espionage",
@@ -3303,7 +4307,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002713": {
         "websiteNm": "espionage",
@@ -3317,7 +4325,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002714": {
         "websiteNm": "espionage",
@@ -3331,7 +4343,11 @@
         "isSoldOut": 0,
         "info": [
             "SEASON OFF"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002715": {
         "websiteNm": "espionage",
@@ -3345,7 +4361,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002716": {
         "websiteNm": "espionage",
@@ -3359,7 +4379,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002717": {
         "websiteNm": "espionage",
@@ -3373,7 +4397,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002718": {
         "websiteNm": "espionage",
@@ -3387,7 +4415,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002741": {
         "websiteNm": "espionage",
@@ -3401,7 +4433,11 @@
         "isSoldOut": 0,
         "info": [
             "RESTOCK PROMOTION"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002742": {
         "websiteNm": "espionage",
@@ -3415,7 +4451,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002743": {
         "websiteNm": "espionage",
@@ -3429,7 +4469,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002746": {
         "websiteNm": "espionage",
@@ -3443,7 +4487,11 @@
         "isSoldOut": 0,
         "info": [
             "OFFICIAL STORE ONLY"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002765": {
         "websiteNm": "espionage",
@@ -3457,7 +4505,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002766": {
         "websiteNm": "espionage",
@@ -3471,7 +4523,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002767": {
         "websiteNm": "espionage",
@@ -3485,7 +4541,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002768": {
         "websiteNm": "espionage",
@@ -3499,7 +4559,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002769": {
         "websiteNm": "espionage",
@@ -3513,7 +4577,11 @@
         "isSoldOut": 1,
         "info": [
             "SEASON OFF"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002770": {
         "websiteNm": "espionage",
@@ -3527,7 +4595,11 @@
         "isSoldOut": 1,
         "info": [
             "SEASON OFF"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002771": {
         "websiteNm": "espionage",
@@ -3541,7 +4613,11 @@
         "isSoldOut": 1,
         "info": [
             "SEASON OFF"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002772": {
         "websiteNm": "espionage",
@@ -3555,7 +4631,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002773": {
         "websiteNm": "espionage",
@@ -3569,7 +4649,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002774": {
         "websiteNm": "espionage",
@@ -3583,7 +4667,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002775": {
         "websiteNm": "espionage",
@@ -3597,7 +4685,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002776": {
         "websiteNm": "espionage",
@@ -3611,7 +4703,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002777": {
         "websiteNm": "espionage",
@@ -3625,7 +4721,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002781": {
         "websiteNm": "espionage",
@@ -3639,7 +4739,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002782": {
         "websiteNm": "espionage",
@@ -3653,7 +4757,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002783": {
         "websiteNm": "espionage",
@@ -3667,7 +4775,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002784": {
         "websiteNm": "espionage",
@@ -3681,7 +4793,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002785": {
         "websiteNm": "espionage",
@@ -3695,7 +4811,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002786": {
         "websiteNm": "espionage",
@@ -3709,7 +4829,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002787": {
         "websiteNm": "espionage",
@@ -3723,7 +4847,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002788": {
         "websiteNm": "espionage",
@@ -3737,7 +4865,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002789": {
         "websiteNm": "espionage",
@@ -3751,7 +4883,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002790": {
         "websiteNm": "espionage",
@@ -3765,7 +4901,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002801": {
         "websiteNm": "espionage",
@@ -3779,7 +4919,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002814": {
         "websiteNm": "espionage",
@@ -3793,7 +4937,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002815": {
         "websiteNm": "espionage",
@@ -3807,7 +4955,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002816": {
         "websiteNm": "espionage",
@@ -3821,7 +4973,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002817": {
         "websiteNm": "espionage",
@@ -3835,7 +4991,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002818": {
         "websiteNm": "espionage",
@@ -3849,7 +5009,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002819": {
         "websiteNm": "espionage",
@@ -3863,7 +5027,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002820": {
         "websiteNm": "espionage",
@@ -3877,7 +5045,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002821": {
         "websiteNm": "espionage",
@@ -3891,7 +5063,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002822": {
         "websiteNm": "espionage",
@@ -3905,7 +5081,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002823": {
         "websiteNm": "espionage",
@@ -3919,7 +5099,11 @@
         "isSoldOut": 0,
         "info": [
             "SEASON OFF"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002824": {
         "websiteNm": "espionage",
@@ -3933,7 +5117,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002825": {
         "websiteNm": "espionage",
@@ -3947,7 +5135,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002844": {
         "websiteNm": "espionage",
@@ -3961,7 +5153,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002845": {
         "websiteNm": "espionage",
@@ -3975,7 +5171,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002846": {
         "websiteNm": "espionage",
@@ -3989,7 +5189,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002847": {
         "websiteNm": "espionage",
@@ -4003,7 +5207,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002848": {
         "websiteNm": "espionage",
@@ -4017,7 +5225,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002849": {
         "websiteNm": "espionage",
@@ -4031,7 +5243,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002858": {
         "websiteNm": "espionage",
@@ -4045,7 +5261,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002859": {
         "websiteNm": "espionage",
@@ -4059,7 +5279,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002860": {
         "websiteNm": "espionage",
@@ -4073,7 +5297,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002861": {
         "websiteNm": "espionage",
@@ -4087,7 +5315,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002862": {
         "websiteNm": "espionage",
@@ -4101,7 +5333,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002863": {
         "websiteNm": "espionage",
@@ -4115,7 +5351,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002864": {
         "websiteNm": "espionage",
@@ -4129,7 +5369,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002865": {
         "websiteNm": "espionage",
@@ -4143,7 +5387,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002866": {
         "websiteNm": "espionage",
@@ -4157,7 +5405,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002916": {
         "websiteNm": "espionage",
@@ -4171,7 +5423,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002917": {
         "websiteNm": "espionage",
@@ -4185,7 +5441,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002918": {
         "websiteNm": "espionage",
@@ -4199,7 +5459,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002919": {
         "websiteNm": "espionage",
@@ -4213,7 +5477,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002920": {
         "websiteNm": "espionage",
@@ -4227,7 +5495,11 @@
         "isSoldOut": 1,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002921": {
         "websiteNm": "espionage",
@@ -4241,7 +5513,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002922": {
         "websiteNm": "espionage",
@@ -4255,7 +5531,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002923": {
         "websiteNm": "espionage",
@@ -4269,7 +5549,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002942": {
         "websiteNm": "espionage",
@@ -4283,7 +5567,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002943": {
         "websiteNm": "espionage",
@@ -4297,7 +5585,11 @@
         "isSoldOut": 0,
         "info": [
             "SEASON OFF"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002954": {
         "websiteNm": "espionage",
@@ -4311,7 +5603,11 @@
         "isSoldOut": 0,
         "info": [
             "SEASON OFF"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002955": {
         "websiteNm": "espionage",
@@ -4325,7 +5621,11 @@
         "isSoldOut": 0,
         "info": [
             "SEASON OFF"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002956": {
         "websiteNm": "espionage",
@@ -4339,7 +5639,11 @@
         "isSoldOut": 0,
         "info": [
             "SEASON OFF"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002957": {
         "websiteNm": "espionage",
@@ -4353,7 +5657,11 @@
         "isSoldOut": 0,
         "info": [
             "SEASON OFF"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002958": {
         "websiteNm": "espionage",
@@ -4367,7 +5675,11 @@
         "isSoldOut": 1,
         "info": [
             "SEASON OFF"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002959": {
         "websiteNm": "espionage",
@@ -4381,7 +5693,11 @@
         "isSoldOut": 1,
         "info": [
             "SEASON OFF"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002960": {
         "websiteNm": "espionage",
@@ -4395,7 +5711,11 @@
         "isSoldOut": 1,
         "info": [
             "SEASON OFF"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002961": {
         "websiteNm": "espionage",
@@ -4409,7 +5729,11 @@
         "isSoldOut": 1,
         "info": [
             "SEASON OFF"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002962": {
         "websiteNm": "espionage",
@@ -4423,7 +5747,11 @@
         "isSoldOut": 1,
         "info": [
             "SEASON OFF"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002991": {
         "websiteNm": "espionage",
@@ -4437,7 +5765,11 @@
         "isSoldOut": 1,
         "info": [
             "SEASON OFF"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002992": {
         "websiteNm": "espionage",
@@ -4451,7 +5783,11 @@
         "isSoldOut": 1,
         "info": [
             "SEASON OFF"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002993": {
         "websiteNm": "espionage",
@@ -4465,7 +5801,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000002994": {
         "websiteNm": "espionage",
@@ -4479,7 +5819,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000003019": {
         "websiteNm": "espionage",
@@ -4493,7 +5837,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000003020": {
         "websiteNm": "espionage",
@@ -4507,7 +5855,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000003021": {
         "websiteNm": "espionage",
@@ -4521,7 +5873,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000003022": {
         "websiteNm": "espionage",
@@ -4535,7 +5891,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000003023": {
         "websiteNm": "espionage",
@@ -4549,7 +5909,11 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000003204": {
         "websiteNm": "espionage",
@@ -4563,7 +5927,11 @@
         "isSoldOut": 0,
         "info": [
             "RELEASE PROMOTION"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     },
     "1000003221": {
         "websiteNm": "espionage",
@@ -4577,6 +5945,10 @@
         "isSoldOut": 0,
         "info": [
             "MORE SALE 01.16~01.29"
-        ]
+        ],
+        "currency": {
+            "mark": "₩",
+            "code": "KRW"
+        }
     }
 }

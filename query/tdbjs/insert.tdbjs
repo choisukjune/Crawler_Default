@@ -28,7 +28,10 @@ for( s in _o ){
 	var i = 0,iLen = arr.length,io;
 	for(;i<iLen;++i){
 	    io = arr[ i ];
-	    if( io.length > 1 && io != io.brand ) so.info.push( io )
+	    if( io.length > 1 && io != so.brand )
+        {
+            so.info.push( io )
+        }
 	}
 
     
@@ -36,7 +39,9 @@ for( s in _o ){
     {
         so.info.push( so.brand )
     }
-    so.info.push( so.websiteNm )
+    if( so.info.indexOf( so.websiteNm ) == -1 ){
+        so.info.push( so.websiteNm )
+    }
     col0.insert( so );
     ++idx;
 }

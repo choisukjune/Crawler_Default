@@ -215,34 +215,37 @@
 						io = el[ i ];
 
 						var href = io.children[0].children[0].href
-
+						var id = window.UTIL.URL.paramToObject( href ).product_no;
 						var _nmArr = io.children[0].children[1].children[0].children[1].innerText.split("\n")
 
-						r[ window.UTIL.URL.paramToObject( href ).product_no ] = {};
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].websiteNm = window.siteNm;
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].url = window.siteUrl + href.replace( "file:///D:", "" )
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].img = io.children[0].children[0].children[0].src.replace( "file", "https" )
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].brand = "frizmworks"
+						r[ id ] = {};
+						r[ id ].websiteNm = window.siteNm;
+						r[ id ].url = window.siteUrl + href.replace( "file:///D:", "" )
+						r[ id ].img = io.children[0].children[0].children[0].src.replace( "file", "https" )
+						r[ id ].brand = "frizmworks"
 				
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].nm = _nmArr.shift();
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].salePrice = -1;
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].msrp = -1;
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].saleRatio = -1;
+						r[ id ].nm = _nmArr.shift();
+						r[ id ].salePrice = -1;
+						r[ id ].msrp = -1;
+						r[ id ].saleRatio = -1;
 						
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].info = _nmArr;
+						r[ id ].info = _nmArr;
 
-
+						r[ id ].currency = {
+							mark : "₩"
+							, code : "KRW"
+						}
 						
 						var isSoldOut = 0
 						if( io.children[0].children[1].children[0].children[2] && io.children[0].children[1].children[0].children[2].children[0].attributes.alt.value == "품절" )
 						{
 							isSoldOut = 1;
 						}
-						r[ window.UTIL.URL.paramToObject( href ).product_no ].isSoldOut = isSoldOut;
+						r[ id ].isSoldOut = isSoldOut;
 
 						if( !io.children[0].children[3] )
 						{
-							console.log( r[ window.UTIL.URL.paramToObject( href ).product_no ].nm )
+							console.log( r[ id ].nm )
 							console.log("상품이아님");
 							continue;
 						}
@@ -256,11 +259,11 @@
 							
 								if( ko.classList.contains( "saleprice" ) && ko.innerText != "" )
 								{
-									r[ window.UTIL.URL.paramToObject( href ).product_no ].salePrice = Number( ko.innerText.split(" ")[0].replace( "원","" ).replace( /\,/gi,"" ) );
+									r[ id ].salePrice = Number( ko.innerText.split(" ")[0].replace( "원","" ).replace( /\,/gi,"" ) );
 								}
 								if( ko.classList.contains( "price" ) && ko.innerText != "" )
 								{
-									r[ window.UTIL.URL.paramToObject( href ).product_no ].msrp = Number( ko.innerText.replace( "원","" ).replace( /\,/gi,"" ) )
+									r[ id ].msrp = Number( ko.innerText.replace( "원","" ).replace( /\,/gi,"" ) )
 								}
 
 							} catch (error) {
@@ -270,11 +273,11 @@
 						}
 
 
-						if( r[ window.UTIL.URL.paramToObject( href ).product_no ].msrp > -1 && r[ window.UTIL.URL.paramToObject( href ).product_no ].salePrice > -1 )
+						if( r[ id ].msrp > -1 && r[ id ].salePrice > -1 )
 						{
-							var salePrice = r[ window.UTIL.URL.paramToObject( href ).product_no ].salePrice;
-							var msrp = r[ window.UTIL.URL.paramToObject( href ).product_no ].msrp;
-							r[ window.UTIL.URL.paramToObject( href ).product_no ].saleRatio = (1 -( salePrice / msrp )).toFixed(2);
+							var salePrice = r[ id ].salePrice;
+							var msrp = r[ id ].msrp;
+							r[ id ].saleRatio = (1 -( salePrice / msrp )).toFixed(2);
 						}
 
 						// try
@@ -326,7 +329,7 @@
 			window.FNS.resultJsonToHtml = function(){
 				console.log( "[S] - window.FNS.resultJsonToHtml" )
 				
-				var targetFilePath = targetFilePath || "./json/" + window.siteNm + ".json";
+				var targetFilePath = targetFilePath || "./result/" + window.siteNm + ".json";
 				var resultDirPath = resultDirPath || "../../../HttpServer_Default/html/";
 
 				var _to = JSON.parse( global.fs.readFileSync( targetFilePath ).toString() );
@@ -396,10 +399,10 @@
 				
 				window.FNS.init()
 				console.log( "--------------- window.FNS.getMaxPage ---------------" );
-				window.FNS.getMaxPage( function(){
+				//window.FNS.getMaxPage( function(){
 					console.log( "--------------- window.FNS.getMaxPage ---------------" );
 					console.log( "--------------- window.FNS.downloadHtml ---------------" );
-					window.FNS.downloadHtml(function(){
+					//window.FNS.downloadHtml(function(){
 						console.log( "--------------- window.FNS.downloadHtml ---------------" );
 						console.log( "--------------- window.FNS.getDetailLinks ---------------" );
 						window.FNS.getDetailLinks( function(){
@@ -413,8 +416,8 @@
 							w.close()
 							
 						})
-					});
-				})
+					//});
+				//})
 			}
 
 			if( !window.FNS.isLogicStart )
