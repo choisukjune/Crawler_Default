@@ -12,7 +12,7 @@ var cp = require( "child_process" );
 global.CONST = {};
 global.CONST.MongoDB = {};
 global.CONST.MongoDB.OPTIONS = {
-	"self" : { ID : "tjrwns", PWD : "123qweasdzxc", HOST : "localhost", PORT : 59320 }	
+	"self" : { ID : "admin", PWD : "tjrwns2482", HOST : "ec2-52-78-47-3.ap-northeast-2.compute.amazonaws.com", PORT : 59320 }	
 };
 
 
