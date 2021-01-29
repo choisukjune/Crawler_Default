@@ -441,7 +441,7 @@
 						
 						r[ id ] = {};
 						r[ id ].websiteNm = window.siteNm;
-						r[ id ].url = window.siteUrl + "/kr/" + href
+						r[ id ].url = window.siteUrl + "/kr/" + href + ".html"
 						
 						//https://media.endclothing.com/media/f_auto,q_auto:eco,w_800,h_800/prodmedia/media/catalog/product/2/1/21-10-2019_visvim_deckhandjacket_olive_0119205013026-olv_jd_1x.jpg
 						var imgUrlBase = "https://media.endclothing.com/media/f_auto,q_auto:eco,w_800,h_800/prodmedia/media/catalog/product";

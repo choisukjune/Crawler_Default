@@ -223,10 +223,33 @@
 						r[ id ].websiteNm = window.siteNm;
 						r[ id ].url = window.siteUrl + href.replace( "file:///D:", "" )
 						r[ id ].img = io.children[0].children[1].children[0].src.replace( "file", "http" ).replace("/S2/", "/O/")
-						debugger;
+
 						r[ id ].nm = io.children[0].children[3].getAttribute( "initial-text" ).replace("【予約】","").replace(/\\n/gi,"").replace(/\\t/gi,"").trim();
-						r[ id ].brand = r[ id ].nm.split(" / ")[0];
+						var brand = r[ id ].nm.split(" / ")[0];
 						
+						if( brand.indexOf( "＞" ) != -1 )
+						{
+							r[ id ].brand = brand.split( "＞" )[ 1 ].trim();
+							console.log( "＞ - " + r[ id ].brand )
+							
+						}
+						else if( brand.indexOf( "】" ) != -1 )
+						{
+							r[ id ].brand = brand.split( "】" )[ 1 ].trim();
+							console.log( "】 - " + r[ id ].brand )
+							
+						}
+						else if( brand.indexOf( ">" ) != -1 )
+						{
+							r[ id ].brand = brand.split( ">" )[ 1 ].trim();
+							console.log( "> - " + r[ id ].brand )
+							
+						}
+						else
+						{
+							r[ id ].brand = brand.trim()
+						}
+
 						
 						
 						r[ id ].salePrice = -1;
@@ -254,7 +277,6 @@
 							{
 								r[ id ].salePrice = Number( jo.innerText.split(" ")[0].replace( "¥","" ).replace( /\,/gi,"" ) )
 							}
-							debugger;
 						}
 						
 						if( r[ id ].msrp == -1 ) r[ id ].msrp = r[ id ].salePrice;
