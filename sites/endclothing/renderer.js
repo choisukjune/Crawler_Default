@@ -580,7 +580,7 @@
 				//window.FNS.getMaxPage( function(){
 					console.log( "--------------- window.FNS.getMaxPage ---------------" );
 					console.log( "--------------- window.FNS.downloadHtml ---------------" );
-					//window.FNS.downloadHtml(function(){
+					//window.FNS.downloadJson(function(){
 						console.log( "--------------- window.FNS.downloadHtml ---------------" );
 						console.log( "--------------- window.FNS.getDetailLinks ---------------" );
 						window.FNS.getDetailLinksByJSON( function(){

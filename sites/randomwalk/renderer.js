@@ -398,10 +398,10 @@
 				
 				window.FNS.init()
 				console.log( "--------------- window.FNS.getMaxPage ---------------" );
-				//window.FNS.getMaxPage( function(){
+				window.FNS.getMaxPage( function(){
 					console.log( "--------------- window.FNS.getMaxPage ---------------" );
 					console.log( "--------------- window.FNS.downloadHtml ---------------" );
-					//window.FNS.downloadHtml(function(){
+					window.FNS.downloadHtml(function(){
 						console.log( "--------------- window.FNS.downloadHtml ---------------" );
 						console.log( "--------------- window.FNS.getDetailLinks ---------------" );
 						window.FNS.getDetailLinks( function(){
@@ -415,8 +415,8 @@
 							w.close()
 							
 						})
-					//});
-				//})
+					});
+				})
 			}
 
 			if( !window.FNS.isLogicStart )
