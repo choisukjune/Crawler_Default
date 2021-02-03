@@ -90,10 +90,10 @@
 		window.FNS = {};
 
 		window.FNS.isLogicStart = 0;
+		window.FNS.webviewIsLoad = 0;
 
-		
 		webview.addEventListener('did-finish-load', () => {
-
+			
 			// var currentURL = webview.getURL();
 			// var titlePage = webview.getTitle();
 			// console.log('currentURL is : ' + currentURL)
@@ -117,67 +117,100 @@
 				window.linkListKeys = [];
 				window.detailList = [];
 				window.resultFileList = {};
-				window.siteNm = "atmos-seoul"
-				window.siteUrl = "http://www.atmos-seoul.com"
-				window.pageBaseUrl = "http://www.atmos-seoul.com/shop/shopbrand.html?type=Y&xcode=012&sort=&page="
+				window.siteNm = "cultizm"
+				window.siteUrl = "https://www.cultizm.com/"
+				//window.pageBaseUrl = "https://www.cultizm.com/en/widgets/Listing/ajaxListing?mode=next&c=83&p="
+				window.pageBaseUrls = [
+					//"https://www.cultizm.com/en/widgets/Listing/ajaxListing?mode=next&c=83&p="
+					  "https://www.cultizm.com/us/widgets/Listing/ajaxListing?mode=next&c=469&p="
+					, "https://www.cultizm.com/us/widgets/Listing/ajaxListing?mode=next&c=468&p="
+					, "https://www.cultizm.com/us/widgets/Listing/ajaxListing?mode=next&c=467&p="
+				]
+				window.pageBaseUrlsCnt = 0;
+				window.downLoadHtmlCnt = 1;
 			}
 			
 			//-------------------------------------------------------;
 			//페이지MAX걊 구하기;
 			//-------------------------------------------------------;
 			window.FNS.getMaxPage = function( cbFunction ){
-				url = "http://www.atmos-seoul.com/shop/shopbrand.html?type=Y&xcode=012&sort=&page=1";
+				url = "https://www.cultizm.com/en/widgets/Listing/ajaxListing?mode=next&c=83&p=1";
 				webview.loadURL( url );
-				webview.executeJavaScript(`
-					var _el = window.document.getElementsByClassName("paging")[0]
-					var url = _el.lastElementChild.href;
-					Promise.resolve( url )
-				`
-				).then(function(data){
-					window.maxPage = window.UTIL.URL.paramToObject( data ).page * 1;
+				//webview.executeJavaScript(`
+				//var _el = window.document.getElementsByClassName("Toolbar__ProductCount-sc-14b11kg-3")[0].children[0].innerText
+				//	Promise.resolve( _el )
+				//`
+				//).then(function(data){
+					//window.maxPage = ( parseInt(( data * 1 ) / 120) ) + 1;
+					window.maxPage = 50;
 					console.log( "window.maxPage : " + window.maxPage );
 					cbFunction();
-				})
+				//})
 			}
 			//-------------------------------------------------------;
 			//게시물HTML저장하기;
 			//-------------------------------------------------------;
 			window.FNS.downloadHtml = function( cbFunction ){
 				
-				if( window.maxPage < window.pageCnt )
-				{
-					cbFunction();
-					return
-				}
+				//if( window.maxPage < window.pageCnt )
+				//{
+				//	cbFunction();
+				//	return
+				//}
 
 				console.log( "[S] - window.FNS.downloadHtml - " +  window.pageCnt );
 				var dirPath = "./html/"
-				url = window.pageBaseUrl + window.pageCnt
-				webview.loadURL( url );
+				url = window.pageBaseUrls[ window.pageBaseUrlsCnt ] + window.pageCnt
+				
+				//webview.loadURL( url ).then(function(data){
 				webview.executeJavaScript(`
-					var _el = window.document.getElementsByClassName( "item-wrap prd-parts" )[0].innerHTML
-					Promise.resolve( _el )
+				new Promise((resolve, reject) => {
+					    var xhr = new XMLHttpRequest();
+						xhr.onreadystatechange = function() {
+							if (xhr.readyState === xhr.DONE) {
+								if (xhr.status === 200 || xhr.status === 201) {
+									resolve(xhr.responseText);
+								} else {
+									console.error(xhr.responseText);
+								}
+							}
+						};
+						xhr.open('GET', '${url}');
+						xhr.send();
+				});
 				`
 				).then(function(data){
 
-					var _data = data.replace(/\/\/img/gi, "https://img")
-
-					// window.document.getElementById("_tmp").innerHTML = "";
-					// window.document.getElementById("_tmp").innerHTML = _data;
-
-					//window.document.getElementsByClassName("card_content")[0].children[0].children[1].innerText
-					//window.document.getElementsByClassName("card_content")[0].children[1].children[0]
-
-					fs.mkdirSync( dirPath, { recursive: true } );
-					fs.writeFileSync( dirPath + window.pageCnt + ".html", _data, {flag : "w"} )
-					console.log( "[E] - window.FNS.downloadHtml - " +  window.pageCnt )
+					if( data == "    \n    " && window.pageBaseUrlsCnt == window.pageBaseUrls.length - 1 )
+					{
+						debugger;
+						cbFunction();
+						return;	
+					}
 					
-					++window.pageCnt;
+					if( data == "    \n    " )
+					{
+						++window.pageBaseUrlsCnt;
+						window.pageCnt = 1;
+						setTimeout(function(){
+							window.FNS.downloadHtml( cbFunction );	
+						},250)
+					}
+					else
+					{
+						var _data = data;
+	
+						fs.mkdirSync( dirPath, { recursive: true } );
+						fs.writeFileSync( dirPath +	window.downLoadHtmlCnt + ".html", _data, {flag : "w"} )
+						++window.downLoadHtmlCnt;
+						console.log( "[E] - window.FNS.downloadHtml - " +  window.pageCnt )
+						
+						++window.pageCnt;
+						setTimeout(function(){
+							window.FNS.downloadHtml( cbFunction );	
+						},1000)	
+					}
 					
-					setTimeout(function(){
-						window.FNS.downloadHtml( cbFunction );
-					},1000)
-					//window.document.getElementById("_tmp").innerHTML = "";
 
 				})
 			}
@@ -186,13 +219,14 @@
 			//-------------------------------------------------------;
 			//게시물상세페이지링크 추출 및 저장하기;
 			//-------------------------------------------------------;
-			window.FNS.getDetailLinks = function( cbFunction ){
+			window.FNS.getDetailLinksByHTML = function( cbFunction ){
 				
 				console.log( "[S] - window.FNS.getDetailLinks" )
 
 				var targetDirPath = "./html/";
 				var resultDirPath = "./result/";
 				var list = global.fs.readdirSync( targetDirPath );
+				
 
 				var r = {};
 				var z = 0,zLen=list.length,zo;
@@ -202,46 +236,72 @@
 					window.document.getElementById("_tmp").innerHTML = "";
 					window.document.getElementById("_tmp").innerHTML = global.fs.readFileSync( targetDirPath + zo ).toString();
 
-					var el = window.document.getElementsByClassName("item-list");
-
+					var el = window.document.getElementsByClassName("product--info");
 					var i = 0, iLen = el.length, io;
 					for(;i<iLen;++i){
 						io = el[ i ];
 						
 						var href = io.children[0].children[0].href
+						var _id = href.split("/")
+						var id = _id[ _id.length - 1 ];
 
-						var id = window.UTIL.URL.paramToObject( href ).branduid;
 						r[ id ] = {};
 						r[ id ].websiteNm = window.siteNm;
-						r[ id ].url = window.siteUrl + href.replace( "file:///D:", "" )
+						r[ id ].url = href;
 						
-						var imgSrc = io.children[0].children[0].children[0].src;
-						if( imgSrc.indexOf( "file:///D:" ) != -1 )
+						if( io.children[0].children[1].children[0].children[0].childElementCount )
 						{
-							r[ id ].img = window.siteUrl + imgSrc.replace( "file:///D:", "" ).split("?")[0]
+							try
+							{
+								//r[ id ].img = io.children[0].children[1].children[0].children[0].children[0].getAttribute("srcset");
+								r[ id ].img = io.children[0].children[0].children[0].children[0].children[0].getAttribute("srcset").split(",")[0];
+							}
+							catch( er )
+							{
+								debugger;
+							}
+							
 						}
-						else if( imgSrc.indexOf( "file://cdn3-aka.makeshop.co.kr" ) != -1 )
+						else
 						{
-							r[ id ].img = imgSrc.replace( "file://", "https://" ).split("?")[0]
+							r[ id ].img = io.children[0].children[0].children[0].children[0].children[0].getAttribute("srcset").split(",")[0];							
 						}
-						
-						
-						r[ id ].brand = "";
+
 						r[ id ].nm = "";
+						r[ id ].brand = ""
 						r[ id ].salePrice = -1;
 						r[ id ].msrp = -1;
 						r[ id ].saleRatio = -1;
 						r[ id ].isSoldOut = 0;
 						r[ id ].info = [];
+
 						r[ id ].currency = {
-							mark : "₩"
-							, code : "KRW"
+							mark : "$"
+							, code : "USD"
 						}
 
-						r[ id ].brand = io.children[1].children[0].children[0].innerText
-						r[ id ].nm = io.children[1].children[0].children[1].innerText
-						r[ id ].msrp = Number( io.children[1].children[0].children[2].children[0].innerText.replace( "원","" ).replace( /\,/gi,"" ) )
-						r[ id ].salePrice = Number( io.children[1].children[0].children[2].children[1].innerText.replace( "원","" ).replace( /\,/gi,"" ) )
+						r[ id ].nm = io.children[3].innerText;						
+						r[ id ].brand = io.children[2].innerText;
+						
+						try
+						{
+							if( io.children[4].children[1].childElementCount == 1 )
+							{
+								r[ id ].salePrice = Number( io.children[4].children[1].children[0].innerText.replace( "$","" ).replace( /\,/gi,"" ) );
+								r[ id ].msrp = Number( io.children[4].children[1].children[0].innerText.replace( "$","" ).replace( /\,/gi,"" ) );								
+							}
+							else
+							{
+								r[ id ].salePrice = Number( io.children[4].children[1].children[1].innerText.replace( "$","" ).replace( /\,/gi,"" ) );
+								r[ id ].msrp = Number( io.children[4].children[1].children[0].innerText.replace( "$","" ).replace( /\,/gi,"" ) );	
+							}
+						}
+						catch( er )
+						{
+							debugger;
+						}
+						
+
 
 						if( r[ id ].msrp > -1 && r[ id ].salePrice > -1 )
 						{
@@ -249,7 +309,6 @@
 							var msrp = r[ id ].msrp;
 							r[ id ].saleRatio = (1 -( salePrice / msrp )).toFixed(2);
 						}
-
 						
 					}
 				}
@@ -358,25 +417,25 @@
 				
 				window.FNS.init()
 				console.log( "--------------- window.FNS.getMaxPage ---------------" );
-				window.FNS.getMaxPage( function(){
+				//window.FNS.getMaxPage( function(){
 					console.log( "--------------- window.FNS.getMaxPage ---------------" );
 					console.log( "--------------- window.FNS.downloadHtml ---------------" );
-					window.FNS.downloadHtml(function(){
+					//window.FNS.downloadHtml(function(){
 						console.log( "--------------- window.FNS.downloadHtml ---------------" );
 						console.log( "--------------- window.FNS.getDetailLinks ---------------" );
-						window.FNS.getDetailLinks( function(){
+						window.FNS.getDetailLinksByHTML( function(){
 							console.log( "--------------- window.FNS.getDetailLinks ---------------" );
 							console.log( "--------------- window.FNS.resultJsonToHtml ---------------" );
-							window.FNS.resultJsonToHtml()
+							//window.FNS.resultJsonToHtml()
 							console.log( "--------------- window.FNS.resultJsonToHtml ---------------" );
 
-							const remote = require('electron').remote
-							let w = remote.getCurrentWindow()
-							w.close()
+							//const remote = require('electron').remote
+							//let w = remote.getCurrentWindow()
+							//w.close()
 							
 						})
-					});
-				})
+					//});
+				//})
 			}
 
 			if( !window.FNS.isLogicStart )
