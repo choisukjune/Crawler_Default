@@ -1,0 +1,46 @@
+var db_nm = "contents";
+var col_nm = "<!=DB_NM=!>";
+
+var db0 = db.getSiblingDB( db_nm );
+var col0 = db0.getCollection( col_nm );
+
+//collection data all remove;
+col0.remove({});
+
+var _o = <!=DATA=!>
+
+var s,so;
+var idx = 0;
+for( s in _o ){
+    so = _o[ s ];
+    
+    if( typeof( s ) == "string" )
+    {
+        so._id = NumberInt( idx );
+    }
+    else
+    {
+        so._id = NumberInt( s );
+    }
+    
+    var arr = so.title.split( " " )
+    
+	var i = 0,iLen = arr.length,io;
+	for(;i<iLen;++i){
+	    io = arr[ i ];
+	    if( io.length > 1 )
+		{
+		    so.info.push( io.trim() )
+		}
+	}
+
+    
+    
+    if( so.info.indexOf( so.websiteNm ) == -1 ){
+        so.info.push( so.websiteNm )
+    }
+    col0.insert( so );
+    ++idx;
+}
+
+printjson( 1 )

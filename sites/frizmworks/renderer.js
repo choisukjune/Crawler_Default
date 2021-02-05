@@ -254,16 +254,16 @@
 						var k = 0,kLen = io.children[0].children[3].children.length,ko;
 						for(;k<kLen;++k){
 							ko = io.children[0].children[3].children[ k ];
-							
+
 							try {
 							
 								if( ko.classList.contains( "saleprice" ) && ko.innerText != "" )
 								{
-									r[ id ].salePrice = Number( ko.innerText.split(" ")[0].replace( "원","" ).replace( /\,/gi,"" ) );
+									r[ id ].salePrice = Number( ko.innerText.replace( "KRW ","" ).split(" ")[0].replace( /\,/gi,"" ).trim() );
 								}
 								if( ko.classList.contains( "price" ) && ko.innerText != "" )
 								{
-									r[ id ].msrp = Number( ko.innerText.replace( "원","" ).replace( /\,/gi,"" ) )
+									r[ id ].msrp = Number( ko.innerText.replace( "KRW","" ).replace( /\,/gi,"" ).trim() )
 								}
 
 							} catch (error) {
