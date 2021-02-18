@@ -9,7 +9,7 @@ col__all.remove({});
 idx = 0;
 cols.forEach(function(col){
     
-    if( col == "all" ) return;
+    if( col != "jcrew" ) return;
     
     db0.getCollection( col ).find({}).toArray().forEach(function(doc){
         doc._id = NumberInt( idx );

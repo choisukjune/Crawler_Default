@@ -577,10 +577,10 @@
 				
 				window.FNS.init()
 				console.log( "--------------- window.FNS.getMaxPage ---------------" );
-				//window.FNS.getMaxPage( function(){
+				window.FNS.getMaxPage( function(){
 					console.log( "--------------- window.FNS.getMaxPage ---------------" );
 					console.log( "--------------- window.FNS.downloadHtml ---------------" );
-					//window.FNS.downloadJson(function(){
+					window.FNS.downloadJson(function(){
 						console.log( "--------------- window.FNS.downloadHtml ---------------" );
 						console.log( "--------------- window.FNS.getDetailLinks ---------------" );
 						window.FNS.getDetailLinksByJSON( function(){
@@ -594,8 +594,8 @@
 							w.close()
 							
 						})
-					//});
-				//})
+					});
+				})
 			}
 
 			if( !window.FNS.isLogicStart )

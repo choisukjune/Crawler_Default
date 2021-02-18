@@ -161,13 +161,14 @@
 				console.log( "[S] - window.FNS.downloadHtml - " +  window.pageCnt );
 				var dirPath = "./html/"
 				url = window.pageBaseUrl + window.pageCnt
+					debugger;
 				webview.loadURL( url );
 				webview.executeJavaScript(`
-					var _el = window.document.getElementsByClassName("column4")[0].innerHTML
+					var _el = window.document.getElementsByClassName("prdList")[0].innerHTML
 					Promise.resolve( _el )
 				`
 				).then(function(data){
-
+					debugger;
 					var _data = data.replace(/\/\/img/gi, "https://img")
 
 					// window.document.getElementById("_tmp").innerHTML = "";
