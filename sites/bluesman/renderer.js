@@ -258,7 +258,7 @@
 						r[ id ].brand = ""
 						r[ id ].salePrice = -1;
 						r[ id ].msrp = -1;
-						r[ id ].saleRatio = -1;
+						r[ id ].saleRatio = 0;
 						r[ id ].isSoldOut = 0;
 						r[ id ].info = [];
 
@@ -298,11 +298,11 @@
 		
 						r[ id ].info = [];
 
-						if( r[ id ].msrp > -1 && r[ id ].salePrice > -1 )
+						if( r[ id ].msrp > 0 && r[ id ].salePrice > 0 )
 						{
 							var salePrice = r[ id ].salePrice;
 							var msrp = r[ id ].msrp;
-							r[ id ].saleRatio = (1 -( salePrice / msrp )).toFixed(2);
+							r[ id ].saleRatio = (1 -( salePrice / msrp )).toFixed(2) * 1;
 						}
 						else if( r[ id ].msrp == r[ id ].salePrice )
 						{
