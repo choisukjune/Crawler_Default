@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Hello World!</title>
+		<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+		<script src="renderer.js"></script>
+		<style>
+			#webview {
+				 display: flex;
+				 width: 100%;
+				 height: 98%;
+				 border: none;
+			}
+			html, body {
+			   width: 100%;
+			   height: 100%;
+			   margin: 0;
+			   padding: 0;
+			}
+		</style>
+	</head>
+	<body style="background: white" height="100% ">
+	<div id="_tmp"></div>
+    <!-- Webview -->
+    <webview
+      id="webview"
+      autosize="on"
+      src="http://slowsteadyclub.com/product/list.html?cate_no=24"
+      data-home="http://slowsteadyclub.com/product/list.html?cate_no=24"
+    ></webview>
+	</body>
+</html>

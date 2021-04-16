@@ -3,17 +3,37 @@ var col_nm = "<!=BRAND_NM=!>";
 
 var db0 = db.getSiblingDB( db_nm );
 var col0 = db0.getCollection( col_nm );
+var col1 = db0.getCollection( "all" );
 
+var getDateTimeToObject = function(){
+	var date = new Date();
+
+	var r = {
+		year : NumberInt( date.getFullYear() )
+		, montyh : NumberInt( date.getMonth() )
+		, day : NumberInt( date.getDate() )
+		, hour : NumberInt( date.getHours() )
+		, minute : NumberInt( date.getMinutes() )
+		, secont : NumberInt( date.getSeconds() )
+		, timeStamp : date.getTime()
+	}
+
+	return  r;
+
+}
 //collection data all remove;
 col0.remove({});
+col1.remove({ websiteNm : col_nm });
 
 var _o = <!=DATA=!>
 
 var s,so;
 var idx = 0;
+var data_arr = [];
 for( s in _o ){
     so = _o[ s ];
     
+    /*/
     if( typeof( s ) == "string" )
     {
         so._id = NumberInt( idx );
@@ -22,7 +42,9 @@ for( s in _o ){
     {
         so._id = NumberInt( s );
     }
-    
+    /*/
+	so._id =  so.websiteNm + "_" + idx;
+	//*/
     var arr = so.nm.replace( so.brand, "" ).split( " " )
     
 	var i = 0,iLen = arr.length,io;
@@ -42,8 +64,30 @@ for( s in _o ){
     if( so.info.indexOf( so.websiteNm ) == -1 ){
         so.info.push( so.websiteNm )
     }
+    so.date_o = getDateTimeToObject();
+    /*/
     col0.insert( so );
+    col1.insert( so );
+    /*/
+
+	
+	if( data_arr.length == 500 )
+	{
+		col0.insertMany( data_arr );
+		col1.insertMany( data_arr );
+		data_arr = [];
+	}
+	else
+	{
+		data_arr.push( so );
+	}
+
+	
+    //*/
     ++idx;
 }
+
+col0.insertMany( data_arr );
+col1.insertMany( data_arr );
 
 printjson( 1 )

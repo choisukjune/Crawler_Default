@@ -1,5 +1,9 @@
 (function(){
 	global.fs = require( "fs" );
+	var execSync = require('child_process').execSync;
+	var iconv = require( "iconv-lite" );
+	var spawn = require('child_process').spawn;
+	
 	onload = function(){
 
 		var webview = document.querySelector('webview')
@@ -39,7 +43,7 @@
 			var M = window.UTIL.String.pad( date.getMinutes(), 2 );
 			var S = window.UTIL.String.pad( date.getSeconds(), 2 );
 
-			return YYYY + "-" + MM + "-" + DD + " " + H + ":" + M + ":" + S;
+			return YYYY + MM + DD + "_" + H +  M + S;
 		};
 
 		window.UTIL.DateFormat.YYYYMMDD = function(){
@@ -51,6 +55,24 @@
 
 			return YYYY + MM + DD;
 		};
+
+
+		window.UTIL.getDateTimeToObject = function(){
+			var date = new Date();
+
+			var r = {
+				year : Number( date.getFullYear() )
+				, montyh : Number( date.getMonth() )
+				, day : Number( date.getDate() )
+				, hour : Number( date.getHours() )
+				, minute : Number( date.getMinutes() )
+				, secont : Number( date.getSeconds() )
+				, timeStamp : date.getTime()
+			}
+
+			return  r;
+
+		}
 
 		window.UTIL.DateFormat.YYMMDD = function( date ){
 			date = date || new Date();
@@ -90,10 +112,10 @@
 		window.FNS = {};
 
 		window.FNS.isLogicStart = 0;
-		window.FNS.webviewIsLoad = 0;
 
+		
 		webview.addEventListener('did-finish-load', () => {
-			
+
 			// var currentURL = webview.getURL();
 			// var titlePage = webview.getTitle();
 			// console.log('currentURL is : ' + currentURL)
@@ -222,8 +244,14 @@
 
 				var targetDirPath = "./html/";
 				var resultDirPath = "./result/";
+				var backupDirPath = "./backup/";
 				var list = global.fs.readdirSync( targetDirPath );
-				
+				var prev_data = {};
+
+				if( fs.existsSync( resultDirPath + window.siteNm + ".json" ) )
+				{
+					var prev_data = JSON.parse( global.fs.readFileSync( resultDirPath + window.siteNm + ".json" ).toString() );	
+				}
 
 				var r = {};
 				var z = 0,zLen=list.length,zo;
@@ -237,12 +265,13 @@
 					var i = 0, iLen = el.length, io;
 					for(;i<iLen;++i){
 						io = el[ i ];
-					debugger;						
+		
 						var href = io.children[0].children[0].getAttribute("href")
 						var _id = href.split("=")
 						var id = _id[ _id.length - 1 ];
 
 						r[ id ] = {};
+						r[ id ].isNew = 0;
 						r[ id ].websiteNm = window.siteNm;
 						r[ id ].url = window.siteUrl + href;
 						//r[ id ].img = io.children[0].children[0].children[0].src.split("?")[0];
@@ -269,8 +298,8 @@
 						{
 							if( io.children[1].children[2].innerText.indexOf("SOLD OUT") == -1 )
 							{
-								r[ id ].salePrice = Number( io.children[1].children[2].innerText.replace( "円(税抜)","" ).replace( /\,/gi,"" ) );
-								r[ id ].msrp = Number( io.children[1].children[2].innerText.replace( "円(税抜)","" ).replace( /\,/gi,"" ) );								
+								r[ id ].salePrice = Number( io.children[1].children[2].innerText.replace( "円","" ).replace( "(税抜)","" ).replace( /\,/gi,"" ) );
+								r[ id ].msrp = Number( io.children[1].children[2].innerText.replace( "円","" ).replace( "(税抜)","" ).replace( /\,/gi,"" ) );								
 							}
 							else
 							{
@@ -283,23 +312,44 @@
 							debugger;
 						}
 						
-
+						//r[ id ].html_no = zo;
 
 						if( r[ id ].msrp > -1 && r[ id ].salePrice > -1 )
 						{
 							var salePrice = r[ id ].salePrice;
 							var msrp = r[ id ].msrp;
-							r[ id ].saleRatio = (1 -( salePrice / msrp )).toFixed(2);
+							r[ id ].saleRatio = (1 -( salePrice / msrp )).toFixed(2) * 1;
+						}
+						
+						
+						if( !prev_data[ id ] )
+						{
+							r[ id ].crwaling_date_o = window.UTIL.getDateTimeToObject();
+							r[ id ].isNew = 1;
+						}
+						else
+						{
+							r[ id ].crwaling_date_o = prev_data[ id ].crwaling_date_o;
+							r[ id ].isNew = prev_data[ id ].isNew;
+							if( prev_data[ id ].crwaling_date_o.timeStamp + 36288000 <  r[ id ].crwaling_date_o.timeStamp )
+							{
+								r[ id ].isNew = 0;
+							}
 						}
 						
 					}
 				}
 
-				
 				try
 				{
 					fs.mkdirSync( resultDirPath, { recursive: true } );
-					fs.writeFileSync( resultDirPath + window.siteNm + ".json", JSON.stringify( r ,null,4 ), {flag:"w"} );
+					
+					var newFilePath = resultDirPath + window.siteNm + ".json";
+					var backupFilePath = backupDirPath + window.UTIL.DateFormat.YYYYMMDD_HHMMSS() + "_" + window.siteNm + ".json"
+					
+					fs.writeFileSync( newFilePath, JSON.stringify( r ,null,4 ), {flag:"w"} );
+					fs.writeFileSync( backupFilePath, JSON.stringify( r ,null,4 ), {flag:"w"} );
+
 					window.document.getElementById("_tmp").innerHTML = "";
 					console.log( "[E] - window.FNS.getDetailLinks" )
 					if( cbFunction ) cbFunction();
@@ -308,86 +358,6 @@
 				{
 					console.log( er );
 				}
-			}
-
-			//-------------------------------------------------------;
-			//게시물상세페이지HTML 추출 및 저장하기;
-			//-------------------------------------------------------;
-			/*
-			 {
-				"websiteNm": "espionage",
-				"url": "http://espionage.co.kr/shop/shopdetail.html?branduid=76078&xcode=061&mcode=001&scode=001&type=X&sort=manual&cur_code=061&GfDT=bm9%2BW1g%3D",
-				"img": "http://espionage.co.kr/shopimages/zooyork77/0610010000252.jpg?1357903799",
-				"brand": "",
-				"nm": [
-					"Colby Heavy Down Parka Dark G"
-				],
-				"salePrice": null,
-				"msrp": "329,000원"
-			},
-			*/
-			window.FNS.resultJsonToHtml = function(){
-				console.log( "[S] - window.FNS.resultJsonToHtml" )
-				
-				var targetFilePath = targetFilePath || "./result/" + window.siteNm + ".json";
-				var resultDirPath = resultDirPath || "../../../HttpServer_Default/html/";;
-
-				var _to = JSON.parse( global.fs.readFileSync( targetFilePath ).toString() );
-
-				var r = `
-				`;
-				var z,zo;
-				for( z in _to ){
-					zo = _to[ z ];
-
-					var thmbnail = zo.img;
-					var title = zo.nm;
-					var href = zo.url;
-					var websiteNm = zo.websiteNm
-					var brand = zo.brand
-					var salePrice = zo.salePrice
-					var msrp = zo.msrp
-
-					//r += "<td>내용</td><td>" + io.detail.join("\n").replace( /rel\=\"xe_gallery\"/gi, "width='200'" ) + "</td>"
-					//${description}
-					r += `
-					<div class="card">
-						<div class="image">
-						<img src="${thmbnail}">
-						</div>
-						<div class="content">
-						<div class="header">${title}</div>
-						<div class="meta">
-							<a>${websiteNm}</a>
-						</div>
-
-						<div class="description" style="font-size:11px;word-break: break-all;">
-							${brand}<br>
-							${salePrice}<br>
-							${msrp}<br>
-						</div>
-						</div>
-						<div class="extra content">
-							<!--span class="right floated">
-								Right-someText
-							</span-->
-							<a href="${href}" target="_blank"><button class="fluid ui mini button">해당사이트이동</button></a>
-							<!--span>
-								<i class="user icon"></i>
-								Left-someText
-							</span-->
-						</div>
-					</div>
-					`
-
-				}
-
-				r += `
-				`
-
-				fs.mkdirSync( resultDirPath, { recursive: true } );
-				fs.writeFileSync( resultDirPath + window.siteNm + ".html", r, {flag : "w"} )
-				console.log( "[E] - window.FNS.resultJsonToHtml" )
 			}
 
 			//-------------------------------------------------------;
@@ -402,17 +372,20 @@
 				window.FNS.getMaxPage( function(){
 					console.log( "--------------- window.FNS.getMaxPage ---------------" );
 					console.log( "--------------- window.FNS.downloadHtml ---------------" );
+					
+					var bat = spawn('cmd.exe', ['/c', 'html_data_delete.bat' ]);
+					bat.stdout.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") ); });
+					bat.stderr.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") );	});
+					bat.on('exit', function(code){ console.log(`Child exited with code ${code}`); });
+
 					window.FNS.downloadHtml(function(){
 						console.log( "--------------- window.FNS.downloadHtml ---------------" );
 						console.log( "--------------- window.FNS.getDetailLinks ---------------" );
 						window.FNS.getDetailLinksByHTML( function(){
 							console.log( "--------------- window.FNS.getDetailLinks ---------------" );
-							console.log( "--------------- window.FNS.resultJsonToHtml ---------------" );
-							//window.FNS.resultJsonToHtml()
-							console.log( "--------------- window.FNS.resultJsonToHtml ---------------" );
-
-							const remote = require('electron').remote
-							let w = remote.getCurrentWindow()
+							
+							var remote = require('electron').remote
+							var w = remote.getCurrentWindow()
 							w.close()
 							
 						})
@@ -427,7 +400,4 @@
 			}
 		})
 	}
-})()
-
-//https://www.zerocho.com/category/HTML&DOM/post/594bc4e9991b0e0018fff5ed
-//xhr사용법
+})();
