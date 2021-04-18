@@ -131,7 +131,8 @@
 				oneDayAgo_date.setDate(oneDayAgo_date.getDate() - 2);
 				window.YYMMDD_oneDayAgo = window.UTIL.DateFormat.YYMMDD( oneDayAgo_date );
 		
-				window.maxPage = -1;
+				//window.maxPage = -1;
+				window.maxPages = [];
 				window.pageCnt = 1;
 				window._tmp = {}
 				window._tmp.cnt = 0;
@@ -141,7 +142,23 @@
 				window.resultFileList = {};
 				window.siteNm = "randomwalk"
 				window.siteUrl = "http://randomwalk.co.kr/"
-				window.pageBaseUrl = "http://randomwalk.co.kr/front/php/category.php?cate_no=99&page="
+//				window.pageBaseUrl = "http://randomwalk.co.kr/front/php/category.php?cate_no=99&page="
+				window.pageBaseUrls = [
+					"http://randomwalk.co.kr/front/php/category.php?cate_no=99&page="
+					, "http://randomwalk.co.kr/front/php/category.php?cate_no=63&page="
+					, "http://randomwalk.co.kr/front/php/category.php?cate_no=64&page="
+					, "http://randomwalk.co.kr/front/php/category.php?cate_no=65&page="
+					, "http://randomwalk.co.kr/front/php/category.php?cate_no=128&page="
+					, "http://randomwalk.co.kr/front/php/category.php?cate_no=84&page="
+					, "http://randomwalk.co.kr/front/php/category.php?cate_no=27&page="
+					, "http://randomwalk.co.kr/front/php/category.php?cate_no=91&page="
+					, "http://randomwalk.co.kr/front/php/category.php?cate_no=106&page="
+					, "http://randomwalk.co.kr/front/php/category.php?cate_no=25&page="
+					, "http://randomwalk.co.kr/front/php/category.php?cate_no=187&page="
+					, "http://randomwalk.co.kr/front/php/category.php?cate_no=74&page="
+				]
+				window.pageBaseUrlsCnt = 0;
+				window.downLoadHtmlCnt = 1;
 			}
 			
 			//-------------------------------------------------------;
@@ -149,18 +166,28 @@
 			//-------------------------------------------------------;
 			window.FNS.getMaxPage = function( cbFunction ){
 				
-				/*/
-				url = "https://frizm.co.kr/product/list.html?cate_no=30";
+				//*/
+				url = pageBaseUrls[ window.pageBaseUrlsCnt ] + 200;
 				webview.loadURL( url );
 				webview.executeJavaScript(`
-					var _el = window.document.getElementsByClassName("item-page")[0]
-					var url = _el.lastElementChild.href;
+					var _el = window.document.getElementsByClassName("xans-element- xans-product xans-product-normalpaging paging")[0]
+					var url = _el.children[1].lastElementChild.children[0].href;
 					Promise.resolve( url )
 				`
 				).then(function(data){
-					//window.maxPage = window.UTIL.URL.paramToObject( data ).page * 1;
+					window.maxPage = window.UTIL.URL.paramToObject( data ).page * 1;
 					console.log( "window.maxPage : " + window.maxPage );
-					cbFunction();
+					window.maxPages.push( maxPage );
+					if( window.pageBaseUrlsCnt < window.pageBaseUrls.length - 1 )
+					{
+						++window.pageBaseUrlsCnt;
+						window.FNS.getMaxPage( cbFunction )
+					}
+					else
+					{
+						window.pageBaseUrlsCnt = 0;
+						cbFunction();	
+					}
 				})
 				
 				/*/
@@ -173,18 +200,26 @@
 			//게시물HTML저장하기;
 			//-------------------------------------------------------;
 			window.FNS.downloadHtml = function( cbFunction ){
-				
-				if( window.maxPage < window.pageCnt )
+				if( window.maxPages[ window.pageBaseUrlsCnt ] < window.pageCnt )
 				{
-					cbFunction();
-					return
+					debugger;
+					if( window.pageBaseUrlsCnt < window.pageBaseUrls.length  - 1 )
+					{
+						++window.pageBaseUrlsCnt;
+						window.pageCnt = 1;
+						return window.FNS.downloadHtml( cbFunction )
+					}
+					else
+					{
+						cbFunction();
+						return;
+					}
 				}
 
 				console.log( "[S] - window.FNS.downloadHtml - " +  window.pageCnt );
 				var dirPath = "./html/"
-				url = window.pageBaseUrl + window.pageCnt
+				url = window.pageBaseUrls[ window.pageBaseUrlsCnt ] + window.pageCnt;
 				webview.loadURL( url );
-				debugger;
 				webview.executeJavaScript(`
 					var _el = window.document.getElementsByClassName("thumbnail")[0].innerHTML
 					Promise.resolve( _el )
@@ -204,6 +239,7 @@
 					console.log( "[E] - window.FNS.downloadHtml - " +  window.pageCnt )
 					
 					++window.pageCnt;
+					++window.downLoadHtmlCnt;
 
 					window.FNS.downloadHtml( cbFunction );
 					window.document.getElementById("_tmp").innerHTML = "";
