@@ -4,8 +4,8 @@ stock_data/
 stock_html/
 node_modules/
 Log/
-sites/*/json/
-sites/*/html/
+
+sites/**/html
 
 # files
 
