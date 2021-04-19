@@ -5,7 +5,7 @@ stock_html/
 node_modules/
 Log/
 
-sites/**/html
+sites/**/html/
 
 # files
 
