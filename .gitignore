@@ -1,6 +1,7 @@
 # directory
 sites/**/html/*
 sites/**/json/*
+sites/**/backup/*
 DataBase/0/
 stock_data/
 stock_html/
