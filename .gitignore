@@ -6,6 +6,7 @@ node_modules/
 Log/
 
 sites/**/html/
+sites/**/json/
 
 # files
 
