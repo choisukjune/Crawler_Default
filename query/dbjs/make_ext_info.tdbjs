@@ -1,0 +1,64 @@
+var db_nm = "data";
+var col_nm = "all";
+
+var db01 = db.getSiblingDB( "info" );
+var col01 = db01.getCollection( "info" );
+
+
+var db0 = db.getSiblingDB( db_nm );
+var col0 = db0.getCollection( col_nm );
+var allCols = db0.getCollectionNames();
+
+
+var tags = {}
+var brands = {}
+var r = {
+	sites : []
+	, tags : {}
+	, brands : []
+}
+
+col0.find({}).forEach(function(doc){
+
+    doc.info.forEach(function(item){
+        if( !tags[ item ] ) tags[ item ] = 1;
+        else ++tags[ item ];
+    })
+    var brand = doc.brand.trim();
+    if( !brands[ brand ] ) brands[ brand ] = 1;
+    else ++brands[ brand ];
+})
+
+allCols.forEach(function(col){
+
+	if( col != "all" ){
+		r.sites.push( col )
+	}
+})
+
+
+var s,so;
+for( s in tags ){
+    so = tags[ s ]
+    if( so > 100 )
+    {
+        r.tags[ s ] = so;
+    }
+}
+
+var s,so;
+for( s in brands ){
+    so = brands[ s ]
+    if( so > 50 )
+    {
+        r.brands.push( s );
+    }
+}
+
+r.brands.sort();
+
+col01.remove({})
+col01.insert( r )
+
+
+printjson( 1 )
