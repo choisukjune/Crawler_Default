@@ -61,7 +61,7 @@
 
 			var r = {
 				year : Number( date.getFullYear() )
-				, montyh : Number( date.getMonth() )
+				, montyh : Number( date.getMonth() + 1 )
 				, day : Number( date.getDate() )
 				, hour : Number( date.getHours() )
 				, minute : Number( date.getMinutes() )
@@ -93,7 +93,8 @@
 		oneDayAgo_date.setDate(oneDayAgo_date.getDate() - 2);
 		window.YYMMDD_oneDayAgo = window.UTIL.DateFormat.YYMMDD( oneDayAgo_date );
 
-		window.maxPage = -1;
+		//window.maxPage = -1;
+		window.maxPages = [];
 		window.pageCnt = 1;
 		window._tmp = {}
 		window._tmp.cnt = 0;
@@ -130,7 +131,8 @@
 				oneDayAgo_date.setDate(oneDayAgo_date.getDate() - 2);
 				window.YYMMDD_oneDayAgo = window.UTIL.DateFormat.YYMMDD( oneDayAgo_date );
 		
-				window.maxPage = -1;
+				//window.maxPage = -1;
+				window.maxPages = [];
 				window.pageCnt = 1;
 				window._tmp = {}
 				window._tmp.cnt = 0;
@@ -140,22 +142,41 @@
 				window.resultFileList = {};
 				window.siteNm = "endclothing"
 				window.siteUrl = "https://www.endclothing.com"
-				window.pageBaseUrl = "https://www.endclothing.com/kr/sale?page="
+				//window.pageBaseUrl = "https://www.endclothing.com/kr/sale?page="
+				window.pageBaseUrls = [
+					"Footwear"
+					, "Clothing"
+					, "Accessories"
+					, "Lifestyle"
+					, "Sale"
+				]
+				window.pageBaseUrls_o = {
+					"Footwear" : "https://www.endclothing.com/kr/footwear?page=1"
+					, "Clothing" : "https://www.endclothing.com/kr/clothing?page=1"
+					, "Accessories" : "https://www.endclothing.com/kr/accessories?page=1"
+					, "Lifestyle" : "https://www.endclothing.com/kr/lifestyle/all-lifestyle?page=1"
+					, "Sale" : "https://www.endclothing.com/kr/sale?page=1"
+				}
+				
+				window.pageBaseUrlsCnt = 0;
+				window.downLoadHtmlCnt = 1;
 			}
 			
 			//-------------------------------------------------------;
 			//페이지MAX걊 구하기;
 			//-------------------------------------------------------;
 			window.FNS.getMaxPage = function( cbFunction ){
-				url = "https://www.endclothing.com/kr/sale?page=1";
-				
+
+				url = window.pageBaseUrls_o[ pageBaseUrls[ window.pageBaseUrlsCnt ] ];
+				var category = pageBaseUrls[ window.pageBaseUrlsCnt ];
+
 				webview.loadURL( url );
 				webview.executeJavaScript(`
 
 				//setTimeout(function(){
 					new Promise((resolve, reject) => {
 					var xhr = new XMLHttpRequest();
-					var param = encodeURI('userToken=anonymous-2f0e9c24-2d43-4500-af43-73b483222a0a&analyticsTags=["browse","web","v2",kr","KR","sale"]&page=1&facetFilters=[["categories:Sale"],["websites_available_at:12"]]&filters=&facets=["websites_available_at"]&hitsPerPage=120&ruleContexts=["browse","web","v2","kr","KR","sale"]&clickAnalytics=false')
+					var param = encodeURI('userToken=anonymous-2f0e9c24-2d43-4500-af43-73b483222a0a&analyticsTags=["browse","web","v2",kr","KR"]&page=1&facetFilters=[["categories:${category}"],["websites_available_at:12"]]&filters=&facets=["websites_available_at"]&hitsPerPage=120&ruleContexts=["browse","web","v2","kr","KR","sale"]&clickAnalytics=false')
 					var data = {
 						"requests":[
 							{
@@ -181,9 +202,22 @@
 				
 				`
 				).then(function(data){
-					window.maxPage = JSON.parse(data).results[0].nbPages;
-					console.log( "window.maxPage : " + window.maxPage );
-					cbFunction();
+					var maxPage = JSON.parse(data).results[0].nbPages;
+					window.maxPages.push( maxPage );
+					console.log( "window.maxPage : " + maxPage );
+					if( window.pageBaseUrlsCnt < window.pageBaseUrls.length - 1 )
+					{
+						++window.pageBaseUrlsCnt;
+						setTimeout(function(){
+							window.FNS.getMaxPage( cbFunction )
+						},1000)
+					}
+					else
+					{
+						debugger;
+						window.pageBaseUrlsCnt = 0;
+						cbFunction();	
+					}
 				})
 			}
 			//-------------------------------------------------------;
@@ -287,20 +321,30 @@
 			// }
 
 			window.FNS.downloadJson = function( cbFunction ){
-				debugger;
-				if( window.maxPage < window.pageCnt )
+				
+				if( window.maxPages[ window.pageBaseUrlsCnt ] < window.pageCnt )
 				{
-					cbFunction();
-					return
+					if( window.pageBaseUrlsCnt < window.pageBaseUrls.length  - 1 )
+					{
+						++window.pageBaseUrlsCnt;
+						window.pageCnt = 1;
+						return window.FNS.downloadJson( cbFunction )
+					}
+					else
+					{
+						cbFunction();
+						return;
+					}
 				}
-
+				var category = pageBaseUrls[ window.pageBaseUrlsCnt ];
 				console.log( "[S] - window.FNS.downloadJspn - " +  window.pageCnt );
 				var dirPath = "./json/"
 				var xhr_page = window.pageCnt - 1;
+
 				webview.executeJavaScript(`
 				new Promise((resolve, reject) => {
 					var xhr = new XMLHttpRequest();
-					var param = encodeURI('userToken=anonymous-2f0e9c24-2d43-4500-af43-73b483222a0a&analyticsTags=["browse","web","v2",kr","KR","sale"]&page=${xhr_page}&facetFilters=[["categories:Sale"],["websites_available_at:12"]]&filters=&facets=["websites_available_at"]&hitsPerPage=120&ruleContexts=["browse","web","v2","kr","KR","sale"]&clickAnalytics=false')
+					var param = encodeURI('userToken=anonymous-2f0e9c24-2d43-4500-af43-73b483222a0a&analyticsTags=["browse","web","v2",kr","KR","sale"]&page=${xhr_page}&facetFilters=[["categories:${category}"],["websites_available_at:12"]]&filters=&facets=["websites_available_at"]&hitsPerPage=120&ruleContexts=["browse","web","v2","kr","KR","sale"]&clickAnalytics=false')
 					var data = {
 						"requests":[
 							{
@@ -328,10 +372,11 @@
 					var _data = data;
 
 					fs.mkdirSync( dirPath, { recursive: true } );
-					fs.writeFileSync( dirPath + window.pageCnt + ".json", _data, {flag : "w"} )
+					fs.writeFileSync( dirPath + window.downLoadHtmlCnt + ".json", _data, {flag : "w"} )
 					console.log( "[E] - window.FNS.downloadJspn - " +  window.pageCnt )
 					
 					++window.pageCnt;
+					++window.downLoadHtmlCnt;
 
 					setTimeout(function(){
 						window.FNS.downloadJson( cbFunction );
@@ -571,28 +616,28 @@
 				
 				window.FNS.init()
 				console.log( "--------------- window.FNS.getMaxPage ---------------" );
-				window.FNS.getMaxPage( function(){
+				//window.FNS.getMaxPage( function(){
 					console.log( "--------------- window.FNS.getMaxPage ---------------" );
 					
-					var bat = spawn('cmd.exe', ['/c', 'JSON_data_delete.bat' ]);
-					bat.stdout.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") ); });
-					bat.stderr.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") );	});
-					bat.on('exit', function(code){ console.log(`Child exited with code ${code}`); });
+					//var bat = spawn('cmd.exe', ['/c', 'JSON_data_delete.bat' ]);
+					//bat.stdout.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") ); });
+					//bat.stderr.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") );	});
+					//bat.on('exit', function(code){ console.log(`Child exited with code ${code}`); });
 					
 					console.log( "--------------- window.FNS.downloadJson ---------------" );
-					window.FNS.downloadJson(function(){
+					//window.FNS.downloadJson(function(){
 						console.log( "--------------- window.FNS.downloadJson ---------------" );
 						console.log( "--------------- window.FNS.getDetailLinks ---------------" );
 						window.FNS.getDetailLinksByJSON( function(){
 							console.log( "--------------- window.FNS.getDetailLinks ---------------" );
 
-							const remote = require('electron').remote
-							let w = remote.getCurrentWindow()
-							w.close()
+							//const remote = require('electron').remote
+							//let w = remote.getCurrentWindow()
+							//w.close()
 							
 						})
-					});
-				})
+					//});
+				//})
 			}
 
 			if( !window.FNS.isLogicStart )

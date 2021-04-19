@@ -62,7 +62,7 @@
 
 			var r = {
 				year : Number( date.getFullYear() )
-				, montyh : Number( date.getMonth() )
+				, montyh : Number( date.getMonth() + 1)
 				, day : Number( date.getDate() )
 				, hour : Number( date.getHours() )
 				, minute : Number( date.getMinutes() )
@@ -94,7 +94,8 @@
 		oneDayAgo_date.setDate(oneDayAgo_date.getDate() - 2);
 		window.YYMMDD_oneDayAgo = window.UTIL.DateFormat.YYMMDD( oneDayAgo_date );
 
-		window.maxPage = -1;
+		//window.maxPage = -1;
+		window.maxPages = [];
 		window.pageCnt = 1;
 		window._tmp = {}
 		window._tmp.cnt = 0;
@@ -131,7 +132,8 @@
 				oneDayAgo_date.setDate(oneDayAgo_date.getDate() - 2);
 				window.YYMMDD_oneDayAgo = window.UTIL.DateFormat.YYMMDD( oneDayAgo_date );
 		
-				window.maxPage = -1;
+				//window.maxPage = -1;
+				window.maxPages = [];
 				window.pageCnt = 1;
 				window._tmp = {}
 				window._tmp.cnt = 0;
@@ -141,7 +143,13 @@
 				window.resultFileList = {};
 				window.siteNm = "beams"
 				window.siteUrl = "https://www.beams.co.jp/"
-				window.pageBaseUrl = "https://www.beams.co.jp/search/?sex=M&search=true&p="
+				//window.pageBaseUrl = "https://www.beams.co.jp/search/?sex=M&search=true&p="
+				window.pageBaseUrls = [
+					"https://www.beams.co.jp/search/?sex=M&search=true&p="
+				  , "https://www.beams.co.jp/search/?sex=W&search=true&p="
+				]
+				window.pageBaseUrlsCnt = 0;
+				window.downLoadHtmlCnt = 1;
 			}
 			
 			//-------------------------------------------------------;
@@ -150,7 +158,7 @@
 			window.FNS.getMaxPage = function( cbFunction ){
 				
 				//*/
-				url = "https://www.beams.co.jp/search/?sex=M&search=true&p=1";
+				url = pageBaseUrls[ window.pageBaseUrlsCnt ] + 1;
 				webview.loadURL( url );
 				webview.executeJavaScript(`
 					var _el = window.document.getElementsByClassName("page-number")[0];
@@ -160,8 +168,20 @@
 				).then(function(data){
 					//window.maxPage = window.UTIL.URL.paramToObject( data ).page * 1;
 					window.maxPage = data * 1;
-					console.log( "window.maxPage : " + window.maxPage );
-					cbFunction();
+					window.maxPages.push( maxPage );
+					console.log( "window.maxPage : " + maxPage );
+					if( window.pageBaseUrlsCnt < window.pageBaseUrls.length - 1 )
+					{
+						debugger;
+						++window.pageBaseUrlsCnt;
+						window.FNS.getMaxPage( cbFunction )
+					}
+					else
+					{
+						debugger;
+						window.pageBaseUrlsCnt = 0;
+						cbFunction();	
+					}
 				})
 				
 				/*/
@@ -175,15 +195,34 @@
 			//-------------------------------------------------------;
 			window.FNS.downloadHtml = function( cbFunction ){
 								
-				if( window.maxPage < window.pageCnt )
+				if( window.maxPages[ window.pageBaseUrlsCnt ] < window.pageCnt )
 				{
-					cbFunction();
-					return
+					if( window.pageBaseUrlsCnt < window.pageBaseUrls.length  - 1 )
+					{
+						++window.pageBaseUrlsCnt;
+						window.pageCnt = 1;
+						return window.FNS.downloadHtml( cbFunction )
+					}
+					else
+					{
+						cbFunction();
+						return;
+					}
 				}
 				console.log( "[S] - window.FNS.downloadHtml - " +  window.pageCnt );
 				var dirPath = "./html/"
-				url = window.pageBaseUrl + window.pageCnt
-				webview.loadURL( url );
+				
+				
+				url = window.pageBaseUrls[ window.pageBaseUrlsCnt ] + window.pageCnt
+				
+				try
+				{
+					webview.loadURL( url );
+				}
+				catch(er)
+				{
+					debugger;
+				}
 				
 				webview.executeJavaScript(`
 					var _el = window.document.getElementsByClassName("listed-items-4columns")[0].innerHTML
@@ -200,12 +239,15 @@
 					//window.document.getElementsByClassName("card_content")[0].children[1].children[0]
 
 					fs.mkdirSync( dirPath, { recursive: true } );
-					fs.writeFileSync( dirPath + window.pageCnt + ".html", _data, {flag : "w"} )
+					fs.writeFileSync( dirPath + window.downLoadHtmlCnt + ".html", _data, {flag : "w"} )
 					console.log( "[E] - window.FNS.downloadHtml - " +  window.pageCnt )
 					
 					++window.pageCnt;
+					++window.downLoadHtmlCnt;
 
-					window.FNS.downloadHtml( cbFunction );
+					//setTimeout(function(){
+						window.FNS.downloadHtml( cbFunction )
+					//},1000)
 					window.document.getElementById("_tmp").innerHTML = "";
 
 				})
@@ -232,6 +274,7 @@
 
 				var r = {};
 				var z = 0,zLen=list.length,zo;
+				var _tc = 0
 				for(;z<zLen;++z)
 				{
 					zo = list[ z ];
@@ -245,9 +288,18 @@
 						io = el[ i ];
 
 						var href = io.children[0].href;
-						var _id = href.split("?")[0].split("/")
-						var id = _id[ _id.length - 2 ]
-
+						var _id = href.split("?")
+						var _id00 = _id[0].split("/")
+						var id =_id00[ _id00.length - 2 ] + "_" + _id[1]
+						//debugger;
+						//console.log( href )
+						//console.log( id )
+						if( r[ id ] )
+						{
+							console.log( href );
+							debugger;
+							++_tc;
+						}
 						r[ id ] = {};
 						r[ id ].isNew = 0;
 						r[ id ].websiteNm = window.siteNm;
@@ -260,19 +312,19 @@
 						if( brand.indexOf( "＞" ) != -1 )
 						{
 							r[ id ].brand = brand.split( "＞" )[ 1 ].trim();
-							console.log( "＞ - " + r[ id ].brand )
+							//console.log( "＞ - " + r[ id ].brand )
 							
 						}
 						else if( brand.indexOf( "】" ) != -1 )
 						{
 							r[ id ].brand = brand.split( "】" )[ 1 ].trim();
-							console.log( "】 - " + r[ id ].brand )
+							//console.log( "】 - " + r[ id ].brand )
 							
 						}
 						else if( brand.indexOf( ">" ) != -1 )
 						{
 							r[ id ].brand = brand.split( ">" )[ 1 ].trim();
-							console.log( "> - " + r[ id ].brand )
+							//console.log( "> - " + r[ id ].brand )
 							
 						}
 						else
@@ -373,28 +425,28 @@
 				
 				window.FNS.init()
 				console.log( "--------------- window.FNS.getMaxPage ---------------" );
-				window.FNS.getMaxPage( function(){
+				//window.FNS.getMaxPage( function(){
 					console.log( "--------------- window.FNS.getMaxPage ---------------" );
 					console.log( "--------------- window.FNS.downloadHtml ---------------" );
 					
-					var bat = spawn('cmd.exe', ['/c', 'html_data_delete.bat' ]);
-					bat.stdout.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") ); });
-					bat.stderr.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") );	});
-					bat.on('exit', function(code){ console.log(`Child exited with code ${code}`); });
+					//var bat = spawn('cmd.exe', ['/c', 'html_data_delete.bat' ]);
+					//bat.stdout.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") ); });
+					//bat.stderr.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") );	});
+					//bat.on('exit', function(code){ console.log(`Child exited with code ${code}`); });
 
-					window.FNS.downloadHtml(function(){
+					//window.FNS.downloadHtml(function(){
 						console.log( "--------------- window.FNS.downloadHtml ---------------" );
 						console.log( "--------------- window.FNS.getDetailLinks ---------------" );
 						window.FNS.getDetailLinks( function(){
 							console.log( "--------------- window.FNS.getDetailLinks ---------------" );
 							
-							var remote = require('electron').remote
-							var w = remote.getCurrentWindow()
-							w.close()
+							//var remote = require('electron').remote
+							//var w = remote.getCurrentWindow()
+							//w.close()
 							
 						})
-					});
-				})
+					//});
+				//})
 			}
 
 			if( !window.FNS.isLogicStart )

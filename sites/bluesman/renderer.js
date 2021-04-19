@@ -62,7 +62,7 @@
 
 			var r = {
 				year : Number( date.getFullYear() )
-				, montyh : Number( date.getMonth() )
+				, montyh : Number( date.getMonth() + 1 )
 				, day : Number( date.getDate() )
 				, hour : Number( date.getHours() )
 				, minute : Number( date.getMinutes() )
@@ -94,7 +94,8 @@
 		oneDayAgo_date.setDate(oneDayAgo_date.getDate() - 2);
 		window.YYMMDD_oneDayAgo = window.UTIL.DateFormat.YYMMDD( oneDayAgo_date );
 
-		window.maxPage = -1;
+		//window.maxPage = -1;
+		window.maxPages = [];
 		window.pageCnt = 1;
 		window._tmp = {}
 		window._tmp.cnt = 0;
@@ -131,7 +132,8 @@
 				oneDayAgo_date.setDate(oneDayAgo_date.getDate() - 2);
 				window.YYMMDD_oneDayAgo = window.UTIL.DateFormat.YYMMDD( oneDayAgo_date );
 		
-				window.maxPage = -1;
+				//window.maxPage = -1;
+				window.maxPages = [];
 				window.pageCnt = 1;
 				window._tmp = {}
 				window._tmp.cnt = 0;
@@ -141,7 +143,20 @@
 				window.resultFileList = {};
 				window.siteNm = "bluesman"
 				window.siteUrl = "http://bluesman.co.kr/"
-				window.pageBaseUrl = "http://bluesman.co.kr/product/list.html?cate_no=24&page="
+				window.pageBaseUrls = [
+					"http://bluesman.co.kr/product/list.html?cate_no=24&page="
+					, "http://bluesman.co.kr/product/list.html?cate_no=85&page="
+					, "http://bluesman.co.kr/product/list.html?cate_no=50&page="
+					, "http://bluesman.co.kr/product/list.html?cate_no=56&page="
+					, "http://bluesman.co.kr/product/list.html?cate_no=60&page="
+					, "http://bluesman.co.kr/product/list.html?cate_no=64&page="
+					, "http://bluesman.co.kr/product/list.html?cate_no=75&page="
+					, "http://bluesman.co.kr/product/list.html?cate_no=267&page="
+					, "http://bluesman.co.kr/product/list.html?cate_no=293&page="
+					, "http://bluesman.co.kr/product/list.html?cate_no=72&page="
+			  ]
+			  window.pageBaseUrlsCnt = 0;
+			  window.downLoadHtmlCnt = 1;
 			}
 			
 			//-------------------------------------------------------;
@@ -150,7 +165,7 @@
 			window.FNS.getMaxPage = function( cbFunction ){
 				
 				//*/
-				url = "http://bluesman.co.kr/product/list.html?cate_no=24";
+				url = pageBaseUrls[ window.pageBaseUrlsCnt ] + 1;
 				webview.loadURL( url );
 				webview.executeJavaScript(`
 					var _el = window.document.getElementsByClassName("last")[0]
@@ -158,9 +173,21 @@
 					Promise.resolve( url )
 				`
 				).then(function(data){
-					window.maxPage = window.UTIL.URL.paramToObject( data ).page * 1;
-					console.log( "window.maxPage : " + window.maxPage );
-					cbFunction();
+					var maxPage = window.UTIL.URL.paramToObject( data.replace("#none","") ).page * 1
+					window.maxPages.push( maxPage );
+					console.log( "window.maxPage : " + maxPage );
+					if( window.pageBaseUrlsCnt < window.pageBaseUrls.length - 1 )
+					{
+						//debugger;
+						++window.pageBaseUrlsCnt;
+						window.FNS.getMaxPage( cbFunction )
+					}
+					else
+					{
+						//debugger;
+						window.pageBaseUrlsCnt = 0;
+						cbFunction();	
+					}
 				})
 				
 				/*/
@@ -174,15 +201,28 @@
 			//-------------------------------------------------------;
 			window.FNS.downloadHtml = function( cbFunction ){
 				
-				if( window.maxPage < window.pageCnt )
+				if( window.maxPages[ window.pageBaseUrlsCnt ] < window.pageCnt )
 				{
-					cbFunction();
-					return
-				}
+					if( window.pageBaseUrlsCnt < window.pageBaseUrls.length  - 1 )
+					{
+						++window.pageBaseUrlsCnt;
+						window.pageCnt = 1;
+						return window.FNS.downloadHtml( cbFunction )
 
+					}
+					else
+					{
+						cbFunction();
+						return;
+					}
+				}
+				//debugger;
 				console.log( "[S] - window.FNS.downloadHtml - " +  window.pageCnt );
 				var dirPath = "./html/"
-				url = window.pageBaseUrl + window.pageCnt
+				
+				
+				url = window.pageBaseUrls[ window.pageBaseUrlsCnt ] + window.pageCnt
+				
 				webview.loadURL( url );
 				//debugger;
 				webview.executeJavaScript(`
@@ -200,12 +240,15 @@
 					//window.document.getElementsByClassName("card_content")[0].children[1].children[0]
 
 					fs.mkdirSync( dirPath, { recursive: true } );
-					fs.writeFileSync( dirPath + window.pageCnt + ".html", _data, {flag : "w"} )
+					fs.writeFileSync( dirPath + window.downLoadHtmlCnt + ".html", _data, {flag : "w"} )
 					console.log( "[E] - window.FNS.downloadHtml - " +  window.pageCnt )
 					
 					++window.pageCnt;
+					++window.downLoadHtmlCnt;
 
-					window.FNS.downloadHtml( cbFunction );
+					setTimeout(function(){
+						window.FNS.downloadHtml( cbFunction )
+					},700)
 					window.document.getElementById("_tmp").innerHTML = "";
 
 				})

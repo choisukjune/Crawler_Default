@@ -62,7 +62,7 @@
 
 			var r = {
 				year : Number( date.getFullYear() )
-				, montyh : Number( date.getMonth() )
+				, montyh : Number( date.getMonth() + 1 )
 				, day : Number( date.getDate() )
 				, hour : Number( date.getHours() )
 				, minute : Number( date.getMinutes() )
@@ -94,7 +94,8 @@
 		oneDayAgo_date.setDate(oneDayAgo_date.getDate() - 2);
 		window.YYMMDD_oneDayAgo = window.UTIL.DateFormat.YYMMDD( oneDayAgo_date );
 
-		window.maxPage = -1;
+		//window.maxPage = -1;
+		window.maxPages = [];
 		window.pageCnt = 1;
 		window._tmp = {}
 		window._tmp.cnt = 0;
@@ -131,7 +132,8 @@
 				oneDayAgo_date.setDate(oneDayAgo_date.getDate() - 2);
 				window.YYMMDD_oneDayAgo = window.UTIL.DateFormat.YYMMDD( oneDayAgo_date );
 		
-				window.maxPage = -1;
+				//window.maxPage = -1;
+				window.maxPages = [];
 				window.pageCnt = 1;
 				window._tmp = {}
 				window._tmp.cnt = 0;
@@ -155,20 +157,20 @@
 			//-------------------------------------------------------;
 			//페이지MAX걊 구하기;
 			//-------------------------------------------------------;
-			window.FNS.getMaxPage = function( cbFunction ){
-				url = "https://www.cultizm.com/en/widgets/Listing/ajaxListing?mode=next&c=83&p=1";
-				webview.loadURL( url );
-				//webview.executeJavaScript(`
-				//var _el = window.document.getElementsByClassName("Toolbar__ProductCount-sc-14b11kg-3")[0].children[0].innerText
-				//	Promise.resolve( _el )
-				//`
-				//).then(function(data){
-					//window.maxPage = ( parseInt(( data * 1 ) / 120) ) + 1;
-					window.maxPage = 50;
-					console.log( "window.maxPage : " + window.maxPage );
-					cbFunction();
-				//})
-			}
+			// window.FNS.getMaxPage = function( cbFunction ){
+			// 	url = "https://www.cultizm.com/en/widgets/Listing/ajaxListing?mode=next&c=83&p=1";
+			// 	webview.loadURL( url );
+			// 	//webview.executeJavaScript(`
+			// 	//var _el = window.document.getElementsByClassName("Toolbar__ProductCount-sc-14b11kg-3")[0].children[0].innerText
+			// 	//	Promise.resolve( _el )
+			// 	//`
+			// 	//).then(function(data){
+			// 		//window.maxPage = ( parseInt(( data * 1 ) / 120) ) + 1;
+			// 		window.maxPage = 50;
+			// 		console.log( "window.maxPage : " + window.maxPage );
+			// 		cbFunction();
+			// 	//})
+			// }
 			//-------------------------------------------------------;
 			//게시물HTML저장하기;
 			//-------------------------------------------------------;
@@ -385,9 +387,9 @@
 				console.log( "[ S ] - window.FNS.logics" )
 				
 				window.FNS.init()
-				console.log( "--------------- window.FNS.getMaxPage ---------------" );
-				window.FNS.getMaxPage( function(){
-					console.log( "--------------- window.FNS.getMaxPage ---------------" );
+				//console.log( "--------------- window.FNS.getMaxPage ---------------" );
+				//window.FNS.getMaxPage( function(){
+					//console.log( "--------------- window.FNS.getMaxPage ---------------" );
 					console.log( "--------------- window.FNS.downloadHtml ---------------" );
 					
 					var bat = spawn('cmd.exe', ['/c', 'html_data_delete.bat' ]);
@@ -407,7 +409,7 @@
 							
 						})
 					});
-				})
+				//})
 			}
 
 			if( !window.FNS.isLogicStart )

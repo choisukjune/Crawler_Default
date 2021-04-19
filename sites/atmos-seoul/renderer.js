@@ -62,7 +62,7 @@
 
 			var r = {
 				year : Number( date.getFullYear() )
-				, montyh : Number( date.getMonth() )
+				, montyh : Number( date.getMonth() + 1 )
 				, day : Number( date.getDate() )
 				, hour : Number( date.getHours() )
 				, minute : Number( date.getMinutes() )
@@ -94,7 +94,8 @@
 		oneDayAgo_date.setDate(oneDayAgo_date.getDate() - 2);
 		window.YYMMDD_oneDayAgo = window.UTIL.DateFormat.YYMMDD( oneDayAgo_date );
 
-		window.maxPage = -1;
+		//window.maxPage = -1;
+		window.maxPages = [];
 		window.pageCnt = 1;
 		window._tmp = {}
 		window._tmp.cnt = 0;
@@ -131,7 +132,8 @@
 				oneDayAgo_date.setDate(oneDayAgo_date.getDate() - 2);
 				window.YYMMDD_oneDayAgo = window.UTIL.DateFormat.YYMMDD( oneDayAgo_date );
 		
-				window.maxPage = -1;
+				//window.maxPage = -1;
+				window.maxPages = [];
 				window.pageCnt = 1;
 				window._tmp = {}
 				window._tmp.cnt = 0;
@@ -141,14 +143,23 @@
 				window.resultFileList = {};
 				window.siteNm = "atmos-seoul"
 				window.siteUrl = "http://www.atmos-seoul.com"
-				window.pageBaseUrl = "http://www.atmos-seoul.com/shop/shopbrand.html?type=Y&xcode=012&sort=&page="
+				window.pageBaseUrl = "http://www.atmos-seoul.com/shop/shopbrand.html?type=Y&xcode=012&sort=&page=";
+				window.pageBaseUrls = [
+					"http://atmos-seoul.com/shop/shopbrand.html?type=Y&xcode=003&mcode=003&sort=&page="
+				  , "http://atmos-seoul.com/shop/shopbrand.html?type=Y&xcode=003&mcode=004&sort=&page="
+				  , "http://atmos-seoul.com/shop/shopbrand.html?type=Y&xcode=003&mcode=005&sort=&page="
+				  , "http://atmos-seoul.com/shop/shopbrand.html?type=Y&xcode=013&sort=&page="
+				  , "http://atmos-seoul.com/shop/shopbrand.html?type=Y&xcode=012&sort=&page="
+				]
+				window.pageBaseUrlsCnt = 0;
+				window.downLoadHtmlCnt = 1;
 			}
 			
 			//-------------------------------------------------------;
 			//페이지MAX걊 구하기;
 			//-------------------------------------------------------;
 			window.FNS.getMaxPage = function( cbFunction ){
-				url = "http://www.atmos-seoul.com/shop/shopbrand.html?type=Y&xcode=012&sort=&page=1";
+				url = pageBaseUrls[ window.pageBaseUrlsCnt ] + 1;
 				webview.loadURL( url );
 				webview.executeJavaScript(`
 					var _el = window.document.getElementsByClassName("paging")[0]
@@ -156,9 +167,23 @@
 					Promise.resolve( url )
 				`
 				).then(function(data){
-					window.maxPage = window.UTIL.URL.paramToObject( data ).page * 1;
-					console.log( "window.maxPage : " + window.maxPage );
-					cbFunction();
+					var maxPage = window.UTIL.URL.paramToObject( data ).page * 1
+					window.maxPages.push( maxPage );
+					console.log( "window.maxPage : " + maxPage );
+					if( window.pageBaseUrlsCnt < window.pageBaseUrls.length - 1 )
+					{
+						debugger;
+						++window.pageBaseUrlsCnt;
+						setTimeout(function(){
+							window.FNS.getMaxPage( cbFunction )
+						},1000)
+					}
+					else
+					{
+						debugger;
+						window.pageBaseUrlsCnt = 0;
+						cbFunction();	
+					}
 				})
 			}
 			//-------------------------------------------------------;
@@ -166,15 +191,27 @@
 			//-------------------------------------------------------;
 			window.FNS.downloadHtml = function( cbFunction ){
 				
-				if( window.maxPage < window.pageCnt )
+				if( window.maxPages[ window.pageBaseUrlsCnt ] < window.pageCnt )
 				{
-					cbFunction();
-					return
+					if( window.pageBaseUrlsCnt < window.pageBaseUrls.length  - 1 )
+					{
+						++window.pageBaseUrlsCnt;
+						window.pageCnt = 1;
+						return window.FNS.downloadHtml( cbFunction )
+					}
+					else
+					{
+						cbFunction();
+						return;
+					}
 				}
 
 				console.log( "[S] - window.FNS.downloadHtml - " +  window.pageCnt );
 				var dirPath = "./html/"
-				url = window.pageBaseUrl + window.pageCnt
+				
+				
+				url = window.pageBaseUrls[ window.pageBaseUrlsCnt ] + window.pageCnt
+				
 				webview.loadURL( url );
 				webview.executeJavaScript(`
 					var _el = window.document.getElementsByClassName( "item-wrap prd-parts" )[0].innerHTML
@@ -191,10 +228,11 @@
 					//window.document.getElementsByClassName("card_content")[0].children[1].children[0]
 
 					fs.mkdirSync( dirPath, { recursive: true } );
-					fs.writeFileSync( dirPath + window.pageCnt + ".html", _data, {flag : "w"} )
+					fs.writeFileSync( dirPath + window.downLoadHtmlCnt + ".html", _data, {flag : "w"} )
 					console.log( "[E] - window.FNS.downloadHtml - " +  window.pageCnt )
 					
 					++window.pageCnt;
+					++window.downLoadHtmlCnt;
 					
 					setTimeout(function(){
 						window.FNS.downloadHtml( cbFunction );
@@ -268,11 +306,25 @@
 							mark : "₩"
 							, code : "KRW"
 						}
-
+						//debugger;
 						r[ id ].brand = io.children[1].children[0].children[0].innerText
 						r[ id ].nm = io.children[1].children[0].children[1].innerText
-						r[ id ].msrp = Number( io.children[1].children[0].children[2].children[0].innerText.replace( "원","" ).replace( /\,/gi,"" ) )
-						r[ id ].salePrice = Number( io.children[1].children[0].children[2].children[1].innerText.replace( "원","" ).replace( /\,/gi,"" ) )
+						
+						if( io.children[1].children[0].children[2].children[0].innerText != "Sold Out" )
+						{
+							if( io.children[1].children[0].children[2].childElementCount > 2 )
+							{
+								r[ id ].msrp = Number( io.children[1].children[0].children[2].children[0].innerText.replace( "원","" ).replace( /\,/gi,"" ) )
+								r[ id ].salePrice = Number( io.children[1].children[0].children[2].children[1].innerText.replace( "원","" ).replace( /\,/gi,"" ) )
+							}
+							else
+							{
+								r[ id ].salePrice = r[ id ].msrp = Number( io.children[1].children[0].children[2].children[0].innerText.replace( "원","" ).replace( /\,/gi,"" ) )
+							}
+							
+						}
+						
+						
 
 						if( r[ id ].msrp > -1 && r[ id ].salePrice > -1 )
 						{
@@ -328,28 +380,28 @@
 				
 				window.FNS.init()
 				console.log( "--------------- window.FNS.getMaxPage ---------------" );
-				window.FNS.getMaxPage( function(){
+				//window.FNS.getMaxPage( function(){
 					console.log( "--------------- window.FNS.getMaxPage ---------------" );
 					console.log( "--------------- window.FNS.downloadHtml ---------------" );
 					
-					var bat = spawn('cmd.exe', ['/c', 'html_data_delete.bat' ]);
-					bat.stdout.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") ); });
-					bat.stderr.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") );	});
-					bat.on('exit', function(code){ console.log(`Child exited with code ${code}`); });
+					//var bat = spawn('cmd.exe', ['/c', 'html_data_delete.bat' ]);
+					//bat.stdout.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") ); });
+					//bat.stderr.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") );	});
+					//bat.on('exit', function(code){ console.log(`Child exited with code ${code}`); });
 
-					window.FNS.downloadHtml(function(){
+					//window.FNS.downloadHtml(function(){
 						console.log( "--------------- window.FNS.downloadHtml ---------------" );
 						console.log( "--------------- window.FNS.getDetailLinks ---------------" );
 						window.FNS.getDetailLinks( function(){
 							console.log( "--------------- window.FNS.getDetailLinks ---------------" );
 							
-							var remote = require('electron').remote
-							var w = remote.getCurrentWindow()
-							w.close()
+							//var remote = require('electron').remote
+							//var w = remote.getCurrentWindow()
+							//w.close()
 							
 						})
-					});
-				})
+					//});
+				//})
 			}
 
 			if( !window.FNS.isLogicStart )

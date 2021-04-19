@@ -62,7 +62,7 @@
 
 			var r = {
 				year : Number( date.getFullYear() )
-				, montyh : Number( date.getMonth() )
+				, montyh : Number( date.getMonth() + 1 )
 				, day : Number( date.getDate() )
 				, hour : Number( date.getHours() )
 				, minute : Number( date.getMinutes() )
@@ -131,7 +131,8 @@
 				oneDayAgo_date.setDate(oneDayAgo_date.getDate() - 2);
 				window.YYMMDD_oneDayAgo = window.UTIL.DateFormat.YYMMDD( oneDayAgo_date );
 		
-				window.maxPage = -1;
+				//window.maxPage = -1;
+				window.maxPages = [];
 				window.pageCnt = 1;
 				window._tmp = {}
 				window._tmp.cnt = 1;
@@ -141,16 +142,21 @@
 				window.resultFileList = {};
 				window.siteNm = "nanamica"
 				window.siteUrl = "https://www.nanamica.com"
-				window.pageBaseUrl = "https://www.nanamica.com/itemlist/?pageno="
+				//window.pageBaseUrl = "https://www.nanamica.com/itemlist/?pageno="
+				window.pageBaseUrls = [
+					"https://www.nanamica.com/itemlist/?pageno="
+				]
+				window.pageBaseUrlsCnt = 0;
+				window.downLoadHtmlCnt = 1;
 			}
 			
 			//-------------------------------------------------------;
 			//페이지MAX걊 구하기;
 			//-------------------------------------------------------;
 			window.FNS.getMaxPage = function( cbFunction ){
-				 url = window.pageBaseUrl+window._tmp.cnt;
-				 webview.loadURL( url );
-				 webview.executeJavaScript(`
+				url = pageBaseUrls[ window.pageBaseUrlsCnt ] + window._tmp.cnt;
+				webview.loadURL( url );
+				webview.executeJavaScript(`
 				 	var _el = window.document.getElementsByClassName("pagination_arrow pagination_arrow_next")[0];
 				 	if( _el.childElementCount == 0 )
 					{
@@ -170,9 +176,28 @@
 					}
 					else
 					{
+						/*/
 						window.maxPage = window._tmp.cnt;
 						console.log( "window.maxPage : " + window.maxPage );
 						cbFunction();	
+						/*/
+						var maxPage = window._tmp.cnt;
+						window.maxPages.push( maxPage );
+						console.log( "window.maxPage : " + maxPage );
+						window._tmp.cnt = 1;
+						if( window.pageBaseUrlsCnt < window.pageBaseUrls.length - 1 )
+						{
+							//debugger;
+							++window.pageBaseUrlsCnt;
+							window.FNS.getMaxPage( cbFunction )
+						}
+						else
+						{
+							//debugger;
+							window.pageBaseUrlsCnt = 0;
+							cbFunction();	
+						}
+						//*/
 					}
 					
 				 })
@@ -182,15 +207,27 @@
 			//-------------------------------------------------------;
 			window.FNS.downloadHtml = function( cbFunction ){
 				
-				if( window.maxPage < window.pageCnt )
+				if( window.maxPages[ window.pageBaseUrlsCnt ] < window.pageCnt )
 				{
-					cbFunction();
-					return
+					if( window.pageBaseUrlsCnt < window.pageBaseUrls.length  - 1 )
+					{
+						++window.pageBaseUrlsCnt;
+						window.pageCnt = 1;
+						return window.FNS.downloadHtml( cbFunction )
+					}
+					else
+					{
+						cbFunction();
+						return;
+					}
 				}
+
 
 				console.log( "[S] - window.FNS.downloadHtml - " +  window.pageCnt );
 				var dirPath = "./html/"
-				url = window.pageBaseUrl + window.pageCnt
+				
+				
+				url = window.pageBaseUrls[ window.pageBaseUrlsCnt ] + window.pageCnt
 				webview.loadURL( url );
 				webview.executeJavaScript(`
 					var _el = window.document.getElementsByClassName("listPage_list")[0].innerHTML
@@ -207,10 +244,11 @@
 					//window.document.getElementsByClassName("card_content")[0].children[1].children[0]
 
 					fs.mkdirSync( dirPath, { recursive: true } );
-					fs.writeFileSync( dirPath + window.pageCnt + ".html", _data, {flag : "w"} )
+					fs.writeFileSync( dirPath + window.downLoadHtmlCnt + ".html", _data, {flag : "w"} )
 					console.log( "[E] - window.FNS.downloadHtml - " +  window.pageCnt )
 					
 					++window.pageCnt;
+					++window.downLoadHtmlCnt;
 					
 					window.FNS.downloadHtml( cbFunction );
 					window.document.getElementById("_tmp").innerHTML = "";

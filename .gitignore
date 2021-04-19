@@ -1,11 +1,12 @@
 # directory
+sites/**/html/*
+sites/**/json/*
 DataBase/0/
 stock_data/
 stock_html/
 node_modules/
 Log/
-sites/**/html/*
-sites/**/json/*
+
 
 # files
 

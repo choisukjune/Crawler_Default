@@ -62,7 +62,7 @@
 
 			var r = {
 				year : Number( date.getFullYear() )
-				, montyh : Number( date.getMonth() )
+				, montyh : Number( date.getMonth() + 1 )
 				, day : Number( date.getDate() )
 				, hour : Number( date.getHours() )
 				, minute : Number( date.getMinutes() )
@@ -131,7 +131,8 @@
 				oneDayAgo_date.setDate(oneDayAgo_date.getDate() - 2);
 				window.YYMMDD_oneDayAgo = window.UTIL.DateFormat.YYMMDD( oneDayAgo_date );
 		
-				window.maxPage = -1;
+				//window.maxPage = -1;
+				window.maxPages = [];
 				window.pageCnt = 1;
 				window._tmp = {}
 				window._tmp.cnt = 0;
@@ -142,6 +143,18 @@
 				window.siteNm = "frizmworks"
 				window.siteUrl = "https://frizm.co.kr"
 				window.pageBaseUrl = "https://frizm.co.kr/product/list.html?cate_no=30&page="
+				window.pageBaseUrls = [
+					"https://frizm.co.kr/product/list.html?cate_no=33&page="
+					, "https://frizm.co.kr/product/list.html?cate_no=24&page="
+					, "https://frizm.co.kr/product/list.html?cate_no=52&page="
+					, "https://frizm.co.kr/product/list.html?cate_no=26&page="
+					, "https://frizm.co.kr/product/list.html?cate_no=4&page="
+					, "https://frizm.co.kr/product/list.html?cate_no=30&page="
+					, "https://frizm.co.kr/product/list.html?cate_no=38&page="
+					, "https://frizm.co.kr/product/list.html?cate_no=37&page="			
+			  ]
+			  window.pageBaseUrlsCnt = 0;
+			  window.downLoadHtmlCnt = 1;
 			}
 			
 			//-------------------------------------------------------;
@@ -150,16 +163,28 @@
 			window.FNS.getMaxPage = function( cbFunction ){
 				
 				//*/
-				url = "https://frizm.co.kr/product/list.html?cate_no=30";
+				url = pageBaseUrls[ window.pageBaseUrlsCnt ] + 500;
 				webview.loadURL( url );
 				webview.executeJavaScript(`
-					var _el = window.document.getElementsByClassName("last")[0].href
+					var _el = window.document.getElementsByClassName("xans-element- xans-product xans-product-normalpaging ec-base-paginate")[0].children[2].lastElementChild.children[0].href
 					Promise.resolve( _el )
 				`
 				).then(function(data){
 					window.maxPage = window.UTIL.URL.paramToObject( data ).page * 1;
-					console.log( "window.maxPage : " + window.maxPage );
-					cbFunction();
+					window.maxPages.push( maxPage );
+					console.log( "window.maxPage : " + maxPage );
+					if( window.pageBaseUrlsCnt < window.pageBaseUrls.length - 1 )
+					{
+						debugger;
+						++window.pageBaseUrlsCnt;
+						window.FNS.getMaxPage( cbFunction )
+					}
+					else
+					{
+						debugger;
+						window.pageBaseUrlsCnt = 0;
+						cbFunction();	
+					}
 				})
 				
 				/*/
@@ -173,15 +198,27 @@
 			//-------------------------------------------------------;
 			window.FNS.downloadHtml = function( cbFunction ){
 				
-				if( window.maxPage < window.pageCnt )
+				if( window.maxPages[ window.pageBaseUrlsCnt ] < window.pageCnt )
 				{
-					cbFunction();
-					return
+					if( window.pageBaseUrlsCnt < window.pageBaseUrls.length  - 1 )
+					{
+						++window.pageBaseUrlsCnt;
+						window.pageCnt = 1;
+						return window.FNS.downloadHtml( cbFunction )
+					}
+					else
+					{
+						cbFunction();
+						return;
+					}
 				}
 
 				console.log( "[S] - window.FNS.downloadHtml - " +  window.pageCnt );
 				var dirPath = "./html/"
-				url = window.pageBaseUrl + window.pageCnt
+				
+				
+				url = window.pageBaseUrls[ window.pageBaseUrlsCnt ] + window.pageCnt
+				
 				webview.loadURL( url );
 				webview.executeJavaScript(`
 					var _el = window.document.getElementsByClassName("prdList")[0].innerHTML
@@ -197,10 +234,11 @@
 					//window.document.getElementsByClassName("card_content")[0].children[1].children[0]
 
 					fs.mkdirSync( dirPath, { recursive: true } );
-					fs.writeFileSync( dirPath + window.pageCnt + ".html", _data, {flag : "w"} )
+					fs.writeFileSync( dirPath + window.downLoadHtmlCnt + ".html", _data, {flag : "w"} )
 					console.log( "[E] - window.FNS.downloadHtml - " +  window.pageCnt )
 					
 					++window.pageCnt;
+					++window.downLoadHtmlCnt;
 
 					window.FNS.downloadHtml( cbFunction );
 					window.document.getElementById("_tmp").innerHTML = "";

@@ -62,7 +62,7 @@
 
 			var r = {
 				year : Number( date.getFullYear() )
-				, montyh : Number( date.getMonth() )
+				, montyh : Number( date.getMonth() + 1 )
 				, day : Number( date.getDate() )
 				, hour : Number( date.getHours() )
 				, minute : Number( date.getMinutes() )
@@ -94,7 +94,8 @@
 		oneDayAgo_date.setDate(oneDayAgo_date.getDate() - 2);
 		window.YYMMDD_oneDayAgo = window.UTIL.DateFormat.YYMMDD( oneDayAgo_date );
 
-		window.maxPage = -1;
+		//window.maxPage = -1;
+		window.maxPages = [];
 		window.pageCnt = 1;
 		window._tmp = {}
 		window._tmp.cnt = 0;
@@ -131,7 +132,8 @@
 				oneDayAgo_date.setDate(oneDayAgo_date.getDate() - 2);
 				window.YYMMDD_oneDayAgo = window.UTIL.DateFormat.YYMMDD( oneDayAgo_date );
 		
-				window.maxPage = -1;
+				//window.maxPage = -1;
+				window.maxPages = [];
 				window.pageCnt = 1;
 				window._tmp = {}
 				window._tmp.cnt = 0;
@@ -141,14 +143,19 @@
 				window.resultFileList = {};
 				window.siteNm = "espionage"
 				window.siteUrl = "http://espionage.co.kr"
-				window.pageBaseUrl = "http://espionage.co.kr/shop/shopbrand.html?type=X&xcode=061&sort=&page="
+				//window.pageBaseUrl = "http://espionage.co.kr/shop/shopbrand.html?type=X&xcode=061&sort=&page="
+				window.pageBaseUrls = [
+					"http://espionage.co.kr/shop/shopbrand.html?type=X&xcode=061&sort=&page="
+				]
+				window.pageBaseUrlsCnt = 0;
+				window.downLoadHtmlCnt = 1;
 			}
 			
 			//-------------------------------------------------------;
 			//페이지MAX걊 구하기;
 			//-------------------------------------------------------;
 			window.FNS.getMaxPage = function( cbFunction ){
-				url = "http://espionage.co.kr/shop/shopbrand.html?type=X&xcode=061";
+				url = pageBaseUrls[ window.pageBaseUrlsCnt ] + 1;
 				webview.loadURL( url );
 				webview.executeJavaScript(`
 					var _el = window.document.getElementsByClassName("item-page")[0]
@@ -156,9 +163,21 @@
 					Promise.resolve( url )
 				`
 				).then(function(data){
-					window.maxPage = window.UTIL.URL.paramToObject( data ).page * 1;
-					console.log( "window.maxPage : " + window.maxPage );
-					cbFunction();
+					var maxPage = window.UTIL.URL.paramToObject( data ).page * 1
+					window.maxPages.push( maxPage );
+					console.log( "window.maxPage : " + maxPage );
+					if( window.pageBaseUrlsCnt < window.pageBaseUrls.length - 1 )
+					{
+						debugger;
+						++window.pageBaseUrlsCnt;
+						window.FNS.getMaxPage( cbFunction )
+					}
+					else
+					{
+						debugger;
+						window.pageBaseUrlsCnt = 0;
+						cbFunction();	
+					}
 				})
 			}
 			//-------------------------------------------------------;
@@ -166,15 +185,27 @@
 			//-------------------------------------------------------;
 			window.FNS.downloadHtml = function( cbFunction ){
 				
-				if( window.maxPage < window.pageCnt )
+				if( window.maxPages[ window.pageBaseUrlsCnt ] < window.pageCnt )
 				{
-					cbFunction();
-					return
+					if( window.pageBaseUrlsCnt < window.pageBaseUrls.length  - 1 )
+					{
+						++window.pageBaseUrlsCnt;
+						window.pageCnt = 1;
+						return window.FNS.downloadHtml( cbFunction )
+					}
+					else
+					{
+						cbFunction();
+						return;
+					}
 				}
 
 				console.log( "[S] - window.FNS.downloadHtml - " +  window.pageCnt );
 				var dirPath = "./html/"
-				url = window.pageBaseUrl + window.pageCnt
+				
+				
+				url = window.pageBaseUrls[ window.pageBaseUrlsCnt ] + window.pageCnt
+				
 				webview.loadURL( url );
 				webview.executeJavaScript(`
 					var _el = window.document.getElementsByClassName("item-list")[0].innerHTML
@@ -191,10 +222,11 @@
 					//window.document.getElementsByClassName("card_content")[0].children[1].children[0]
 
 					fs.mkdirSync( dirPath, { recursive: true } );
-					fs.writeFileSync( dirPath + window.pageCnt + ".html", _data, {flag : "w"} )
+					fs.writeFileSync( dirPath + window.downLoadHtmlCnt + ".html", _data, {flag : "w"} )
 					console.log( "[E] - window.FNS.downloadHtml - " +  window.pageCnt )
 					
 					++window.pageCnt;
+					++window.downLoadHtmlCnt;
 					
 					window.FNS.downloadHtml( cbFunction );
 					window.document.getElementById("_tmp").innerHTML = "";
