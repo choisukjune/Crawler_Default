@@ -327,6 +327,10 @@
 					if( window.pageBaseUrlsCnt < window.pageBaseUrls.length  - 1 )
 					{
 						++window.pageBaseUrlsCnt;
+						
+						var url = window.pageBaseUrls_o[ pageBaseUrls[ window.pageBaseUrlsCnt ] ];
+						webview.loadURL( url );
+						
 						window.pageCnt = 1;
 						return window.FNS.downloadJson( cbFunction )
 					}
