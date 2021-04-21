@@ -331,7 +331,6 @@
 
 							if( eo.innerText.indexOf( "할인판매가 : " ) != -1 )
 							{
-								debugger;
 								r[ id ].salePrice = Number( eo.innerText.replace( "할인판매가 : ", "" ).replace( "원", "" ).replace( /\,/gi,"" ).split( " " )[0].trim() );
 							}
 						}
