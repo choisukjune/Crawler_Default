@@ -321,10 +321,10 @@
 						}
 						*/
 						
-						io.children[0].children[1].children[1].children[0].innerText.split(" ").forEach(function(item){
-							r[ id ].info.push( item ); 
-						})
-						r[ id ].info.push( io.children[0].children[1].children[2].innerText.replace("(","").replace(")","").trim() );
+//						io.children[0].children[1].children[1].children[0].innerText.split(" ").forEach(function(item){
+//							r[ id ].info.push( item ); 
+//						})
+//						r[ id ].info.push( io.children[0].children[1].children[2].innerText.replace("(","").replace(")","").trim() );
 
 						try
 						{

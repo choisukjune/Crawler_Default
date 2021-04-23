@@ -323,9 +323,9 @@
 						}
 						*/
 						
-						io.children[2].children[0].children[1].innerText.replace("상품명 : ","").replace(" X ","").split( " " ).forEach(function(item){
-							r[ id ].info.push( item ); 
-						})
+//						io.children[2].children[0].children[1].innerText.replace("상품명 : ","").replace(" X ","").split( " " ).forEach(function(item){
+//							r[ id ].info.push( item ); 
+//						})
 						
 						try
 						{

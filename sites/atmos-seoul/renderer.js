@@ -380,16 +380,16 @@
 				
 				window.FNS.init()
 				console.log( "--------------- window.FNS.getMaxPage ---------------" );
-				//window.FNS.getMaxPage( function(){
+				window.FNS.getMaxPage( function(){
 					console.log( "--------------- window.FNS.getMaxPage ---------------" );
 					console.log( "--------------- window.FNS.downloadHtml ---------------" );
 					
-					//var bat = spawn('cmd.exe', ['/c', 'html_data_delete.bat' ]);
-					//bat.stdout.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") ); });
-					//bat.stderr.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") );	});
-					//bat.on('exit', function(code){ console.log(`Child exited with code ${code}`); });
+					var bat = spawn('cmd.exe', ['/c', 'html_data_delete.bat' ]);
+					bat.stdout.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") ); });
+					bat.stderr.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") );	});
+					bat.on('exit', function(code){ console.log(`Child exited with code ${code}`); });
 
-					//window.FNS.downloadHtml(function(){
+					window.FNS.downloadHtml(function(){
 						console.log( "--------------- window.FNS.downloadHtml ---------------" );
 						console.log( "--------------- window.FNS.getDetailLinks ---------------" );
 						window.FNS.getDetailLinks( function(){
@@ -400,8 +400,8 @@
 							//w.close()
 							
 						})
-					//});
-				//})
+					});
+				})
 			}
 
 			if( !window.FNS.isLogicStart )

@@ -94,7 +94,8 @@
 		oneDayAgo_date.setDate(oneDayAgo_date.getDate() - 2);
 		window.YYMMDD_oneDayAgo = window.UTIL.DateFormat.YYMMDD( oneDayAgo_date );
 
-		window.maxPage = -1;
+		//window.maxPage = -1;
+		window.maxPages = [];
 		window.pageCnt = 1;
 		window._tmp = {}
 		window._tmp.cnt = 0;
@@ -140,30 +141,13 @@
 				window.linkListKeys = [];
 				window.detailList = [];
 				window.resultFileList = {};
-				window.siteNm = "noclaim"
-				window.siteUrl = "https://noclaim.co.kr"
-				//window.pageBaseUrl = "http://sculpstore.com/product/sale.html?cate_no=256&page="
+				window.siteNm = "mode-man"
+				window.siteUrl = "https://mode-man.com"
+				//window.pageBaseUrl = "https://mode-man.com/product/list.html?cate_no=50&page="
 				window.pageBaseUrls = [
-					"https://noclaim.co.kr/category/t-shirts/532/?page="
-					, "https://noclaim.co.kr/category/sweaters-hoodies/533/?page="
-					, "https://noclaim.co.kr/category/pullovers/535/?page="
-					, "https://noclaim.co.kr/category/shirts/58/?page="
-					, "https://noclaim.co.kr/category/vests/339/?page="
-					, "https://noclaim.co.kr/category/knitwear/536/?page="
-					, "https://noclaim.co.kr/category/jackets/59/?page="
-					, "https://noclaim.co.kr/category/coats/538/?page="
-					, "https://noclaim.co.kr/category/coats/563/?page="
-					, "https://noclaim.co.kr/category/pants/539/?page="
-					, "https://noclaim.co.kr/category/shorts/540/?page="
-					, "https://noclaim.co.kr/category/denim/541/?page="
-					, "https://noclaim.co.kr/category/skirt/558/?page="
-					, "https://noclaim.co.kr/category/shoes/121/?page="
-					, "https://noclaim.co.kr/category/headwear/71/?page="
-					, "https://noclaim.co.kr/category/fragrance/512/?page="
-					, "https://noclaim.co.kr/category/accessories/53/?page="
-					, "https://noclaim.co.kr/category/bags/72/?page="
-					, "https://noclaim.co.kr/category/jewelry/73/?page="
-					, "https://noclaim.co.kr/category/scarves/464/?page="
+					  "https://mode-man.com/product/list.html?cate_no=50&page="
+					, "https://mode-man.com/product/list.html?cate_no=212?page="
+					, "https://mode-man.com/product/list.html?cate_no=207?page="
 				]
 				window.pageBaseUrlsCnt = 0;
 				window.downLoadHtmlCnt = 1;
@@ -175,17 +159,16 @@
 			window.FNS.getMaxPage = function( cbFunction ){
 				
 				//*/
-				//url = pageBaseUrls[ window.pageBaseUrlsCnt ];
-				//webview.loadURL( url );
-				//webview.executeJavaScript(`
-				//	var _el = window.document.getElementsByClassName("last")[0].href
-				//	Promise.resolve( _el )
-				//`
-				//).then(function(data){
-					//var maxPage = window.UTIL.URL.paramToObject( data ).page * 1
-					//window.maxPages.push( maxPage );
-					window.maxPages.push( 1 );
-					//console.log( "window.maxPage : " + maxPage );
+				url = pageBaseUrls[ window.pageBaseUrlsCnt ] + 200;
+				webview.loadURL( url );
+				webview.executeJavaScript(`
+					var _el = window.document.getElementsByClassName("xans-element- xans-product xans-product-normalpaging paging")[0].children[1].lastElementChild.children[0].href;
+					Promise.resolve( _el )
+				`
+				).then(function(data){
+					var maxPage = window.UTIL.URL.paramToObject( data ).page * 1
+					window.maxPages.push( maxPage );
+					console.log( "window.maxPage : " + maxPage );
 					if( window.pageBaseUrlsCnt < window.pageBaseUrls.length - 1 )
 					{
 						++window.pageBaseUrlsCnt;
@@ -196,7 +179,7 @@
 						window.pageBaseUrlsCnt = 0;
 						cbFunction();	
 					}
-				//})
+				})
 				
 				/*/
 				window.maxPage = 10;
@@ -232,8 +215,13 @@
 				
 				webview.loadURL( url );
 				webview.executeJavaScript(`
-					var _el = window.document.getElementsByClassName("prdList grid2")[0].innerHTML
-					Promise.resolve( _el )
+					new Promise((resolve, reject) => {
+						window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
+						setTimeout(function(){
+							var _el = window.document.getElementsByClassName("prdList column4")[0].innerHTML
+							resolve( _el )
+						},1000)
+					});
 				`
 				).then(function(data){
 
@@ -289,18 +277,18 @@
 					var i = 0, iLen = el.length, io;
 					for(;i<iLen;++i){
 						io = el[ i ];
-						var href = io.children[1].children[0].href;
-						var id = href.split("/")[6];
+
+						var href = io.children[0].children[0].href;
+						var id = window.UTIL.URL.paramToObject( href ).product_no;
 
 						r[ id ] = {};
 						r[ id ].isNew = 0;
 						r[ id ].websiteNm = window.siteNm;
 						r[ id ].url = window.siteUrl + href.replace( "file:///D:", "" )
-						r[ id ].img = io.children[1].children[0].children[0].src.replace( "file", "https" )
-												
-						r[ id ].brand = io.children[2].children[0].innerText;
+						r[ id ].img = io.children[0].children[0].children[0].src.replace( "file", "https" )
+						r[ id ].brand = io.children[0].children[2].children[0].children[ 1 ].innerText;
 				
-						r[ id ].nm = io.children[2].children[2].innerText.replace("상품명 : ","").replace( /\"/gi,"" );
+						r[ id ].nm = io.children[0].children[1].children[0].children[0].innerText;
 						r[ id ].salePrice = -1;
 						r[ id ].msrp = -1;
 						r[ id ].saleRatio = -1;
@@ -312,18 +300,25 @@
 							, code : "KRW"
 						}
 
-						r[ id ].msrp = Number( io.children[2].children[3].children[0].innerText.replace( /\,/gi,"" ).replace( "원","" ) );
-						r[ id ].salePrice = Number( io.children[2].children[3].children[1].innerText.replace( /\,/gi,"" ).replace( "원","" ) );
-						if( r[ id ].msrp == 0 ) r[ id ].msrp = r[ id ].salePrice;
+						r[ id ].msrp = Number( io.children[0].children[2].children[1].children[1].innerText.replace( /\,/gi,"" ).replace( "w","" ) );
 						
-//						io.children[2].children[2].innerText.replace("상품명 : ","").replace( /\"/gi,"" ).split( " " ).forEach(function(item){
+						if( io.children[0].children[2].children[2] )
+						{
+							r[ id ].salePrice = Number( io.children[0].children[2].children[2].children[1].innerText.replace( /\,/gi,"" ).replace( "w","" ) );;	
+						}
+						else
+						{
+							r[ id ].salePrice = r[ id ].msrp;
+						}
+						
+//						io.children[0].children[1].children[0].children[0].innerText.split( " " ).forEach(function(item){
 //							r[ id ].info.push( item ); 
 //						})
 						
 						try
 						{
 							var isSoldOut = 0
-							if( io.children[2].children[4].children[0].childElementCount != 0 )
+							if( io.children[0].children[1].children[2] && io.children[0].children[1].children[2].alt == "품절" )
 							{
 								isSoldOut = 1;
 							}

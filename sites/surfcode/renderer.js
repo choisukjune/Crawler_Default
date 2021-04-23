@@ -94,7 +94,8 @@
 		oneDayAgo_date.setDate(oneDayAgo_date.getDate() - 2);
 		window.YYMMDD_oneDayAgo = window.UTIL.DateFormat.YYMMDD( oneDayAgo_date );
 
-		window.maxPage = -1;
+		//window.maxPage = -1;
+		window.maxPages = [];
 		window.pageCnt = 1;
 		window._tmp = {}
 		window._tmp.cnt = 0;
@@ -140,30 +141,11 @@
 				window.linkListKeys = [];
 				window.detailList = [];
 				window.resultFileList = {};
-				window.siteNm = "noclaim"
-				window.siteUrl = "https://noclaim.co.kr"
-				//window.pageBaseUrl = "http://sculpstore.com/product/sale.html?cate_no=256&page="
+				window.siteNm = "surfcode"
+				window.siteUrl = "http://surfcode.kr"
+				//window.pageBaseUrl = "https://mode-man.com/product/list.html?cate_no=50&page="
 				window.pageBaseUrls = [
-					"https://noclaim.co.kr/category/t-shirts/532/?page="
-					, "https://noclaim.co.kr/category/sweaters-hoodies/533/?page="
-					, "https://noclaim.co.kr/category/pullovers/535/?page="
-					, "https://noclaim.co.kr/category/shirts/58/?page="
-					, "https://noclaim.co.kr/category/vests/339/?page="
-					, "https://noclaim.co.kr/category/knitwear/536/?page="
-					, "https://noclaim.co.kr/category/jackets/59/?page="
-					, "https://noclaim.co.kr/category/coats/538/?page="
-					, "https://noclaim.co.kr/category/coats/563/?page="
-					, "https://noclaim.co.kr/category/pants/539/?page="
-					, "https://noclaim.co.kr/category/shorts/540/?page="
-					, "https://noclaim.co.kr/category/denim/541/?page="
-					, "https://noclaim.co.kr/category/skirt/558/?page="
-					, "https://noclaim.co.kr/category/shoes/121/?page="
-					, "https://noclaim.co.kr/category/headwear/71/?page="
-					, "https://noclaim.co.kr/category/fragrance/512/?page="
-					, "https://noclaim.co.kr/category/accessories/53/?page="
-					, "https://noclaim.co.kr/category/bags/72/?page="
-					, "https://noclaim.co.kr/category/jewelry/73/?page="
-					, "https://noclaim.co.kr/category/scarves/464/?page="
+					  "http://surfcode.kr/product/list.html?cate_no=118&page="
 				]
 				window.pageBaseUrlsCnt = 0;
 				window.downLoadHtmlCnt = 1;
@@ -175,17 +157,16 @@
 			window.FNS.getMaxPage = function( cbFunction ){
 				
 				//*/
-				//url = pageBaseUrls[ window.pageBaseUrlsCnt ];
-				//webview.loadURL( url );
-				//webview.executeJavaScript(`
-				//	var _el = window.document.getElementsByClassName("last")[0].href
-				//	Promise.resolve( _el )
-				//`
-				//).then(function(data){
-					//var maxPage = window.UTIL.URL.paramToObject( data ).page * 1
-					//window.maxPages.push( maxPage );
-					window.maxPages.push( 1 );
-					//console.log( "window.maxPage : " + maxPage );
+				url = pageBaseUrls[ window.pageBaseUrlsCnt ] + 500;
+				webview.loadURL( url );
+				webview.executeJavaScript(`
+					var _el = window.document.getElementsByClassName("xans-element- xans-product xans-product-normalpaging")[0].children[0].lastElementChild.children[0].href;
+					Promise.resolve( _el )
+				`
+				).then(function(data){
+					var maxPage = window.UTIL.URL.paramToObject( data ).page * 1
+					window.maxPages.push( maxPage );
+					console.log( "window.maxPage : " + maxPage );
 					if( window.pageBaseUrlsCnt < window.pageBaseUrls.length - 1 )
 					{
 						++window.pageBaseUrlsCnt;
@@ -196,7 +177,7 @@
 						window.pageBaseUrlsCnt = 0;
 						cbFunction();	
 					}
-				//})
+				})
 				
 				/*/
 				window.maxPage = 10;
@@ -232,8 +213,10 @@
 				
 				webview.loadURL( url );
 				webview.executeJavaScript(`
-					var _el = window.document.getElementsByClassName("prdList grid2")[0].innerHTML
-					Promise.resolve( _el )
+					new Promise((resolve, reject) => {
+						var _el = window.document.getElementsByClassName("thumbnail")[0].innerHTML
+						resolve( _el )
+					});
 				`
 				).then(function(data){
 
@@ -289,18 +272,34 @@
 					var i = 0, iLen = el.length, io;
 					for(;i<iLen;++i){
 						io = el[ i ];
-						var href = io.children[1].children[0].href;
-						var id = href.split("/")[6];
+
+						var href = io.children[1].href;
+						var id = window.UTIL.URL.paramToObject( href ).product_no;
 
 						r[ id ] = {};
 						r[ id ].isNew = 0;
 						r[ id ].websiteNm = window.siteNm;
 						r[ id ].url = window.siteUrl + href.replace( "file:///D:", "" )
-						r[ id ].img = io.children[1].children[0].children[0].src.replace( "file", "https" )
-												
+						r[ id ].img = io.children[1].children[0].src.replace( "file", "http" )
 						r[ id ].brand = io.children[2].children[0].innerText;
-				
-						r[ id ].nm = io.children[2].children[2].innerText.replace("상품명 : ","").replace( /\"/gi,"" );
+
+						try
+						{
+							if( io.children[2].children[1].children[0].innerText.indexOf( "] " ) != -1 )
+							{
+								r[ id ].nm = io.children[2].children[1].children[0].innerText.split("] ")[1].replace(" / ", " ").replace(/\(/gi, " ").replace(/\)/gi, "").replace(/\"/gi, "").replace(/\_/gi, "").replace(/\#/gi, "");		
+							}
+							else
+							{
+								r[ id ].nm = io.children[2].children[1].children[0].innerText.replace(" / ", " ").replace(/\(/gi, " ").replace(/\)/gi, "").replace(/\"/gi, "").replace(/\_/gi, "").replace(/\#/gi, "");
+							}
+						}
+						catch(er)
+						{
+							debugger;
+						}
+						
+						
 						r[ id ].salePrice = -1;
 						r[ id ].msrp = -1;
 						r[ id ].saleRatio = -1;
@@ -312,18 +311,28 @@
 							, code : "KRW"
 						}
 
-						r[ id ].msrp = Number( io.children[2].children[3].children[0].innerText.replace( /\,/gi,"" ).replace( "원","" ) );
-						r[ id ].salePrice = Number( io.children[2].children[3].children[1].innerText.replace( /\,/gi,"" ).replace( "원","" ) );
-						if( r[ id ].msrp == 0 ) r[ id ].msrp = r[ id ].salePrice;
+						r[ id ].salePrice = Number( io.children[2].children[1].children[2].innerText.replace( /\,/gi,"" ).replace( " won","" ) )
 						
-//						io.children[2].children[2].innerText.replace("상품명 : ","").replace( /\"/gi,"" ).split( " " ).forEach(function(item){
-//							r[ id ].info.push( item ); 
+						if( io.children[2].children[1].children[1].innerText != "" )
+						{
+							r[ id ].msrp = Number( io.children[2].children[1].children[1].innerText.replace( /\,/gi,"" ).replace( " won","" ) );	
+						}
+						else
+						{
+							r[ id ].msrp = r[ id ].salePrice;
+						}
+						
+						if( r[ id ].salePrice == 0 ) debugger;
+
+						var _t_nm = r[ id ].nm;
+//						_t_nm.split(" ").forEach(function(item){
+//							if( item != "" && item.length != 1  ) r[ id ].info.push( item ); 
 //						})
 						
 						try
 						{
 							var isSoldOut = 0
-							if( io.children[2].children[4].children[0].childElementCount != 0 )
+							if( io.children[0].children[0].childElementCount != 0 )
 							{
 								isSoldOut = 1;
 							}
@@ -391,16 +400,16 @@
 				
 				window.FNS.init()
 				console.log( "--------------- window.FNS.getMaxPage ---------------" );
-				window.FNS.getMaxPage( function(){
+				//window.FNS.getMaxPage( function(){
 					console.log( "--------------- window.FNS.getMaxPage ---------------" );
 					console.log( "--------------- window.FNS.downloadHtml ---------------" );
 					
-					var bat = spawn('cmd.exe', ['/c', 'html_data_delete.bat' ]);
-					bat.stdout.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") ); });
-					bat.stderr.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") );	});
-					bat.on('exit', function(code){ console.log(`Child exited with code ${code}`); });
+					//var bat = spawn('cmd.exe', ['/c', 'html_data_delete.bat' ]);
+					//bat.stdout.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") ); });
+					//bat.stderr.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") );	});
+					//bat.on('exit', function(code){ console.log(`Child exited with code ${code}`); });
 
-					window.FNS.downloadHtml(function(){
+					//window.FNS.downloadHtml(function(){
 						console.log( "--------------- window.FNS.downloadHtml ---------------" );
 						console.log( "--------------- window.FNS.getDetailLinks ---------------" );
 						window.FNS.getDetailLinks( function(){
@@ -411,8 +420,8 @@
 							w.close()
 							
 						})
-					});
-				})
+					//});
+				//})
 			}
 
 			if( !window.FNS.isLogicStart )
