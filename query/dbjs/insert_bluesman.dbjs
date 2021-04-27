@@ -47264,12 +47264,13 @@ for( s in _o ){
 	//*/
     var arr = so.nm.replace( so.brand, "" ).split( " " )
     
+	
 	var i = 0,iLen = arr.length,io;
 	for(;i<iLen;++i){
 	    io = arr[ i ];
 	    if( io.length > 1 && io != so.brand )
 		{
-		    so.info.push( io.trim() )
+	       if( io != "" && so.info.indexOf( io ) == -1 ) so.info.push( io.trim() )
 		}
 	}
 
