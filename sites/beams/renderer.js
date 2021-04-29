@@ -212,25 +212,37 @@
 				console.log( "[S] - window.FNS.downloadHtml - " +  window.pageCnt );
 				var dirPath = "./html/"
 				
-				
 				url = window.pageBaseUrls[ window.pageBaseUrlsCnt ] + window.pageCnt
 				
-				try
-				{
-					webview.loadURL( url );
-				}
-				catch(er)
-				{
-					debugger;
-				}
-				
+//				try
+//				{
+//					webview.loadURL( url );
+//				}
+//				catch(er)
+//				{
+//					debugger;
+//				}
+				console.log( url )
+				var apiUrl = "https://checkout-api.worldshopping.jp/v1/fetch-html?lang=ko-KR&ua=Mozilla%2F5.0%20%28Windows%20NT%2010.0%3B%20Win64%3B%20x64%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F89.0.4389.114%20Safari%2F537.36&url=" + encodeURIComponent( url );
+				console.log( apiUrl )
 				webview.executeJavaScript(`
-					var _el = window.document.getElementsByClassName("listed-items-4columns")[0].innerHTML
-					Promise.resolve( _el )
+				new Promise((resolve, reject) => {
+					var xhr = new XMLHttpRequest();
+					xhr.onload = function() {
+					if (xhr.status === 200 || xhr.status === 201) {
+						//console.log(JSON.parse( xhr.responseText ));
+						resolve( xhr.responseText )
+					} else {
+						console.error(xhr.responseText);
+					}
+					};
+					xhr.open('GET', '${apiUrl}')
+					xhr.send(); // 데이터를 stringify해서 보냄
+				});
 				`
 				).then(function(data){
-
-					var _data = data.replace(/\/\/img/gi, "https://img")
+					debugger;
+					var _data = data.match(/<body[^>]*>([\w|\W]*)<\/body>/im)[1].replace(/\/\/img/gi, "https://img")
 
 					//window.document.getElementById("_tmp").innerHTML = "";
 					//window.document.getElementById("_tmp").innerHTML = _data;
@@ -286,11 +298,11 @@
 					var i = 0, iLen = el.length, io;
 					for(;i<iLen;++i){
 						io = el[ i ];
-
+						debugger;
 						var href = io.children[0].href;
 						var _id = href.split("?")
 						var _id00 = _id[0].split("/")
-						var id =_id00[ _id00.length - 2 ] + "_" + _id[1]
+						var id =_id00[ _id00.length - 2 ] + "_" + _id[1].replace("=","_")
 						//debugger;
 						//console.log( href )
 						//console.log( id )
@@ -299,6 +311,7 @@
 							console.log( href );
 							debugger;
 							++_tc;
+							continue;
 						}
 						r[ id ] = {};
 						r[ id ].isNew = 0;
@@ -306,7 +319,7 @@
 						r[ id ].url = window.siteUrl + href.replace( "file:///D:", "" )
 						r[ id ].img = io.children[0].children[1].children[0].src.replace( "file", "http" ).replace("/S2/", "/O/")
 
-						r[ id ].nm = io.children[0].children[3].getAttribute( "initial-text" ).replace("【予約】","").replace(/\\n/gi,"").replace(/\\t/gi,"").trim();
+						r[ id ].nm = io.children[0].children[3].innerText.replace("【予約】","").replace(/\\n/gi,"").replace(/\\t/gi,"").trim();
 						var brand = r[ id ].nm.split(" / ")[0];
 						
 						if( brand.indexOf( "＞" ) != -1 )
@@ -332,8 +345,6 @@
 							r[ id ].brand = brand.trim()
 						}
 
-						
-						
 						r[ id ].salePrice = -1;
 						r[ id ].msrp = -1;
 						r[ id ].saleRatio = -1;
@@ -392,28 +403,50 @@
 								r[ id ].isNew = 0;
 							}
 						}
+						r[ id ].id = id
 						
 					}
 				}
 
-				try
-				{
-					fs.mkdirSync( resultDirPath, { recursive: true } );
-					
-					var newFilePath = resultDirPath + window.siteNm + ".json";
-					var backupFilePath = backupDirPath + window.UTIL.DateFormat.YYYYMMDD_HHMMSS() + "_" + window.siteNm + ".json"
-					
-					fs.writeFileSync( newFilePath, JSON.stringify( r ,null,4 ), {flag:"w"} );
-					fs.writeFileSync( backupFilePath, JSON.stringify( r ,null,4 ), {flag:"w"} );
+				var jsonCnt = 0;
 
-					window.document.getElementById("_tmp").innerHTML = "";
-					console.log( "[E] - window.FNS.getDetailLinks" )
-					if( cbFunction ) cbFunction();
-				}
-				catch(er)
+				var r_arr = [];
+				var s,so;
+				for( s in r )
 				{
-					console.log( er );
+					so = r[ s ];
+					so.id = s;
+					r_arr.push( so );
+					//debugger;
+					if( r_arr.length == 5000 )
+					{
+						console.log( jsonCnt )
+						try
+						{
+							fs.mkdirSync( resultDirPath, { recursive: true } );
+
+							var newFilePath = resultDirPath + window.siteNm + "_"+ jsonCnt + ".json";
+							var backupFilePath = backupDirPath + window.UTIL.DateFormat.YYYYMMDD_HHMMSS() + "_" + window.siteNm + "_"+ jsonCnt + ".json"
+
+							fs.writeFileSync( newFilePath, JSON.stringify( r_arr ,null,4 ), {flag:"w"} );
+							fs.writeFileSync( backupFilePath, JSON.stringify( r_arr ,null,4 ), {flag:"w"} );
+
+							++jsonCnt;
+							r_arr = []
+						
+						}
+						catch(er)
+						{
+							console.log( er );
+						}		
+					}
+					
+					
 				}
+			
+				console.log( "[E] - window.FNS.getDetailLinks" )
+				if( cbFunction ) cbFunction();
+				
 			}
 
 			//-------------------------------------------------------;
@@ -425,16 +458,16 @@
 				
 				window.FNS.init()
 				console.log( "--------------- window.FNS.getMaxPage ---------------" );
-				//window.FNS.getMaxPage( function(){
+				window.FNS.getMaxPage( function(){
 					console.log( "--------------- window.FNS.getMaxPage ---------------" );
 					console.log( "--------------- window.FNS.downloadHtml ---------------" );
 					
-					//var bat = spawn('cmd.exe', ['/c', 'html_data_delete.bat' ]);
-					//bat.stdout.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") ); });
-					//bat.stderr.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") );	});
-					//bat.on('exit', function(code){ console.log(`Child exited with code ${code}`); });
+					var bat = spawn('cmd.exe', ['/c', 'html_data_delete.bat' ]);
+					bat.stdout.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") ); });
+					bat.stderr.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") );	});
+					bat.on('exit', function(code){ console.log(`Child exited with code ${code}`); });
 
-					//window.FNS.downloadHtml(function(){
+					window.FNS.downloadHtml(function(){
 						console.log( "--------------- window.FNS.downloadHtml ---------------" );
 						console.log( "--------------- window.FNS.getDetailLinks ---------------" );
 						window.FNS.getDetailLinks( function(){
@@ -445,8 +478,8 @@
 							//w.close()
 							
 						})
-					//});
-				//})
+					});
+				})
 			}
 
 			if( !window.FNS.isLogicStart )

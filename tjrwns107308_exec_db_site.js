@@ -81,24 +81,38 @@ var deleteLines = function( str, n ){
 //-------------------------;
 //-------------------------;
 //-------------------------;
-var makeDbJsInsert = function( nm ){
-    console.log( nm )
-    var FILE_PATH = process.cwd() + "/sites/" + nm + "/result/" + nm + ".json";
+var makeDbJsInsert = function( nm, fileNm ){
+    
+	console.log( "[S]" + nm + " - " +  fileNm );
+
+    var FILE_PATH = process.cwd() + "/sites/" + nm + "/result/" + fileNm;
     var TDBJS_PATH = process.cwd() + "/query/tdbjs/insert.tdbjs";
     var DBJS_PATH = process.cwd() + "/query/dbjs/";
     var _q = fs.readFileSync( TDBJS_PATH ).toString();
     var _d = fs.readFileSync( FILE_PATH ).toString();
+	var _t = fileNm.split(".")[0].split("_");
+	var remove_query = "";
+	if( _t[ _t.length - 1 ] ==  "0")
+	{
+		var remove_query = `
+		col0.remove({});
+		col1.remove({ websiteNm : col_nm });
+		`;	
+	}
+	
     var q = _q.replace( "<!=BRAND_NM=!>", nm )
-            .replace( "<!=DATA=!>", _d );
+            .replace( "<!=DATA=!>", _d )
+		    .replace( "<!=REMOVE_QUERY=!>", remove_query );
     var dbjsNm = "insert_" + nm + ".dbjs"
-    console.log( dbjsNm )
-    console.log( DBJS_PATH + dbjsNm )
+//    console.log( dbjsNm )
+//    console.log( DBJS_PATH + dbjsNm )
     fs.writeFileSync( DBJS_PATH + dbjsNm, q, {flag:"w"} );
     
     exec_query_DB( dbjsNm, 0 );
-
+	console.log( "[E]" + nm + " - " +  fileNm );
     return;
 }
+
 //-------------------------;
 //-------------------------;
 //-------------------------;
@@ -120,9 +134,28 @@ var makeBrandList = function(){
 //-------------------------;
 //-------------------------;
 //-------------------------;
+
+var target_dir_path = process.cwd() + "/sites/" + args[2] + "/result/";
+var target_files = fs.readdirSync( target_dir_path );
+
+var target_file_cnt = 0;
 var FN00 = function( site ){
-	console.log( site )
-        makeDbJsInsert( site );
+	
+	var fileNm = target_files[ target_file_cnt ];
+	console.log( fileNm )
+	
+	makeDbJsInsert( site, fileNm );
+	
+	if( target_files.length == 1 || target_files.length - 1 == target_file_cnt )
+	{
+		return;
+	}
+	
+	++target_file_cnt
+	FN00( args[2] );
+	
+
+    
 }
 
 FN00( args[2] );

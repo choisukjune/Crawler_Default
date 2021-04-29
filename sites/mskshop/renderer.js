@@ -245,7 +245,9 @@
 					++window.pageCnt;
 					++window.downLoadHtmlCnt;
 
-					window.FNS.downloadHtml( cbFunction );
+					setTimeout(function(){
+						window.FNS.downloadHtml( cbFunction );
+					},1000)
 					window.document.getElementById("_tmp").innerHTML = "";
 
 				})
@@ -361,28 +363,68 @@
 								r[ id ].isNew = 0;
 							}
 						}
-						
+						r[ id ].id = id
 					}
 				}
 
+				var jsonCnt = 0;
+
+				var r_arr = [];
+				var s,so;
+				for( s in r )
+				{
+					so = r[ s ];
+					so.id = s;
+					r_arr.push( so );
+					//debugger;
+					if( r_arr.length == 5000 )
+					{
+						console.log( jsonCnt )
+						try
+						{
+							fs.mkdirSync( resultDirPath, { recursive: true } );
+
+							var newFilePath = resultDirPath + window.siteNm + "_"+ jsonCnt + ".json";
+							var backupFilePath = backupDirPath + window.UTIL.DateFormat.YYYYMMDD_HHMMSS() + "_" + window.siteNm + "_"+ jsonCnt + ".json"
+
+							fs.writeFileSync( newFilePath, JSON.stringify( r_arr ,null,4 ), {flag:"w"} );
+							fs.writeFileSync( backupFilePath, JSON.stringify( r_arr ,null,4 ), {flag:"w"} );
+
+							++jsonCnt;
+							r_arr = []
+						
+						}
+						catch(er)
+						{
+							console.log( er );
+						}		
+					}					
+				}
+			
 				try
 				{
-					fs.mkdirSync( resultDirPath, { recursive: true } );
-					
-					var newFilePath = resultDirPath + window.siteNm + ".json";
-					var backupFilePath = backupDirPath + window.UTIL.DateFormat.YYYYMMDD_HHMMSS() + "_" + window.siteNm + ".json"
-					
-					fs.writeFileSync( newFilePath, JSON.stringify( r ,null,4 ), {flag:"w"} );
-					fs.writeFileSync( backupFilePath, JSON.stringify( r ,null,4 ), {flag:"w"} );
+					console.log( resultDirPath + window.siteNm + "_"+ jsonCnt + ".json" )
 
-					window.document.getElementById("_tmp").innerHTML = "";
-					console.log( "[E] - window.FNS.getDetailLinks" )
-					if( cbFunction ) cbFunction();
+					fs.mkdirSync( resultDirPath, { recursive: true } );
+
+					var newFilePath = resultDirPath + window.siteNm + "_"+ jsonCnt + ".json";
+					var backupFilePath = backupDirPath + window.UTIL.DateFormat.YYYYMMDD_HHMMSS() + "_" + window.siteNm + "_"+ jsonCnt + ".json"
+
+					fs.writeFileSync( newFilePath, JSON.stringify( r_arr ,null,4 ), {flag:"w"} );
+					fs.writeFileSync( backupFilePath, JSON.stringify( r_arr ,null,4 ), {flag:"w"} );
+
+					++jsonCnt;
+					r_arr = []
+				
 				}
 				catch(er)
 				{
 					console.log( er );
 				}
+			
+				console.log( "[E] - window.FNS.getDetailLinks" )
+				if( cbFunction ) cbFunction();
+				
 			}
 
 			//-------------------------------------------------------;
@@ -394,16 +436,16 @@
 				
 				window.FNS.init()
 				console.log( "--------------- window.FNS.getMaxPage ---------------" );
-				//window.FNS.getMaxPage( function(){
+				window.FNS.getMaxPage( function(){
 					console.log( "--------------- window.FNS.getMaxPage ---------------" );
 					console.log( "--------------- window.FNS.downloadHtml ---------------" );
 					
-					//var bat = spawn('cmd.exe', ['/c', 'html_data_delete.bat' ]);
-					//bat.stdout.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") ); });
-					//bat.stderr.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") );	});
-					//bat.on('exit', function(code){ console.log(`Child exited with code ${code}`); });
+					var bat = spawn('cmd.exe', ['/c', 'html_data_delete.bat' ]);
+					bat.stdout.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") ); });
+					bat.stderr.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") );	});
+					bat.on('exit', function(code){ console.log(`Child exited with code ${code}`); });
 
-					//window.FNS.downloadHtml(function(){
+					window.FNS.downloadHtml(function(){
 						console.log( "--------------- window.FNS.downloadHtml ---------------" );
 						console.log( "--------------- window.FNS.getDetailLinks ---------------" );
 						window.FNS.getDetailLinks( function(){
@@ -414,8 +456,8 @@
 							w.close()
 							
 						})
-					//});
-				//})
+					});
+				})
 			}
 
 			if( !window.FNS.isLogicStart )

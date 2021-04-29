@@ -131,7 +131,8 @@
 				oneDayAgo_date.setDate(oneDayAgo_date.getDate() - 2);
 				window.YYMMDD_oneDayAgo = window.UTIL.DateFormat.YYMMDD( oneDayAgo_date );
 		
-				window.maxPage = -1;
+				//window.maxPage = -1;
+				window.maxPages = [];
 				window.pageCnt = 1;
 				window._tmp = {}
 				window._tmp.cnt = 0;
@@ -156,18 +157,31 @@
 			//페이지MAX걊 구하기;
 			//-------------------------------------------------------;
 			window.FNS.getMaxPage = function( cbFunction ){
-				url = "https://www.cultizm.com/en/widgets/Listing/ajaxListing?mode=next&c=83&p=1";
+				//*/
+				url = pageBaseUrls[ window.pageBaseUrlsCnt ] + 1;
 				webview.loadURL( url );
-				//webview.executeJavaScript(`
-				//var _el = window.document.getElementsByClassName("Toolbar__ProductCount-sc-14b11kg-3")[0].children[0].innerText
-				//	Promise.resolve( _el )
-				//`
-				//).then(function(data){
-					//window.maxPage = ( parseInt(( data * 1 ) / 120) ) + 1;
-					window.maxPage = 50;
-					console.log( "window.maxPage : " + window.maxPage );
-					cbFunction();
-				//})
+				webview.executeJavaScript(`
+					var _el = window.document.getElementsByClassName( "pager" )[0].children[0].innerText;
+					Promise.resolve( _el )
+				`
+				).then(function(data){
+					var _data = data.replace("ALL [ ","").replace(" ] ITEMS","") * 1;
+					var maxPage = Math.ceil( _data / 12 );
+					window.maxPages.push( maxPage );
+					console.log( "window.maxPage : " + maxPage );
+					if( window.pageBaseUrlsCnt < window.pageBaseUrls.length - 1 )
+					{
+						debugger;
+						++window.pageBaseUrlsCnt;
+						window.FNS.getMaxPage( cbFunction )
+					}
+					else
+					{
+						debugger;
+						window.pageBaseUrlsCnt = 0;
+						cbFunction();	
+					}
+				})
 			}
 			//-------------------------------------------------------;
 			//게시물HTML저장하기;
@@ -336,28 +350,68 @@
 								r[ id ].isNew = 0;
 							}
 						}
-						
+						r[ id ].id = id
 					}
 				}
 
+				var jsonCnt = 0;
+
+				var r_arr = [];
+				var s,so;
+				for( s in r )
+				{
+					so = r[ s ];
+					so.id = s;
+					r_arr.push( so );
+					//debugger;
+					if( r_arr.length == 5000 )
+					{
+						console.log( jsonCnt )
+						try
+						{
+							fs.mkdirSync( resultDirPath, { recursive: true } );
+
+							var newFilePath = resultDirPath + window.siteNm + "_"+ jsonCnt + ".json";
+							var backupFilePath = backupDirPath + window.UTIL.DateFormat.YYYYMMDD_HHMMSS() + "_" + window.siteNm + "_"+ jsonCnt + ".json"
+
+							fs.writeFileSync( newFilePath, JSON.stringify( r_arr ,null,4 ), {flag:"w"} );
+							fs.writeFileSync( backupFilePath, JSON.stringify( r_arr ,null,4 ), {flag:"w"} );
+
+							++jsonCnt;
+							r_arr = []
+						
+						}
+						catch(er)
+						{
+							console.log( er );
+						}		
+					}					
+				}
+			
 				try
 				{
-					fs.mkdirSync( resultDirPath, { recursive: true } );
-					
-					var newFilePath = resultDirPath + window.siteNm + ".json";
-					var backupFilePath = backupDirPath + window.UTIL.DateFormat.YYYYMMDD_HHMMSS() + "_" + window.siteNm + ".json"
-					
-					fs.writeFileSync( newFilePath, JSON.stringify( r ,null,4 ), {flag:"w"} );
-					fs.writeFileSync( backupFilePath, JSON.stringify( r ,null,4 ), {flag:"w"} );
+					console.log( resultDirPath + window.siteNm + "_"+ jsonCnt + ".json" )
 
-					window.document.getElementById("_tmp").innerHTML = "";
-					console.log( "[E] - window.FNS.getDetailLinks" )
-					if( cbFunction ) cbFunction();
+					fs.mkdirSync( resultDirPath, { recursive: true } );
+
+					var newFilePath = resultDirPath + window.siteNm + "_"+ jsonCnt + ".json";
+					var backupFilePath = backupDirPath + window.UTIL.DateFormat.YYYYMMDD_HHMMSS() + "_" + window.siteNm + "_"+ jsonCnt + ".json"
+
+					fs.writeFileSync( newFilePath, JSON.stringify( r_arr ,null,4 ), {flag:"w"} );
+					fs.writeFileSync( backupFilePath, JSON.stringify( r_arr ,null,4 ), {flag:"w"} );
+
+					++jsonCnt;
+					r_arr = []
+				
 				}
 				catch(er)
 				{
 					console.log( er );
 				}
+			
+				console.log( "[E] - window.FNS.getDetailLinks" )
+				if( cbFunction ) cbFunction();
+				
 			}
 
 			//-------------------------------------------------------;

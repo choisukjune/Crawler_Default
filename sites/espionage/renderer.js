@@ -245,15 +245,17 @@
 				var targetDirPath = "./html/";
 				var resultDirPath = "./result/";
 				var backupDirPath = "./backup/";
+				var prev_ids_filePath = "./prev_json/";
 				var list = global.fs.readdirSync( targetDirPath );
-				var prev_data = {};
+				var prev_data = [];
 
-				if( fs.existsSync( resultDirPath + window.siteNm + ".json" ) )
+				if( fs.existsSync( prev_ids_filePath + "prev_" + window.siteNm + ".json" ) )
 				{
-					var prev_data = JSON.parse( global.fs.readFileSync( resultDirPath + window.siteNm + ".json" ).toString() );	
+					var prev_data = JSON.parse( global.fs.readFileSync( resultDirPath + "prev_" + window.siteNm + ".json" ).toString() );	
 				}
-
+				
 				var r = {};
+				var ids = [];
 				var z = 0,zLen=list.length,zo;
 				for(;z<zLen;++z)
 				{
@@ -271,6 +273,9 @@
 
 						var info = io.children[0].children[0].children[1].children
 						var id = window.UTIL.URL.paramToObject( href ).branduid;
+
+						ids.push( id );
+						
 						r[ id ] = {};
 						r[ id ].isNew = 0;
 						r[ id ].websiteNm = window.siteNm;
@@ -334,7 +339,7 @@
 								r[ id ].saleRatio = (1 -( salePrice / msrp )).toFixed(2);
 							}
 
-							if( !prev_data[ id ] )
+							if( prev_data.indexOf( id ) == -1 )
 							{
 								r[ id ].crwaling_date_o = window.UTIL.getDateTimeToObject();
 								r[ id ].isNew = 1;
@@ -349,28 +354,73 @@
 								}
 							}
 						}
-						
+						r[ id ].id = id
 					}
 				}
 
+				var jsonCnt = 0;
+
+				var r_arr = [];
+				var s,so;
+				for( s in r )
+				{
+					so = r[ s ];
+					so.id = s;
+					r_arr.push( so );
+					//debugger;
+					if( r_arr.length == 5000 )
+					{
+						console.log( jsonCnt )
+						try
+						{
+							fs.mkdirSync( resultDirPath, { recursive: true } );
+
+							var newFilePath = resultDirPath + window.siteNm + "_"+ jsonCnt + ".json";
+							var backupFilePath = backupDirPath + window.UTIL.DateFormat.YYYYMMDD_HHMMSS() + "_" + window.siteNm + "_"+ jsonCnt + ".json"
+
+							fs.writeFileSync( newFilePath, JSON.stringify( r_arr ,null,4 ), {flag:"w"} );
+							fs.writeFileSync( backupFilePath, JSON.stringify( r_arr ,null,4 ), {flag:"w"} );
+
+							++jsonCnt;
+							r_arr = []
+						
+						}
+						catch(er)
+						{
+							console.log( er );
+						}		
+					}					
+				}
+			
 				try
 				{
-					fs.mkdirSync( resultDirPath, { recursive: true } );
-					
-					var newFilePath = resultDirPath + window.siteNm + ".json";
-					var backupFilePath = backupDirPath + window.UTIL.DateFormat.YYYYMMDD_HHMMSS() + "_" + window.siteNm + ".json"
-					
-					fs.writeFileSync( newFilePath, JSON.stringify( r ,null,4 ), {flag:"w"} );
-					fs.writeFileSync( backupFilePath, JSON.stringify( r ,null,4 ), {flag:"w"} );
+					console.log( resultDirPath + window.siteNm + "_"+ jsonCnt + ".json" )
 
-					window.document.getElementById("_tmp").innerHTML = "";
-					console.log( "[E] - window.FNS.getDetailLinks" )
-					if( cbFunction ) cbFunction();
+					fs.mkdirSync( resultDirPath, { recursive: true } );
+
+					var newFilePath = resultDirPath + window.siteNm + "_"+ jsonCnt + ".json";
+					var backupFilePath = backupDirPath + window.UTIL.DateFormat.YYYYMMDD_HHMMSS() + "_" + window.siteNm + "_"+ jsonCnt + ".json"
+
+					fs.writeFileSync( newFilePath, JSON.stringify( r_arr ,null,4 ), {flag:"w"} );
+					fs.writeFileSync( backupFilePath, JSON.stringify( r_arr ,null,4 ), {flag:"w"} );
+
+					++jsonCnt;
+					r_arr = []
+				
 				}
 				catch(er)
 				{
 					console.log( er );
 				}
+				
+
+				var prev_ids_fileNm = window.siteNm + ".json";
+				fs.mkdirSync( prev_ids_filePath, { recursive: true } );
+				fs.writeFileSync( prev_ids_filePath + prev_ids_fileNm, JSON.stringify( ids ), {flag:"w"} );
+
+				console.log( "[E] - window.FNS.getDetailLinks" )
+				if( cbFunction ) cbFunction();
+				
 			}
 
 			//-------------------------------------------------------;
@@ -382,28 +432,28 @@
 				
 				window.FNS.init()
 				console.log( "--------------- window.FNS.getMaxPage ---------------" );
-				window.FNS.getMaxPage( function(){
+				//window.FNS.getMaxPage( function(){
 					console.log( "--------------- window.FNS.getMaxPage ---------------" );
 					console.log( "--------------- window.FNS.downloadHtml ---------------" );
 					
-					var bat = spawn('cmd.exe', ['/c', 'html_data_delete.bat' ]);
-					bat.stdout.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") ); });
-					bat.stderr.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") );	});
-					bat.on('exit', function(code){ console.log(`Child exited with code ${code}`); });
+					//var bat = spawn('cmd.exe', ['/c', 'html_data_delete.bat' ]);
+					//bat.stdout.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") ); });
+					//bat.stderr.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") );	});
+					//bat.on('exit', function(code){ console.log(`Child exited with code ${code}`); });
 
-					window.FNS.downloadHtml(function(){
+					//window.FNS.downloadHtml(function(){
 						console.log( "--------------- window.FNS.downloadHtml ---------------" );
 						console.log( "--------------- window.FNS.getDetailLinks ---------------" );
 						window.FNS.getDetailLinks( function(){
 							console.log( "--------------- window.FNS.getDetailLinks ---------------" );
 							
-							var remote = require('electron').remote
-							var w = remote.getCurrentWindow()
-							w.close()
+							//var remote = require('electron').remote
+							//var w = remote.getCurrentWindow()
+							//w.close()
 							
 						})
-					});
-				})
+					//});
+				//})
 			}
 
 			if( !window.FNS.isLogicStart )

@@ -573,6 +573,8 @@ debugger;
 							continue;
 						}
 						
+						if( r[ id ] ) continue;
+
 						r[ id ] = {};
 						r[ id ].isNew = 0;
 						r[ id ].websiteNm = window.siteNm;
@@ -623,29 +625,49 @@ debugger;
 								r[ id ].isNew = 0;
 							}
 						}
-						
 					}
 				}
 
 				
-				try
-				{
-					fs.mkdirSync( resultDirPath, { recursive: true } );
-					
-					var newFilePath = resultDirPath + window.siteNm + ".json";
-					var backupFilePath = backupDirPath + window.UTIL.DateFormat.YYYYMMDD_HHMMSS() + "_" + window.siteNm + ".json"
-					
-					fs.writeFileSync( newFilePath, JSON.stringify( r ,null,4 ), {flag:"w"} );
-					fs.writeFileSync( backupFilePath, JSON.stringify( r ,null,4 ), {flag:"w"} );
+				var jsonCnt = 0;
 
-					window.document.getElementById("_tmp").innerHTML = "";
-					console.log( "[E] - window.FNS.getDetailLinks" )
-					if( cbFunction ) cbFunction();
-				}
-				catch(er)
+				var r_arr = [];
+				var s,so;
+				for( s in r )
 				{
-					console.log( er );
+					so = r[ s ];
+					so.id = s;
+					r_arr.push( so );
+					//debugger;
+					if( r_arr.length == 5000 )
+					{
+						console.log( jsonCnt )
+						try
+						{
+							fs.mkdirSync( resultDirPath, { recursive: true } );
+
+							var newFilePath = resultDirPath + window.siteNm + "_"+ jsonCnt + ".json";
+							var backupFilePath = backupDirPath + window.UTIL.DateFormat.YYYYMMDD_HHMMSS() + "_" + window.siteNm + "_"+ jsonCnt + ".json"
+
+							fs.writeFileSync( newFilePath, JSON.stringify( r_arr ,null,4 ), {flag:"w"} );
+							fs.writeFileSync( backupFilePath, JSON.stringify( r_arr ,null,4 ), {flag:"w"} );
+
+							++jsonCnt;
+							r_arr = []
+						
+						}
+						catch(er)
+						{
+							console.log( er );
+						}		
+					}
+					
+					
 				}
+			
+				console.log( "[E] - window.FNS.getDetailLinks" )
+				if( cbFunction ) cbFunction();
+				
 			}
 			
 			//-------------------------------------------------------;
@@ -660,13 +682,13 @@ debugger;
 				//window.FNS.getMaxPage( function(){
 					console.log( "--------------- window.FNS.getMaxPage ---------------" );
 					
-					var bat = spawn('cmd.exe', ['/c', 'JSON_data_delete.bat' ]);
-					bat.stdout.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") ); });
-					bat.stderr.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") );	});
-					bat.on('exit', function(code){ console.log(`Child exited with code ${code}`); });
+					//var bat = spawn('cmd.exe', ['/c', 'JSON_data_delete.bat' ]);
+					//bat.stdout.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") ); });
+					//bat.stderr.on('data', function(data){ console.log( iconv.decode( data, "euc-kr") );	});
+					//bat.on('exit', function(code){ console.log(`Child exited with code ${code}`); });
 					
 					console.log( "--------------- window.FNS.downloadJson ---------------" );
-					window.FNS.downloadJson(function(){
+					//window.FNS.downloadJson(function(){
 						console.log( "--------------- window.FNS.downloadJson ---------------" );
 						console.log( "--------------- window.FNS.getDetailLinks ---------------" );
 						window.FNS.getDetailLinksByJSON( function(){
@@ -677,7 +699,7 @@ debugger;
 							//w.close()
 							
 						})
-					});
+					//});
 				//})
 			}
 
