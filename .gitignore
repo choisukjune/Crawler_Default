@@ -2,6 +2,8 @@
 sites/**/html/*
 sites/**/json/*
 sites/**/backup/*
+sites/**/prev_json/*
+query/dbjs/*
 DataBase/0/
 stock_data/
 stock_html/
