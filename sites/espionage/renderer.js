@@ -274,8 +274,6 @@
 						var info = io.children[0].children[0].children[1].children
 						var id = window.UTIL.URL.paramToObject( href ).branduid;
 
-						ids.push( id );
-						
 						r[ id ] = {};
 						r[ id ].isNew = 0;
 						r[ id ].websiteNm = window.siteNm;
@@ -355,6 +353,7 @@
 							}
 						}
 						r[ id ].id = id
+						r[ id ]._search_ = 	r[ id ].websiteNm + " " + r[ id ].brand + " " + r[ id ].nm;
 					}
 				}
 
@@ -367,6 +366,7 @@
 					so = r[ s ];
 					so.id = s;
 					r_arr.push( so );
+					ids.push( s )
 					//debugger;
 					if( r_arr.length == 5000 )
 					{
@@ -413,7 +413,6 @@
 					console.log( er );
 				}
 				
-
 				var prev_ids_fileNm = window.siteNm + ".json";
 				fs.mkdirSync( prev_ids_filePath, { recursive: true } );
 				fs.writeFileSync( prev_ids_filePath + prev_ids_fileNm, JSON.stringify( ids ), {flag:"w"} );

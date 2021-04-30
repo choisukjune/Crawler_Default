@@ -368,15 +368,17 @@
 				var targetDirPath = "./html/";
 				var resultDirPath = "./result/";
 				var backupDirPath = "./backup/";
+				var prev_ids_filePath = "./prev_json/";
 				var list = global.fs.readdirSync( targetDirPath );
-				var prev_data = {};
+				var prev_data = [];
 
-				if( fs.existsSync( resultDirPath + window.siteNm + ".json" ) )
+				if( fs.existsSync( prev_ids_filePath + "prev_" + window.siteNm + ".json" ) )
 				{
-					var prev_data = JSON.parse( global.fs.readFileSync( resultDirPath + window.siteNm + ".json" ).toString() );	
+					var prev_data = JSON.parse( global.fs.readFileSync( resultDirPath + "prev_" + window.siteNm + ".json" ).toString() );	
 				}
 
 				var r = {};
+				var ids = [];
 				var z = 0,zLen=list.length,zo;
 				for(;z<zLen;++z)
 				{
@@ -460,7 +462,7 @@
 						}
 						
 						
-						if( !prev_data[ id ] )
+						if( prev_data.indexOf( id ) == -1 )
 						{
 							r[ id ].crwaling_date_o = window.UTIL.getDateTimeToObject();
 							r[ id ].isNew = 1;
@@ -474,7 +476,8 @@
 								r[ id ].isNew = 0;
 							}
 						}
-						r[ id ].id = id
+						r[ id ].id = id;
+						r[ id ]._search_ = 	r[ id ].websiteNm + " " + r[ id ].brand + " " + r[ id ].nm;
 					}
 				}
 
@@ -487,6 +490,8 @@
 					so = r[ s ];
 					so.id = s;
 					r_arr.push( so );
+					ids.push( s );
+
 					//debugger;
 					if( r_arr.length == 5000 )
 					{
@@ -533,6 +538,10 @@
 					console.log( er );
 				}
 			
+				var prev_ids_fileNm = window.siteNm + ".json";
+				fs.mkdirSync( prev_ids_filePath, { recursive: true } );
+				fs.writeFileSync( prev_ids_filePath + prev_ids_fileNm, JSON.stringify( ids ), {flag:"w"} );
+
 				console.log( "[E] - window.FNS.getDetailLinks" )
 				if( cbFunction ) cbFunction();
 				
@@ -548,7 +557,7 @@
 //				var resultDirPath = "./result/";
 //				var backupDirPath = "./backup/";
 //				var list = global.fs.readdirSync( targetDirPath );
-//				var prev_data = {};
+//				var prev_data = [];
 //
 //				var r = {};
 //				var z = 0,zLen=list.length,zo;
