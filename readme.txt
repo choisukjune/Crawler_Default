@@ -1,1 +1,11 @@
-db.createUser({ user:'tjrwns', pwd:'123qweasdzxc', roles: [ { "role" : "userAdminAnyDatabase", "db" : "admin" }, { "role" : "dbAdminAnyDatabase", "db" : "admin" }, { "role" : "readWriteAnyDatabase", "db" : "admin" } ] })
+패션몰 상품데이터 크롤러
+site 폴더내부에서 데이터 수집 후 정제 및 가공을 진행함
+SPA 형식의 사이트는 API 수집서버를 독립적으로 실행은 해당데이터를 서버로 전송함
+그외 서버렌더링사이트들은 HTML수집후 데이터정제를 진행함
+
+https://tjrwns2482.cafe24.com/
+
+위 샘플사이트의 베이스 데이터로 활용함
+
+현재는 쇼핑몰데이터만 이용중임
+이후 다른분야 페이지 데이터 수집용으로 사용할 계획임.
